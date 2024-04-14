@@ -7,6 +7,7 @@ class AppColors {
   static const loginButtonTextColor = Colors.black;
   static final backgroundColor = '#181818'.toColor();
   static final loginAgreementTextColor = '#E7E7E7'.toColor();
-  static final loginAgreementHighlightTextColor = '#FDFDFD'.toColor();
+  static const loginAgreementHighlightTextColor =
+      Color.fromARGB(255, 253, 253, 253);
   const AppColors._();
 }
