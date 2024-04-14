@@ -1,20 +1,15 @@
-name: 'Issue Reference'
+name: 'Issue Links'
 on:
   pull_request:
     types: [opened, edited]
-  push:
-    branches: ["main"]
 
 jobs:
-  issue-reference:
-    permissions:
-      contents: write
-      pull-requests: read
-      id-token: write
-
+  issue-links:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
-      - uses: kentaro-m/add-an-issue-reference-action@v2.0.0
+      - uses: tkt-actions/add-issue-links@v1.8.1
         with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          branch-prefix: "DW-"
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          branch-prefix: 'DW-'
