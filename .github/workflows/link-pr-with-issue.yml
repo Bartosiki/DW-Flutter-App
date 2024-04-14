@@ -1,7 +1,9 @@
 name: 'Issue Reference'
 on:
   pull_request:
-    types: [opened]
+    types: [opened, edited]
+  push:
+    branches: ["main"]
 
 jobs:
   issue-reference:
