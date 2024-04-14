@@ -9,5 +9,6 @@ class AppColors {
   static final loginAgreementTextColor = '#E7E7E7'.toColor();
   static const loginAgreementHighlightTextColor =
       Color.fromARGB(255, 253, 253, 253);
+  static final dividerColor = '#FDFDFD'.toColor();
   const AppColors._();
 }

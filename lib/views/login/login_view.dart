@@ -1,3 +1,4 @@
+import 'package:dw_flutter_app/components/divider_with_margins.dart';
 import 'package:dw_flutter_app/views/login/login_view_terms_agreement_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,9 +21,14 @@ class LoginView extends ConsumerWidget {
               children: [],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: LoginViewTermsAgreementWidget(),
+          Column(
+            children: [
+              DividerWithMargins(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: LoginViewTermsAgreementWidget(),
+              ),
+            ],
           ),
         ],
       ),
