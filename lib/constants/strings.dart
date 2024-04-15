@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 @immutable
 class Strings {
   static const String appName = 'Dzień Wydziału EEIA';
-  static const String loginToTakePartInOurEvent =
+  static const String signUpToTakePartInOurEvent =
       'Sign up to take part in our event!';
   static const String continueWithGoogle = 'Continue with Google';
   static const String continueWithApple = 'Continue with Apple';

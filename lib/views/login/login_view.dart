@@ -10,43 +10,62 @@ class LoginView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 40.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                LoginButton(
-                  text: Strings.continueWithGoogle,
-                  imagePath: "assets/images/google_logo.png",
-                  onPressed: () {},
-                ),
-                const SizedBox(height: 12.0),
-                LoginButton(
-                  text: Strings.continueWithApple,
-                  imagePath: "assets/images/apple_logo.png",
-                  onPressed: () {},
-                ),
-                const SizedBox(height: 12.0),
-              ],
-            ),
-          ),
-          const Column(
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+        child: Scaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.max,
             children: [
-              DividerWithMargins(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: LoginViewTermsAgreementWidget(),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Image(
+                    image: AssetImage("assets/images/dw_logo_white.png"),
+                    height: 120.0,
+                  ),
+                  const SizedBox(height: 26.0),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 64.0),
+                    child: Text(
+                      Strings.signUpToTakePartInOurEvent,
+                      style:
+                          Theme.of(context).textTheme.headlineLarge?.copyWith(
+                                fontSize: 36.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  LoginButton(
+                    text: Strings.continueWithGoogle,
+                    imagePath: "assets/images/google_logo.png",
+                    onPressed: () {},
+                  ),
+                  const SizedBox(height: 12.0),
+                  LoginButton(
+                    text: Strings.continueWithApple,
+                    imagePath: "assets/images/apple_logo.png",
+                    onPressed: () {},
+                  ),
+                  const SizedBox(height: 12.0),
+                  const DividerWithMargins(),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: LoginViewTermsAgreementWidget(),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

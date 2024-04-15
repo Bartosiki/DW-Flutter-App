@@ -75,6 +75,7 @@ flutter:
   assets:
     - assets/images/apple_logo.png
     - assets/images/google_logo.png
+    - assets/images/dw_logo_white.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
