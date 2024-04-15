@@ -1,3 +1,5 @@
+import 'package:dw_flutter_app/constants/app_colors.dart';
+import 'package:dw_flutter_app/views/login/login_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,11 +15,13 @@ class App extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: AppColors.backgroundColor,
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.blueGrey,
         indicatorColor: Colors.blueGrey,
+        scaffoldBackgroundColor: AppColors.backgroundColor,
       ),
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
@@ -31,13 +35,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('DW App'),
-      ),
-      body: const Center(
-        child: Text('Home'),
-      ),
+    return const Scaffold(
+      body: LoginView(),
     );
   }
 }
