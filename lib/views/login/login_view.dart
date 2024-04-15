@@ -15,61 +15,68 @@ class LoginView extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
         child: Scaffold(
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.max,
+          body: Stack(
             children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Image(
-                    image: AssetImage("assets/images/dw_logo_white.png"),
-                    height: 120.0,
-                  ),
-                  const SizedBox(height: 26.0),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 64.0),
-                    child: Text(
-                      Strings.signUpToTakePartInOurEvent,
-                      style:
-                          Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                fontSize: 36.0,
-                                fontWeight: FontWeight.w500,
-                              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 600.0,
+                      child: Lottie.asset(
+                        "assets/animations/kitty.json",
+                        reverse: true,
+                      ),
                     ),
-                  ),
-                ],
+                    LoginButton(
+                      text: Strings.continueWithGoogle,
+                      imagePath: "assets/images/google_logo.png",
+                      onPressed: () {},
+                    ),
+                    const SizedBox(height: 12.0),
+                    LoginButton(
+                      text: Strings.continueWithApple,
+                      imagePath: "assets/images/apple_logo.png",
+                      onPressed: () {},
+                    ),
+                    const SizedBox(height: 12.0),
+                    const DividerWithMargins(),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: LoginViewTermsAgreementWidget(),
+                    ),
+                  ],
+                ),
               ),
-              Column(
-                children: [
-                  SizedBox(
-                    height: 200.0,
-                    child: Lottie.asset(
-                      "assets/animations/kitty.json",
-                      reverse: true,
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Image(
+                      image: AssetImage("assets/images/dw_logo_white.png"),
+                      height: 100.0,
                     ),
-                  ),
-                  LoginButton(
-                    text: Strings.continueWithGoogle,
-                    imagePath: "assets/images/google_logo.png",
-                    onPressed: () {},
-                  ),
-                  const SizedBox(height: 12.0),
-                  LoginButton(
-                    text: Strings.continueWithApple,
-                    imagePath: "assets/images/apple_logo.png",
-                    onPressed: () {},
-                  ),
-                  const SizedBox(height: 12.0),
-                  const DividerWithMargins(),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: LoginViewTermsAgreementWidget(),
-                  ),
-                ],
+                    const SizedBox(height: 26.0),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 64.0),
+                      child: Text(
+                        Strings.signUpToTakePartInOurEvent,
+                        style:
+                            Theme.of(context).textTheme.headlineLarge?.copyWith(
+                                  fontSize: 36.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
