@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../auth/provider/auth_state_provider.dart';
+
 class LoginView extends ConsumerWidget {
   const LoginView({super.key});
 
@@ -33,7 +35,9 @@ class LoginView extends ConsumerWidget {
                     LoginButton(
                       text: Strings.continueWithGoogle,
                       imagePath: "assets/images/google_logo.png",
-                      onPressed: () {},
+                      onPressed: () {
+                        ref.read(authStateProvider.notifier).loginWithGoogle();
+                      },
                     ),
                     const SizedBox(height: 12.0),
                     LoginButton(
