@@ -30,23 +30,23 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     final result = await _authenticator.signInWithGoogle();
     final userId = _authenticator.userId;
     if (result == AuthResult.success && userId != null) {
-      final savingUserInfoToFirestoreWasSuccessful =
-          await _userInfoStorage.saveUserInfo(
-        userId: userId,
-        displayName: _authenticator.displayName,
-        email: _authenticator.email,
-      );
-      if (savingUserInfoToFirestoreWasSuccessful) {
+      try {
+        await _userInfoStorage.saveUserInfo(
+          userId: userId,
+          displayName: _authenticator.displayName,
+          email: _authenticator.email,
+        );
         state = AuthState(
           result: result,
           isLoading: false,
           userId: userId,
         );
-      } else {
+      } catch (e) {
         state = const AuthState.unknown();
+        return;
       }
     } else {
-      state = state.copiedWithIsLoading(false);
+      state = const AuthState.unknown();
     }
   }
 }
