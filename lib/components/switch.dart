@@ -60,8 +60,24 @@ class _CustomSwitchState extends State<CustomSwitch> {
               Expanded(
                 child: Expanded(
                   child: optionView == Option.first
-                      ? const Text('First')
-                      : const Text('Second'),
+                      ? InteractiveViewer(
+                          boundaryMargin:
+                              const EdgeInsets.all(20), // Margines graniczny
+                          minScale: 0.1, // Minimalna skala
+                          maxScale: 4.0, // Maksymalna skala
+                          child: Image.asset(
+                            'assets/images/first_floor.png',
+                          ),
+                        )
+                      : InteractiveViewer(
+                          boundaryMargin:
+                              const EdgeInsets.all(20), // Margines graniczny
+                          minScale: 0.1, // Minimalna skala
+                          maxScale: 4.0, // Maksymalna skala
+                          child: Image.asset(
+                            'assets/images/ground_floor.png',
+                          ),
+                        ),
                 ),
               ),
             ],
