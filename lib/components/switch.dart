@@ -3,10 +3,17 @@ import 'package:flutter/material.dart';
 enum Option { first, second }
 
 class CustomSwitch extends StatefulWidget {
-  const CustomSwitch({super.key});
+  const CustomSwitch(
+      {super.key,
+      required this.firstScreen,
+      required this.secondScreen,
+      required this.firstLabel,
+      required this.secondLabel});
 
-  // final Widget firstScreen;
-  // final Widget secondScreen;
+  final Widget firstScreen;
+  final Widget secondScreen;
+  final String firstLabel;
+  final String secondLabel;
 
   @override
   _CustomSwitchState createState() => _CustomSwitchState();
@@ -38,14 +45,14 @@ class _CustomSwitchState extends State<CustomSwitch> {
                         const VisualDensity(horizontal: -3, vertical: -3),
                   ),
                   showSelectedIcon: false,
-                  segments: const <ButtonSegment<Option>>[
+                  segments: <ButtonSegment<Option>>[
                     ButtonSegment<Option>(
                       value: Option.first,
-                      label: Text('Your tasks'),
+                      label: Text(widget.firstLabel),
                     ),
                     ButtonSegment<Option>(
                       value: Option.second,
-                      label: Text('Standings'),
+                      label: Text(widget.secondLabel),
                     ),
                   ],
                   selected: {optionView},
@@ -60,24 +67,8 @@ class _CustomSwitchState extends State<CustomSwitch> {
               Expanded(
                 child: Expanded(
                   child: optionView == Option.first
-                      ? InteractiveViewer(
-                          boundaryMargin:
-                              const EdgeInsets.all(20), // Margines graniczny
-                          minScale: 0.1, // Minimalna skala
-                          maxScale: 4.0, // Maksymalna skala
-                          child: Image.asset(
-                            'assets/images/first_floor.png',
-                          ),
-                        )
-                      : InteractiveViewer(
-                          boundaryMargin:
-                              const EdgeInsets.all(20), // Margines graniczny
-                          minScale: 0.1, // Minimalna skala
-                          maxScale: 4.0, // Maksymalna skala
-                          child: Image.asset(
-                            'assets/images/ground_floor.png',
-                          ),
-                        ),
+                      ? widget.firstScreen
+                      : widget.secondScreen,
                 ),
               ),
             ],
