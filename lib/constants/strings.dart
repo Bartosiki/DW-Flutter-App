@@ -15,4 +15,13 @@ class Strings {
   static const String privacyPolicy = 'Privacy Policy ';
   static const String toLearnMoreAboutHowWeUseYourData =
       'to learn more about how we use your data.';
+  static const String calendar = 'Calendar';
+  static const String tasks = 'Tasks';
+  static const String camera = 'Camera';
+  static const String map = 'Map';
+  static const String assistant = 'Assistant';
+  static const String profile = 'Profile';
+  static const String yourTasks = 'Your tasks';
+  static const String standings = 'Standings';
+  const Strings._();
 }

@@ -10,5 +10,6 @@ class AppColors {
   static const loginAgreementHighlightTextColor =
       Color.fromARGB(255, 253, 253, 253);
   static final dividerColor = '#FDFDFD'.toColor();
+  static final navigationItemActiveColor = Colors.amber[800]!;
   const AppColors._();
 }
