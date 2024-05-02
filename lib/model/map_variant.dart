@@ -1,0 +1,4 @@
+enum MapVariant {
+  ground,
+  floor,
+}
