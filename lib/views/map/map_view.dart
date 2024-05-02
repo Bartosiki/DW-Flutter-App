@@ -1,4 +1,4 @@
-import 'package:dw_flutter_app/components/switch.dart';
+import 'package:dw_flutter_app/components/custom_switch.dart';
 import 'package:dw_flutter_app/views/map/map_container.dart';
 import 'package:flutter/material.dart';
 

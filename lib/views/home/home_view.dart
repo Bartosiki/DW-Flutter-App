@@ -3,7 +3,7 @@ import 'package:dw_flutter_app/components/default_bottom_navigation_bar.dart';
 import 'package:dw_flutter_app/views/home/screens/profile_screen.dart';
 =======
 import 'package:dw_flutter_app/auth/provider/auth_state_provider.dart';
-import 'package:dw_flutter_app/components/switch.dart';
+import 'package:dw_flutter_app/components/custom_switch.dart';
 import 'package:dw_flutter_app/views/map/map_view.dart';
 >>>>>>> 0530cb8 (add props to switch)
 import 'package:flutter/material.dart';

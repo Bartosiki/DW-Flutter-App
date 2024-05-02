@@ -1,6 +1,5 @@
 import 'package:dw_flutter_app/constants/app_colors.dart';
 import 'package:dw_flutter_app/views/home/home_view.dart';
-import 'package:dw_flutter_app/views/login/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
