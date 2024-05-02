@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../model/tasks_subpages.dart';
-import '../../../provider/tasks_subpage_provider.dart';
+import '../../../provider/tasks_subpage/tasks_subpage_provider.dart';
 
 class TasksScreen extends ConsumerWidget {
   const TasksScreen({super.key});

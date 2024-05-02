@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../model/map_variant.dart';
+import '../../model/map_variant.dart';
 
 class MapVariantNotifier extends StateNotifier<MapVariant> {
   MapVariantNotifier()
