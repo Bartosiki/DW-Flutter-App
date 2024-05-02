@@ -2,27 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../constants/strings.dart';
-import '../home_view.dart';
+import '../../../provider/events/events_provider.dart';
 
 class CalendarScreen extends ConsumerWidget {
   const CalendarScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Text(
-            Strings.calendar,
-          ),
-          TextButton(
-            onPressed: () {
-              showProfileScreen(context);
+    final events = ref.watch(eventsProvider);
+    return events.when(
+      data: (events) {
+        if (events.isEmpty) {
+          return const Center(
+            child: Text(
+              Strings.empty,
+            ),
+          );
+        } else {
+          return ListView.builder(
+            itemCount: events.length,
+            itemBuilder: (context, index) {
+              final event = events.elementAt(index);
+              return ListTile(
+                title: Text(event.title),
+                subtitle: Text(event.description),
+                onTap: () {},
+              );
             },
-            child: const Text('Show Profile Screen'),
-          ),
-        ],
+          );
+        }
+      },
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
+      error: (error, stackTrace) => const Center(
+        child: Text(
+          Strings.error,
+        ),
       ),
     );
   }
