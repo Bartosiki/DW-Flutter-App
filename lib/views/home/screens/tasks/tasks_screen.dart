@@ -1,9 +1,10 @@
 import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/views/home/screens/tasks/your_tasks_section.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../model/tasks_subpages.dart';
-import '../../../provider/tasks_subpage/tasks_subpage_provider.dart';
+import '../../../../model/tasks_subpages.dart';
+import '../../../../provider/tasks_subpage/tasks_subpage_provider.dart';
 
 class TasksScreen extends ConsumerWidget {
   const TasksScreen({super.key});
@@ -13,9 +14,7 @@ class TasksScreen extends ConsumerWidget {
     final subpage = ref.watch(tasksSubpageProvider);
 
     const Map<TasksSubpage, Widget> subpageWidgets = {
-      TasksSubpage.yourTasks: Text(
-        Strings.yourTasks,
-      ),
+      TasksSubpage.yourTasks: YourTasksSection(),
       TasksSubpage.standings: Text(
         Strings.standings,
       ),
