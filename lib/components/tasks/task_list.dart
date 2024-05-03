@@ -14,8 +14,7 @@ class TaskList extends StatelessWidget {
         child: Column(
           children: tasks.map((task) {
             return Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
               child: TaskCard(
                 title: task['title'],
                 subtitle: task['subtitle'],

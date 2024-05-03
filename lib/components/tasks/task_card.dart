@@ -24,17 +24,25 @@ class TaskCard extends StatelessWidget {
                 child: Text(
                   "$points",
                   style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold
+                  ),
                 ),
               ),
               title: Text(
                 title,
                 style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16
+                ),
               ),
               subtitle: Text(subtitle,
                   style: const TextStyle(
-                      color: Colors.white60, fontWeight: FontWeight.normal)),
+                      color: Colors.white60,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 12
+                  )
+              ),
               textColor: Colors.white,
             )),
       ),

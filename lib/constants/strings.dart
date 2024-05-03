@@ -26,5 +26,6 @@ class Strings {
   static String youHaveXPoints(int points) {
     return 'You have $points points';
   }
+  static const String taskScreenDescription = "Task screen description Task screen description Task screen description";
   const Strings._();
 }

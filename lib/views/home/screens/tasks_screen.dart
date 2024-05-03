@@ -34,18 +34,44 @@ class TasksScreen extends ConsumerWidget {
       ),
     };
 
-    return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              Strings.youHaveXPoints(points),
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            TaskList(tasks: tasks)
-          ],
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    child: Text(Strings.taskScreenDescription,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16
+                    ))),
+                  SizedBox(width: 16),
+                  IconButton(
+                      iconSize: 30,
+                      onPressed: null,
+                      icon: Icon(Icons.filter_list_rounded, color: Colors.white))
+                ],
+              ),
+              const SizedBox(height: 16),
+              Text(
+                Strings.youHaveXPoints(points),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16),
+              ),
+              const SizedBox(height: 8),
+              TaskList(tasks: tasks)
+            ],
+          ),
         ),
-      );
+      ),
+    );
   }
 }
