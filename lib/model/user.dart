@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dw_flutter_app/constants/firestore_fields.dart';
+import 'package:dw_flutter_app/model/user_finished_task.dart';
 import 'package:flutter/material.dart';
 
 @immutable
@@ -7,7 +8,7 @@ class User {
   final String? userId;
   final String displayName;
   final String email;
-  final List<String> scannedQrCodes;
+  final List<UserFinishedTask> finishedTasks;
   final int gainedPoints;
   final bool isWinner;
   final Timestamp? lastScannedQrCodeTime;
@@ -16,35 +17,28 @@ class User {
     required this.userId,
     required this.displayName,
     required this.email,
-    required this.scannedQrCodes,
+    required this.finishedTasks,
     required this.gainedPoints,
     required this.isWinner,
     required this.lastScannedQrCodeTime,
   });
-
-  factory User.unknown() {
-    return const User(
-      userId: null,
-      displayName: '',
-      email: '',
-      scannedQrCodes: [],
-      gainedPoints: 0,
-      isWinner: false,
-      lastScannedQrCodeTime: null,
-    );
-  }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       userId: json[FirestoreUsersFields.userId],
       displayName: json[FirestoreUsersFields.displayName],
       email: json[FirestoreUsersFields.email],
-      scannedQrCodes:
-          List<String>.from(json[FirestoreUsersFields.scannedQrCodes]),
+      finishedTasks: (json[FirestoreUsersFields.finishedTasks] as List)
+          .map(
+            (task) => UserFinishedTask.fromJson(
+              task,
+            ),
+          )
+          .toList(),
       gainedPoints: json[FirestoreUsersFields.gainedPoints],
       isWinner: json[FirestoreUsersFields.isWinner],
       lastScannedQrCodeTime:
-          (json[FirestoreUsersFields.lastScannedQrCodeTime] as Timestamp?),
+          json[FirestoreUsersFields.lastScannedQrCodeTime] as Timestamp?,
     );
   }
 
@@ -56,7 +50,7 @@ class User {
             userId == other.userId &&
             displayName == other.displayName &&
             email == other.email &&
-            scannedQrCodes == other.scannedQrCodes &&
+            finishedTasks == other.finishedTasks &&
             gainedPoints == other.gainedPoints &&
             isWinner == other.isWinner &&
             lastScannedQrCodeTime == other.lastScannedQrCodeTime;
@@ -68,7 +62,7 @@ class User {
           userId,
           displayName,
           email,
-          scannedQrCodes,
+          finishedTasks,
           gainedPoints,
           isWinner,
           lastScannedQrCodeTime,

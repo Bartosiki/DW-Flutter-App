@@ -24,11 +24,19 @@ class FirestoreUsersFields {
   static const String userId = 'userId';
   static const String displayName = 'displayName';
   static const String email = 'email';
-  static const String scannedQrCodes = 'scannedQrCodes';
+  static const String finishedTasks = 'finishedTasks';
   static const String gainedPoints = 'gainedPoints';
   static const String isWinner = 'isWinner';
   static const String lastScannedQrCodeTime = 'lastScannedQrCodeTime';
   FirestoreUsersFields._();
+}
+
+class FirestoreUserFinishedTaskFields {
+  static const String taskId = 'taskId';
+  static const String points = 'points';
+  static const String qrCode = 'qrCode';
+  static const String finishedAt = 'finishedAt';
+  FirestoreUserFinishedTaskFields._();
 }
 
 class FirestorePatronsFields {

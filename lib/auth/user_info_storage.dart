@@ -6,10 +6,10 @@ import 'package:dw_flutter_app/exceptions/task_not_found.dart';
 import 'package:dw_flutter_app/exceptions/user_not_found.dart';
 import 'package:flutter/foundation.dart' show immutable;
 
-import '../exceptions/could_not_get_all_tasks.dart';
 import '../exceptions/task_already_finished.dart';
 import '../model/task.dart';
 import '../model/user.dart';
+import '../model/user_finished_task.dart';
 
 @immutable
 class UserInfoStorage {
@@ -38,7 +38,7 @@ class UserInfoStorage {
         FirestoreUsersFields.userId: userId,
         FirestoreUsersFields.displayName: displayName,
         FirestoreUsersFields.email: email,
-        FirestoreUsersFields.scannedQrCodes: [],
+        FirestoreUsersFields.finishedTasks: [],
         FirestoreUsersFields.gainedPoints: 0,
         FirestoreUsersFields.isWinner: false,
         FirestoreUsersFields.lastScannedQrCodeTime: null,
@@ -54,44 +54,52 @@ class UserInfoStorage {
     }
   }
 
-  Future<void> finishTask(String userId, String qrCode) async {
-    final userInfo = await FirebaseFirestore.instance
+  Future<void> finishTask(
+    String userId,
+    String qrCode,
+    List<Task> allTasks,
+  ) async {
+    final userSnapshot = await FirebaseFirestore.instance
         .collection(FirestoreCollections.users)
         .where(FirestoreUsersFields.userId, isEqualTo: userId)
         .limit(1)
         .get();
-    if (userInfo.docs.isEmpty) {
+    if (userSnapshot.docs.isEmpty) {
       throw UserNotFound(userId);
     }
+    final userDoc = userSnapshot.docs.first;
+    final user = User.fromJson(userDoc.data());
 
-    final allTasksSnapshot = await FirebaseFirestore.instance
-        .collection(FirestoreCollections.tasks)
-        .get();
-    if (allTasksSnapshot.docs.isEmpty) {
-      throw CouldNotGetAllTasks();
+    final task = allTasks.firstWhereOrNull((task) => task.qrCode == qrCode);
+    if (task == null) {
+      throw TaskNotFound(qrCode);
     }
 
-    final userDoc = userInfo.docs.first;
-    var user = User.fromJson(userDoc.data());
-    final allTasks =
-        allTasksSnapshot.docs.map((doc) => Task.fromJson(doc.data())).toList();
-
-    final task = allTasks.firstWhere(
-      (task) => task.qrCode == qrCode,
-      orElse: () => throw TaskNotFound(qrCode),
-    );
-
-    if (user.scannedQrCodes.contains(qrCode)) {
+    if (user.finishedTasks.any((task) => task.qrCode == qrCode)) {
       throw TaskAlreadyFinished(userId, task.taskId, qrCode);
     }
 
-    final newScannedQrCodes = [...user.scannedQrCodes, qrCode];
+    final newFinishedTasks = [
+      ...user.finishedTasks,
+      UserFinishedTask(
+        taskId: task.taskId,
+        qrCode: qrCode,
+        points: task.points,
+        finishedAt: Timestamp.now(),
+      ),
+    ];
+
     await userDoc.reference.update(
       {
-        FirestoreUsersFields.scannedQrCodes: newScannedQrCodes,
-        FirestoreUsersFields.gainedPoints: allTasks
-            .where((task) => newScannedQrCodes.contains(task.qrCode))
-            .map((task) => task.points)
+        FirestoreUsersFields.finishedTasks: newFinishedTasks
+            .map(
+              (finishedTask) => finishedTask.toJson(),
+            )
+            .toList(),
+        FirestoreUsersFields.gainedPoints: newFinishedTasks
+            .map(
+              (finishedTask) => finishedTask.points,
+            )
             .sum,
         FirestoreUsersFields.lastScannedQrCodeTime:
             FieldValue.serverTimestamp(),

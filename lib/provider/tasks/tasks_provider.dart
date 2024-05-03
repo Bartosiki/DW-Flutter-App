@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../constants/firestore_collections.dart';
 import '../../model/task.dart';
 
-final tasksProvider = StreamProvider<Iterable<Task>>((ref) {
+final tasksProvider = StreamProvider<List<Task>>((ref) {
   return FirebaseFirestore.instance
       .collection(FirestoreCollections.tasks)
       .orderBy(
@@ -24,6 +24,7 @@ final tasksProvider = StreamProvider<Iterable<Task>>((ref) {
               (doc) => Task.fromJson(
                 doc.data(),
               ),
-            ),
+            )
+            .toList(),
       );
 });
