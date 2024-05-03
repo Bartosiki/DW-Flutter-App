@@ -1,5 +1,6 @@
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/provider/contest/remaining_time_provider.dart';
+import 'package:dw_flutter_app/views/home/screens/tasks/standings_section.dart';
 import 'package:dw_flutter_app/views/home/screens/tasks/your_tasks_section.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,15 +15,10 @@ class TasksScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final subpage = ref.watch(tasksSubpageProvider);
-    final remainingTime = ref.watch(remainingTimeProvider);
 
     Map<TasksSubpage, Widget> subpageWidgets = {
       TasksSubpage.yourTasks: const YourTasksSection(),
-      TasksSubpage.standings: remainingTime != null
-          ? Text(
-              'Remaining time: $remainingTime',
-            )
-          : const CircularProgressIndicator(),
+      TasksSubpage.standings: const StandingsSection(),
     };
 
     return Scaffold(
