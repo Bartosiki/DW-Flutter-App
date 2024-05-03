@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dw_flutter_app/model/patron.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../constants/firestore_collections.dart';
-import '../../model/partner.dart';
+import '../constants/firestore_collections.dart';
 
-final partnersProvider = StreamProvider<List<Partner>>((ref) {
+final patronsProvider = StreamProvider<List<Patron>>((ref) {
   return FirebaseFirestore.instance
-      .collection(FirestoreCollections.partners)
+      .collection(FirestoreCollections.patrons)
       .snapshots()
       .map(
         (snapshot) => snapshot.docs
@@ -16,7 +16,7 @@ final partnersProvider = StreamProvider<List<Partner>>((ref) {
               (doc) => !doc.metadata.hasPendingWrites,
             )
             .map(
-              (doc) => Partner.fromJson(
+              (doc) => Patron.fromJson(
                 doc.data(),
               ),
             )

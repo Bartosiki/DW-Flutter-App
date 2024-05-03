@@ -1,19 +1,14 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dw_flutter_app/constants/firestore_fields.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../constants/firestore_collections.dart';
-import '../../model/task.dart';
+import '../constants/firestore_collections.dart';
+import '../model/partner.dart';
 
-final tasksProvider = StreamProvider<List<Task>>((ref) {
+final partnersProvider = StreamProvider<List<Partner>>((ref) {
   return FirebaseFirestore.instance
-      .collection(FirestoreCollections.tasks)
-      .orderBy(
-        FirestoreTasksFields.taskId,
-        descending: true,
-      )
+      .collection(FirestoreCollections.partners)
       .snapshots()
       .map(
         (snapshot) => snapshot.docs
@@ -21,7 +16,7 @@ final tasksProvider = StreamProvider<List<Task>>((ref) {
               (doc) => !doc.metadata.hasPendingWrites,
             )
             .map(
-              (doc) => Task.fromJson(
+              (doc) => Partner.fromJson(
                 doc.data(),
               ),
             )

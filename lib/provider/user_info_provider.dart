@@ -5,8 +5,8 @@ import 'package:dw_flutter_app/auth/provider/user_id_provider.dart';
 import 'package:dw_flutter_app/model/user.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../constants/firestore_collections.dart';
-import '../../constants/firestore_fields.dart';
+import '../constants/firestore_collections.dart';
+import '../constants/firestore_fields.dart';
 
 final userInfoProvider = StreamProvider<User>((ref) {
   return FirebaseFirestore.instance

@@ -1,9 +1,9 @@
 import 'package:dw_flutter_app/auth/provider/user_id_provider.dart';
-import 'package:dw_flutter_app/auth/user_info_storage.dart';
+import 'package:dw_flutter_app/data/user_info_storage.dart';
 import 'package:dw_flutter_app/exceptions/exception_with_message.dart';
 import 'package:dw_flutter_app/extensions/log.dart';
-import 'package:dw_flutter_app/provider/tasks/tasks_provider.dart';
-import 'package:dw_flutter_app/provider/users/user_info_provider.dart';
+import 'package:dw_flutter_app/provider/tasks_provider.dart';
+import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

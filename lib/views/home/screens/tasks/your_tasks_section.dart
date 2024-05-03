@@ -1,5 +1,5 @@
 import 'package:dw_flutter_app/constants/strings.dart';
-import 'package:dw_flutter_app/provider/tasks/tasks_provider.dart';
+import 'package:dw_flutter_app/provider/tasks_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

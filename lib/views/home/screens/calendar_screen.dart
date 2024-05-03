@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../constants/strings.dart';
-import '../../../provider/events/events_provider.dart';
+import '../../../provider/events_provider.dart';
 
 class CalendarScreen extends ConsumerWidget {
   const CalendarScreen({super.key});
