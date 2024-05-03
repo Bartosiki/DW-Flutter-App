@@ -19,9 +19,6 @@ final userInfoProvider = StreamProvider<User>((ref) {
       .snapshots()
       .map(
         (snapshot) => snapshot.docs
-            .where(
-              (doc) => !doc.metadata.hasPendingWrites,
-            )
             .map(
               (doc) => User.fromJson(
                 doc.data(),
