@@ -1,6 +1,9 @@
+import 'package:dw_flutter_app/components/screen_description.dart';
 import 'package:dw_flutter_app/components/tasks/task_list.dart';
+import 'package:dw_flutter_app/constants/paths.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../model/tasks_subpages.dart';
@@ -41,22 +44,11 @@ class TasksScreen extends ConsumerWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: Text(Strings.taskScreenDescription,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16
-                    ))),
-                  SizedBox(width: 16),
-                  IconButton(
-                      iconSize: 30,
-                      onPressed: null,
-                      icon: Icon(Icons.filter_list_rounded, color: Colors.white))
-                ],
+              ScreenDescription(
+                description: Strings.taskScreenDescription, 
+                trailingIcon: SvgPicture.asset(
+                  Paths.sortIcon,
+                )
               ),
               const SizedBox(height: 16),
               Text(
