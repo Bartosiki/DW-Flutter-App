@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../provider/contest/remaining_time_provider.dart';
 import '../../../../provider/contest/top_players_provider.dart';
+import '../../../../provider/contest/user_ranking_position_provider.dart';
 
 class StandingsSection extends ConsumerWidget {
   const StandingsSection({super.key});
@@ -13,12 +14,19 @@ class StandingsSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final remainingTime = ref.watch(remainingTimeProvider);
     final topPlayers = ref.watch(topPlayersProvider);
+    final userRankingPosition = ref.watch(userRankingPositionProvider);
 
     return SafeArea(
       child: Column(
         children: [
           Text(
-            remainingTime.toString(),
+            "Time remaining: $remainingTime",
+          ),
+          Text(
+            userRankingPosition.maybeWhen(
+              data: (position) => "Your position: $position",
+              orElse: () => "Your position: loading...",
+            ),
           ),
           topPlayers.when(
             data: (topPlayers) {
