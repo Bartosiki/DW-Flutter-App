@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../model/tasks_subpages.dart';
+import '../../../../provider/contest_time/contestTimeProvider.dart';
 import '../../../../provider/tasks_subpage/tasks_subpage_provider.dart';
 
 class TasksScreen extends ConsumerWidget {
@@ -12,11 +13,18 @@ class TasksScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final subpage = ref.watch(tasksSubpageProvider);
+    final contestTime = ref.watch(contestTimeProvider);
 
-    const Map<TasksSubpage, Widget> subpageWidgets = {
-      TasksSubpage.yourTasks: YourTasksSection(),
-      TasksSubpage.standings: Text(
-        Strings.standings,
+    Map<TasksSubpage, Widget> subpageWidgets = {
+      TasksSubpage.yourTasks: const YourTasksSection(),
+      TasksSubpage.standings: contestTime.when(
+        data: (contestTime) {
+          return Text(
+            "Contest ends at ${contestTime.toIso8601String()}",
+          );
+        },
+        loading: () => const CircularProgressIndicator(),
+        error: (error, stackTrace) => const Text(Strings.error),
       ),
     };
 

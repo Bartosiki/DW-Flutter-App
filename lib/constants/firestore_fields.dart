@@ -44,6 +44,6 @@ class FirestorePartnersFields {
   FirestorePartnersFields._();
 }
 
-class FirestoreContestFields {
+class FirestoreContestTimeFields {
   static const String endTime = 'endTime';
 }
