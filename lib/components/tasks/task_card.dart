@@ -13,31 +13,30 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Scaffold(
-        body: Center(
-          child: Card(
-              color: Colors.white10,
-              child: ListTile(
-                trailing: CircleAvatar(
-                  backgroundColor: Colors.white10,
-                  child: Text(
-                    "$points",
-                    style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                title: Text(
-                  title,
+    return SizedBox(
+      height: 80,
+      child: Center(
+        child: Card(
+            color: Colors.white10,
+            child: ListTile(
+              trailing: CircleAvatar(
+                backgroundColor: Colors.white10,
+                child: Text(
+                  "$points",
                   style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600),
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                subtitle: Text(subtitle,
-                    style: const TextStyle(
-                        color: Colors.white60, fontWeight: FontWeight.normal)),
-                textColor: Colors.white,
-              )),
-        ),
+              ),
+              title: Text(
+                title,
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w600),
+              ),
+              subtitle: Text(subtitle,
+                  style: const TextStyle(
+                      color: Colors.white60, fontWeight: FontWeight.normal)),
+              textColor: Colors.white,
+            )),
       ),
     );
   }
