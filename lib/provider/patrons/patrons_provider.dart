@@ -6,37 +6,20 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../constants/firestore_collections.dart';
 
-final patronsProvider = StreamProvider.autoDispose<List<Patron>>((ref) {
-  final controller = StreamController<List<Patron>>();
-
-  controller.onListen = () {
-    controller.sink.add([]);
-  };
-
-  final subscription = FirebaseFirestore.instance
+final patronsProvider = StreamProvider<List<Patron>>((ref) {
+  return FirebaseFirestore.instance
       .collection(FirestoreCollections.patrons)
       .snapshots()
-      .listen(
-    (snapshot) {
-      final documents = snapshot.docs;
-      final patrons = documents
-          .where(
-            (doc) => !doc.metadata.hasPendingWrites,
-          )
-          .map(
-            (doc) => Patron.fromJson(
-              doc.data(),
-            ),
-          )
-          .toList();
-      controller.sink.add(patrons);
-    },
-  );
-
-  ref.onDispose(() {
-    subscription.cancel();
-    controller.close();
-  });
-
-  return controller.stream;
+      .map(
+        (snapshot) => snapshot.docs
+            .where(
+              (doc) => !doc.metadata.hasPendingWrites,
+            )
+            .map(
+              (doc) => Patron.fromJson(
+                doc.data(),
+              ),
+            )
+            .toList(),
+      );
 });

@@ -8,14 +8,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../constants/firestore_collections.dart';
 import '../../constants/firestore_fields.dart';
 
-final userInfoProvider = StreamProvider.autoDispose<User>((ref) {
-  final controller = StreamController<User>();
-
-  controller.onListen = () {
-    controller.sink.add(User.unknown());
-  };
-
-  final subscription = FirebaseFirestore.instance
+final userInfoProvider = StreamProvider<User>((ref) {
+  return FirebaseFirestore.instance
       .collection(FirestoreCollections.users)
       .where(
         FirestoreUsersFields.userId,
@@ -23,23 +17,16 @@ final userInfoProvider = StreamProvider.autoDispose<User>((ref) {
       )
       .limit(1)
       .snapshots()
-      .listen(
-    (snapshot) {
-      final documents = snapshot.docs;
-      if (documents.isEmpty) {
-        return;
-      }
-      final userInfo = User.fromJson(
-        documents.first.data(),
+      .map(
+        (snapshot) => snapshot.docs
+            .where(
+              (doc) => !doc.metadata.hasPendingWrites,
+            )
+            .map(
+              (doc) => User.fromJson(
+                doc.data(),
+              ),
+            )
+            .first,
       );
-      controller.sink.add(userInfo);
-    },
-  );
-
-  ref.onDispose(() {
-    subscription.cancel();
-    controller.close();
-  });
-
-  return controller.stream;
 });
