@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ScreenDescription extends StatelessWidget {
-  ScreenDescription({super.key, required this.description, this.trailingIcon});
+  const ScreenDescription({super.key, required this.description, this.trailingIcon});
 
-  String description;
-  Widget? trailingIcon;
+  final String description;
+  final Widget? trailingIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,9 @@ class ScreenDescription extends StatelessWidget {
                 )
             )
         ),
-        if (trailingIcon != null) // Check if trailingIcon is not null
+        if (trailingIcon != null)
           const SizedBox(width: 16),
-        if (trailingIcon != null) // Check if trailingIcon is not null
+        if (trailingIcon != null)
           IconButton(
             iconSize: 30,
             onPressed: null,

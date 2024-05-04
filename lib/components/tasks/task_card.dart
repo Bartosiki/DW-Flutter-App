@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class TaskCard extends StatelessWidget {
-  TaskCard(
+  const TaskCard(
       {required this.title,
       required this.subtitle,
       required this.points,
       super.key});
 
-  String title;
-  String subtitle;
-  int points;
+  final String title;
+  final String subtitle;
+  final int points;
 
   @override
   Widget build(BuildContext context) {

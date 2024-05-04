@@ -38,9 +38,12 @@ class TasksScreen extends ConsumerWidget {
     };
 
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+      body: Padding(
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+            top: 16
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -48,6 +51,10 @@ class TasksScreen extends ConsumerWidget {
                 description: Strings.taskScreenDescription, 
                 trailingIcon: SvgPicture.asset(
                   Paths.sortIcon,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcIn
+                  ),
                 )
               ),
               const SizedBox(height: 16),
@@ -59,11 +66,10 @@ class TasksScreen extends ConsumerWidget {
                     fontSize: 16),
               ),
               const SizedBox(height: 8),
-              TaskList(tasks: tasks)
+              Expanded(child: TaskList(tasks: tasks))
             ],
           ),
         ),
-      ),
     );
   }
 }

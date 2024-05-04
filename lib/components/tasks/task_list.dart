@@ -8,9 +8,7 @@ class TaskList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 400,
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Column(
           children: tasks.map((task) {
             return Padding(
@@ -23,7 +21,6 @@ class TaskList extends StatelessWidget {
             );
           }).toList(),
         ),
-      ),
-    );
+      );
   }
 }

@@ -21,6 +21,17 @@ class _HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(_screens[_selectedIndex].label),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              showProfileScreen(context);
+            }, 
+          )
+        ],
+      ),
       body: Center(
         child: _screens[_selectedIndex].screen,
       ),
