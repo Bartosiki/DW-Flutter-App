@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../authenticator.dart';
 import '../model/auth_result.dart';
 import '../model/auth_state.dart';
-import '../user_info_storage.dart';
+import '../../data/user_info_storage.dart';
 
 class AuthStateNotifier extends StateNotifier<AuthState> {
   AuthStateNotifier() : super(const AuthState.unknown()) {
@@ -31,7 +31,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     final userId = _authenticator.userId;
     if (result == AuthResult.success && userId != null) {
       try {
-        await _userInfoStorage.saveUserInfo(
+        await _userInfoStorage.saveOrUpdateUserInfoAfterSignIn(
           userId: userId,
           displayName: _authenticator.displayName,
           email: _authenticator.email,

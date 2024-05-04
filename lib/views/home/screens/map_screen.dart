@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../model/map_variant.dart';
-import '../../../provider/map_variant_provider.dart';
+import '../../../provider/map_variant/map_variant_provider.dart';
 
 class MapScreen extends ConsumerWidget {
   const MapScreen({super.key});

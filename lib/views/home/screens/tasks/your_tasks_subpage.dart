@@ -1,18 +1,17 @@
+import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/provider/tasks_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../constants/strings.dart';
-import '../../../provider/events_provider.dart';
-
-class CalendarScreen extends ConsumerWidget {
-  const CalendarScreen({super.key});
+class YourTasksSubpage extends ConsumerWidget {
+  const YourTasksSubpage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final events = ref.watch(eventsProvider);
-    return events.when(
-      data: (events) {
-        if (events.isEmpty) {
+    final tasks = ref.watch(tasksProvider);
+    return tasks.when(
+      data: (tasks) {
+        if (tasks.isEmpty) {
           return const Center(
             child: Text(
               Strings.empty,
@@ -20,12 +19,12 @@ class CalendarScreen extends ConsumerWidget {
           );
         } else {
           return ListView.builder(
-            itemCount: events.length,
+            itemCount: tasks.length,
             itemBuilder: (context, index) {
-              final event = events.elementAt(index);
+              final task = tasks.elementAt(index);
               return ListTile(
-                title: Text(event.title),
-                subtitle: Text(event.description),
+                title: Text(task.title),
+                subtitle: Text(task.description),
                 onTap: () {},
               );
             },
