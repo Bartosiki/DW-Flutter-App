@@ -1,7 +1,7 @@
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/provider/contest/remaining_time_provider.dart';
-import 'package:dw_flutter_app/views/home/screens/tasks/standings_section.dart';
-import 'package:dw_flutter_app/views/home/screens/tasks/your_tasks_section.dart';
+import 'package:dw_flutter_app/views/home/screens/tasks/standings_subpage.dart';
+import 'package:dw_flutter_app/views/home/screens/tasks/your_tasks_subpage.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,8 +17,8 @@ class TasksScreen extends ConsumerWidget {
     final subpage = ref.watch(tasksSubpageProvider);
 
     Map<TasksSubpage, Widget> subpageWidgets = {
-      TasksSubpage.yourTasks: const YourTasksSection(),
-      TasksSubpage.standings: const StandingsSection(),
+      TasksSubpage.yourTasks: const YourTasksSubpage(),
+      TasksSubpage.standings: const StandingsSubpage(),
     };
 
     return Scaffold(

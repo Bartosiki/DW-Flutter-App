@@ -3,8 +3,8 @@ import 'package:dw_flutter_app/provider/tasks_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class YourTasksSection extends ConsumerWidget {
-  const YourTasksSection({super.key});
+class YourTasksSubpage extends ConsumerWidget {
+  const YourTasksSubpage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
