@@ -1,15 +1,24 @@
 import 'package:dw_flutter_app/clients/vertex_http_client.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 class GeminiClient {
-  final VertexHttpClient _client;
+  final GenerativeModel _client;
 
-  GeminiClient(this._client);
+  GeminiClient({
+    required String apiKey,
+    required String projectUrl,
+  }) : _client = GenerativeModel(
+          model: 'gemini-pro',
+          apiKey: apiKey,
+          httpClient: VertexHttpClient(projectUrl),
+        );
 
-  Future<String> fetch(String path) async {
-    final response = await _client.get(Uri.parse('$_baseUrl$path'));
-    if (response.statusCode != 200) {
-      throw Exception('Failed to fetch data');
-    }
-    return response.body;
+  Future<String?> generateTestResponse() async {
+    final content = [Content.text("Hey Gemini, say hi to me!")];
+    final response = await _client.generateContent(content);
+
+    print(response.text);
+
+    return response.text;
   }
 }
