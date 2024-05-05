@@ -79,16 +79,13 @@ flutter:
     - assets/images/map_poland_1.jpg
     - assets/images/map_poland_2.png
     - assets/animations/kitty.json
-<<<<<<< HEAD
     - assets/icons/ai_sparkles.svg
     - assets/icons/calendar.svg
     - assets/icons/map.svg
     - assets/icons/qr_code.svg
     - assets/icons/trophy.svg
-=======
-    - assets/images/ground_floor.png
     - assets/images/first_floor.png
->>>>>>> 5341adc (add assets and interactive viewer)
+    - assets/images/ground_floor.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

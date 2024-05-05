@@ -5,15 +5,15 @@ enum Option { first, second }
 class CustomSwitch extends StatefulWidget {
   const CustomSwitch(
       {super.key,
-      required this.firstScreen,
-      required this.secondScreen,
-      required this.firstLabel,
-      required this.secondLabel});
+      required this.leftScreen,
+      required this.rightScreen,
+      required this.leftLabel,
+      required this.rightLabel});
 
-  final Widget firstScreen;
-  final Widget secondScreen;
-  final String firstLabel;
-  final String secondLabel;
+  final Widget leftScreen;
+  final Widget rightScreen;
+  final String leftLabel;
+  final String rightLabel;
 
   @override
   _CustomSwitchState createState() => _CustomSwitchState();
@@ -42,17 +42,17 @@ class _CustomSwitchState extends State<CustomSwitch> {
                     selectedBackgroundColor: Colors.grey[800],
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     visualDensity:
-                        const VisualDensity(horizontal: -3, vertical: -3),
+                        const VisualDensity(horizontal: -2, vertical: -2),
                   ),
                   showSelectedIcon: false,
                   segments: <ButtonSegment<Option>>[
                     ButtonSegment<Option>(
                       value: Option.first,
-                      label: Text(widget.firstLabel),
+                      label: Text(widget.leftLabel),
                     ),
                     ButtonSegment<Option>(
                       value: Option.second,
-                      label: Text(widget.secondLabel),
+                      label: Text(widget.rightLabel),
                     ),
                   ],
                   selected: {optionView},
@@ -67,8 +67,8 @@ class _CustomSwitchState extends State<CustomSwitch> {
               Expanded(
                 child: Expanded(
                   child: optionView == Option.first
-                      ? widget.firstScreen
-                      : widget.secondScreen,
+                      ? widget.leftScreen
+                      : widget.rightScreen,
                 ),
               ),
             ],
