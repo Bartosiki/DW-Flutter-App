@@ -49,4 +49,19 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       state = const AuthState.unknown();
     }
   }
+
+  Future<void> loginAnonymously() async {
+    state = state.copiedWithIsLoading(true);
+    final result = await _authenticator.signInAnonymously();
+
+    try {
+      state = AuthState(
+        result: result,
+        isLoading: false,
+        userId: 'siema',
+      );
+    } catch (e) {
+      state = const AuthState.unknown();
+    }
+  }
 }

@@ -36,4 +36,8 @@ class Authenticator {
       return AuthResult.failure;
     }
   }
+
+  Future<AuthResult> signInAnonymously() async {
+    return AuthResult.success;
+  }
 }

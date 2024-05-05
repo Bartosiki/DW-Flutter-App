@@ -7,6 +7,7 @@ class Strings {
       'Sign up to take part in our event!';
   static const String continueWithGoogle = 'Continue with Google';
   static const String continueWithApple = 'Continue with Apple';
+  static const String continueWithoutLogin = 'Continue without login';
   static const String bySigningUpYouAgreeToOur =
       'By signing up you agree to our ';
   static const String termsOfService = 'Terms of Service ';
