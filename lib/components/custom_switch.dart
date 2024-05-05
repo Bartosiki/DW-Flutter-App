@@ -32,44 +32,37 @@ class _CustomSwitchState extends State<CustomSwitch> {
           child: Column(
             children: [
               Container(
-                  padding: const EdgeInsets.all(30.0),
-                  width: double.infinity,
-                  child: SegmentedButtonTheme(
-                    data: const SegmentedButtonThemeData(),
-                    child: SegmentedButton<Option>(
-                      style: SegmentedButton.styleFrom(
-                        shape: const CircleBorder(
-                          side: BorderSide(
-                            width: 0,
-                          ),
-                        ),
-                        backgroundColor: Colors.grey[300],
-                        foregroundColor: Colors.black,
-                        selectedForegroundColor: Colors.white,
-                        selectedBackgroundColor: Colors.grey[800],
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        visualDensity:
-                            const VisualDensity(horizontal: -3, vertical: -3),
-                      ),
-                      showSelectedIcon: false,
-                      segments: <ButtonSegment<Option>>[
-                        ButtonSegment<Option>(
-                          value: Option.first,
-                          label: Text(widget.firstLabel),
-                        ),
-                        ButtonSegment<Option>(
-                          value: Option.second,
-                          label: Text(widget.secondLabel),
-                        ),
-                      ],
-                      selected: {optionView},
-                      onSelectionChanged: (Set<Option> newSelection) {
-                        setState(() {
-                          optionView = newSelection.first;
-                        });
-                      },
+                padding: const EdgeInsets.all(30.0),
+                width: double.infinity,
+                child: SegmentedButton<Option>(
+                  style: SegmentedButton.styleFrom(
+                    backgroundColor: Colors.grey[300],
+                    foregroundColor: Colors.black,
+                    selectedForegroundColor: Colors.white,
+                    selectedBackgroundColor: Colors.grey[800],
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity:
+                        const VisualDensity(horizontal: -3, vertical: -3),
+                  ),
+                  showSelectedIcon: false,
+                  segments: <ButtonSegment<Option>>[
+                    ButtonSegment<Option>(
+                      value: Option.first,
+                      label: Text(widget.firstLabel),
                     ),
-                  )),
+                    ButtonSegment<Option>(
+                      value: Option.second,
+                      label: Text(widget.secondLabel),
+                    ),
+                  ],
+                  selected: {optionView},
+                  onSelectionChanged: (Set<Option> newSelection) {
+                    setState(() {
+                      optionView = newSelection.first;
+                    });
+                  },
+                ),
+              ),
               const SizedBox(height: 20.0),
               Expanded(
                 child: Expanded(
