@@ -42,7 +42,7 @@ class App extends StatelessWidget {
         body: Consumer(
           builder: (context, ref, child) {
             final isLoggedIn = ref.watch(isLoggedInProvider);
-            return isLoggedIn ? const HomeView() : const HomeView();
+            return isLoggedIn ? const HomeView() : const LoginView();
           },
         ),
       ),
