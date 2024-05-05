@@ -23,6 +23,8 @@ class Strings {
   static const String profile = 'Profile';
   static const String yourTasks = 'Your tasks';
   static const String standings = 'Standings';
+  static const String error = 'Error';
+  static const String empty = 'Empty';
   static String youHaveXPoints(int points) {
     return 'You have $points points';
   }

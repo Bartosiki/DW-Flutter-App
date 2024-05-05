@@ -2,12 +2,16 @@ import 'package:dw_flutter_app/components/screen_description.dart';
 import 'package:dw_flutter_app/components/tasks/task_list.dart';
 import 'package:dw_flutter_app/constants/paths.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/provider/contest/remaining_time_provider.dart';
+import 'package:dw_flutter_app/views/home/screens/tasks/standings_subpage.dart';
+import 'package:dw_flutter_app/views/home/screens/tasks/your_tasks_subpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../model/tasks_subpages.dart';
-import '../../../provider/tasks_subpage_provider.dart';
+import '../../../../model/tasks_subpages.dart';
+import '../../../../provider/contest/contest_time_provider.dart';
+import '../../../../provider/tasks_subpage/tasks_subpage_provider.dart';
 
 class TasksScreen extends ConsumerWidget {
   const TasksScreen({super.key});
@@ -28,13 +32,9 @@ class TasksScreen extends ConsumerWidget {
       {"title": "Task 8", "subtitle": "Description for Task 8", "points": 40},
     ];
 
-    const Map<TasksSubpage, Widget> subpageWidgets = {
-      TasksSubpage.yourTasks: Text(
-        Strings.yourTasks,
-      ),
-      TasksSubpage.standings: Text(
-        Strings.standings,
-      ),
+    Map<TasksSubpage, Widget> subpageWidgets = {
+      TasksSubpage.yourTasks: const YourTasksSubpage(),
+      TasksSubpage.standings: const StandingsSubpage(),
     };
 
     return Scaffold(
