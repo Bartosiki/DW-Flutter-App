@@ -27,5 +27,9 @@ class Strings {
 
   static const String error = 'Error';
   static const String empty = 'Empty';
+
+  static const String firstFloor = 'First Floor';
+  static const String groundFloor = 'Ground Floor';
+
   const Strings._();
 }
