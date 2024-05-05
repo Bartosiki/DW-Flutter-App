@@ -5,7 +5,7 @@ class TaskCard extends StatelessWidget {
       {required this.title,
       required this.subtitle,
       required this.points,
-      super.key});
+      super.key,});
 
   final String title;
   final String subtitle;
@@ -44,7 +44,8 @@ class TaskCard extends StatelessWidget {
                   )
               ),
               textColor: Colors.white,
-            )),
+            ),
+        ),
       ),
     );
   }

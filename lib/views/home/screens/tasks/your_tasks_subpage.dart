@@ -3,6 +3,7 @@ import 'package:dw_flutter_app/components/tasks/task_list.dart';
 import 'package:dw_flutter_app/constants/paths.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/provider/tasks_provider.dart';
+import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,8 +13,9 @@ class YourTasksSubpage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final points = 5;
+    final userInfo = ref.watch(userInfoProvider);
     final tasks = ref.watch(tasksProvider);
+    
     return tasks.when(
       data: (tasks) {
         if (tasks.isEmpty) {
@@ -25,7 +27,7 @@ class YourTasksSubpage extends ConsumerWidget {
         } else {
           return Scaffold(
             body: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -34,20 +36,33 @@ class YourTasksSubpage extends ConsumerWidget {
                       trailingIcon: SvgPicture.asset(
                         Paths.sortIcon,
                         colorFilter: const ColorFilter.mode(
-                            Colors.white, BlendMode.srcIn
+                            Colors.white, BlendMode.srcIn,
                         ),
                       )
                   ),
                   const SizedBox(height: 16),
-                  Text(
-                    Strings.youHaveXPoints(points),
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16),
+                  userInfo.when(
+                    data: (user) {
+                      return Text(
+                        Strings.youHaveXPoints(user.gainedPoints),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                        ),
+                      );
+                    },
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    error: (error, stackTrace) => const Center(
+                      child: Text(
+                        Strings.error,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 8),
-                  Expanded(child: TaskList(tasks: tasks))
+                  Expanded(child: TaskList(tasks: tasks)),
                 ],
               ),
             ),

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ScreenDescription extends StatelessWidget {
-  const ScreenDescription({super.key, required this.description, this.trailingIcon});
+  const ScreenDescription({
+    super.key,
+    required this.description,
+    this.trailingIcon,
+  });
 
   final String description;
   final Widget? trailingIcon;
@@ -16,17 +20,13 @@ class ScreenDescription extends StatelessWidget {
                 style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w400,
-                    fontSize: 16
-                )
-            )
-        ),
+                    fontSize: 16))),
         if (trailingIcon != null)
-          const SizedBox(width: 16),
-        if (trailingIcon != null)
-          IconButton(
-            iconSize: 30,
-            onPressed: null,
-            icon: trailingIcon!
+          Column(
+            children: [
+              const SizedBox(width: 16),
+              IconButton(iconSize: 30, onPressed: null, icon: trailingIcon!),
+            ],
           ),
       ],
     );

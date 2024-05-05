@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dw_flutter_app/components/tasks/task_card.dart';
 
 class TaskList extends StatelessWidget {
-  const TaskList({super.key, required this.tasks});
+  const TaskList({super.key, required this.tasks,});
 
   final List<Task> tasks;
 
