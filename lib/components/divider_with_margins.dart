@@ -7,16 +7,9 @@ class DividerWithMargins extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
-      child: Column(
-        children: [
-          Divider(
-            color: AppColors.dividerColor,
-            thickness: 1.5,
-          ),
-        ],
-      ),
+    return Divider(
+      color: AppColors.dividerColor,
+      thickness: 1.5,
     );
   }
 }
