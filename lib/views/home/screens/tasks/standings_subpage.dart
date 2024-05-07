@@ -1,5 +1,5 @@
+import 'package:dw_flutter_app/components/tasks/standings_card.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
-import 'package:dw_flutter_app/provider/tasks_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -51,9 +51,16 @@ class StandingsSubpage extends ConsumerWidget {
                     itemCount: topPlayers.length,
                     itemBuilder: (context, index) {
                       final topPlayer = topPlayers.elementAt(index);
-                      return ListTile(
-                        title: Text(topPlayer.displayName),
-                        subtitle: Text(topPlayer.gainedPoints.toString()),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: 16
+                        ),
+                        child: StandingsCard(
+                          rankIndex: index+1,
+                          points: topPlayer.gainedPoints,
+                          name: topPlayer.displayName
+                        ),
                       );
                     },
                   ),

@@ -27,5 +27,6 @@ class Strings {
 
   static const String error = 'Error';
   static const String empty = 'Empty';
+  static const String standingsCardPoints = 'Points';
   const Strings._();
 }
