@@ -31,8 +31,6 @@ class StandingsSubpage extends ConsumerWidget {
     final topPlayers = ref.watch(topPlayersProvider);
     final userRankingPosition = ref.watch(userRankingPositionProvider);
 
-    final infoCardWidth = (MediaQuery.of(context).size.width - 56) / 2; 
-
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -44,7 +42,6 @@ class StandingsSubpage extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             StandingsInfoCardRow(
-              infoCardWidth: infoCardWidth,
               timeLeft: getTimeLeftFormatted(remainingTime),
               position: userRankingPosition.maybeWhen(
                 data: (position) => "#$position",
