@@ -8,7 +8,7 @@ class MapView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomSwitch(
+    return ScreenSwitch(
       leftLabel: Strings.groundFloor,
       rightLabel: Strings.firstFloor,
       leftScreen: MapContainer(

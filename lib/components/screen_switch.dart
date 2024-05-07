@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 enum Option { first, second }
 
-class CustomSwitch extends StatefulWidget {
-  const CustomSwitch(
+class ScreenSwitch extends StatefulWidget {
+  const ScreenSwitch(
       {super.key,
       required this.leftScreen,
       required this.rightScreen,
@@ -16,10 +16,10 @@ class CustomSwitch extends StatefulWidget {
   final String rightLabel;
 
   @override
-  _CustomSwitchState createState() => _CustomSwitchState();
+  _ScreenSwitchState createState() => _ScreenSwitchState();
 }
 
-class _CustomSwitchState extends State<CustomSwitch> {
+class _ScreenSwitchState extends State<ScreenSwitch> {
   bool isSwitched = false;
   Option optionView = Option.first;
 
