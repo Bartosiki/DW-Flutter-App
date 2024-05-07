@@ -16,7 +16,7 @@ class TaskList extends StatelessWidget {
         return TaskCard(
           title: task.title,
           subtitle: task.description,
-          points: task.points
+          points: task.points,
         );
       },
     );

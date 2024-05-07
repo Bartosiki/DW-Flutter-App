@@ -25,7 +25,11 @@ class ScreenDescription extends StatelessWidget {
           Column(
             children: [
               const SizedBox(width: 16),
-              IconButton(iconSize: 30, onPressed: null, icon: trailingIcon!),
+              IconButton(
+                iconSize: 30,
+                onPressed: null,
+                icon: trailingIcon!,
+              ),
             ],
           ),
       ],

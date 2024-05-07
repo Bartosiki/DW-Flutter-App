@@ -38,7 +38,7 @@ class YourTasksSubpage extends ConsumerWidget {
                         colorFilter: const ColorFilter.mode(
                             Colors.white, BlendMode.srcIn,
                         ),
-                      )
+                      ),
                   ),
                   const SizedBox(height: 16),
                   userInfo.when(
