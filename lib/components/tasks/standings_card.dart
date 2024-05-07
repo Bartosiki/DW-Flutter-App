@@ -2,8 +2,6 @@ import 'package:dw_flutter_app/constants/app_colors.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:flutter/material.dart';
 
-enum Rank { first, second, third }
-
 class StandingsCard extends StatelessWidget {
   StandingsCard(
       {super.key,
