@@ -29,5 +29,7 @@ class Strings {
     return 'You have $points points';
   }
   static const String taskScreenDescription = "Task screen description Task screen description Task screen description";
+  static const String firstFloor = 'First Floor';
+  static const String groundFloor = 'Ground Floor';
   const Strings._();
 }
