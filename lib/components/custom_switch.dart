@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 
 enum Option { first, second }
 
-class ScreenSwitch extends StatefulWidget {
-  const ScreenSwitch(
+class CustomSwitch extends StatefulWidget {
+  const CustomSwitch(
       {super.key,
-      required this.leftScreen,
-      required this.rightScreen,
-      required this.leftLabel,
-      required this.rightLabel,
+      required this.firstScreen,
+      required this.secondScreen,
+      required this.firstLabel,
+      required this.secondLabel,
       this.onSwitch});
 
-  final Widget leftScreen;
-  final Widget rightScreen;
-  final String leftLabel;
-  final String rightLabel;
+  final Widget firstScreen;
+  final Widget secondScreen;
+  final String firstLabel;
+  final String secondLabel;
   final void Function()? onSwitch;
 
   @override
-  _ScreenSwitchState createState() => _ScreenSwitchState();
+  _CustomSwitchState createState() => _CustomSwitchState();
 }
 
-class _ScreenSwitchState extends State<ScreenSwitch> {
+class _CustomSwitchState extends State<CustomSwitch> {
   bool isSwitched = false;
   Option optionView = Option.first;
 
@@ -32,12 +32,12 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.all(24),
                 width: double.infinity,
                 child: SegmentedButtonTheme(
                   data: SegmentedButtonThemeData(
                     style: SegmentedButton.styleFrom(
-                      side: BorderSide.none
+                      side: BorderSide.none,
                     )
                   ),
                   child: SegmentedButton<Option>(
@@ -54,11 +54,11 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
                     segments: <ButtonSegment<Option>>[
                       ButtonSegment<Option>(
                         value: Option.first,
-                        label: Text(widget.leftLabel),
+                        label: Text(widget.firstLabel),
                       ),
                       ButtonSegment<Option>(
                         value: Option.second,
-                        label: Text(widget.rightLabel),
+                        label: Text(widget.secondLabel),
                       ),
                     ],
                     selected: {optionView},
@@ -66,20 +66,17 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
                       setState(() {
                         optionView = newSelection.first;
                         if (widget.onSwitch != null) {
-                            widget.onSwitch!();
+                          widget.onSwitch!();
                         }
                       });
                     },
                   ),
                 ),
               ),
-              const SizedBox(height: 20.0),
               Expanded(
-                child: Expanded(
-                  child: optionView == Option.first
-                      ? widget.leftScreen
-                      : widget.rightScreen,
-                ),
+                child: optionView == Option.first
+                      ? widget.firstScreen
+                      : widget.secondScreen,
               ),
             ],
           ),

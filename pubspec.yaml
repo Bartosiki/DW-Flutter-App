@@ -84,6 +84,7 @@ flutter:
     - assets/icons/map.svg
     - assets/icons/qr_code.svg
     - assets/icons/trophy.svg
+    - assets/icons/sort_icon.svg
     - assets/images/first_floor.png
     - assets/images/ground_floor.png
   #   - images/a_dot_burr.jpeg

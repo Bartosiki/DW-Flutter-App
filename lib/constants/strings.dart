@@ -15,7 +15,6 @@ class Strings {
   static const String privacyPolicy = 'Privacy Policy ';
   static const String toLearnMoreAboutHowWeUseYourData =
       'to learn more about how we use your data.';
-
   static const String calendar = 'Calendar';
   static const String tasks = 'Tasks';
   static const String camera = 'Camera';
@@ -24,12 +23,13 @@ class Strings {
   static const String profile = 'Profile';
   static const String yourTasks = 'Your tasks';
   static const String standings = 'Standings';
-
   static const String error = 'Error';
   static const String empty = 'Empty';
-
+  static String youHaveXPoints(int points) {
+    return 'You have $points points';
+  }
+  static const String taskScreenDescription = "Task screen description Task screen description Task screen description";
   static const String firstFloor = 'First Floor';
   static const String groundFloor = 'Ground Floor';
-
   const Strings._();
 }
