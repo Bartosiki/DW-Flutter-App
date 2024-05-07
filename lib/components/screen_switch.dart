@@ -8,12 +8,14 @@ class ScreenSwitch extends StatefulWidget {
       required this.leftScreen,
       required this.rightScreen,
       required this.leftLabel,
-      required this.rightLabel});
+      required this.rightLabel,
+      this.onSwitch});
 
   final Widget leftScreen;
   final Widget rightScreen;
   final String leftLabel;
   final String rightLabel;
+  final void Function()? onSwitch;
 
   @override
   _ScreenSwitchState createState() => _ScreenSwitchState();
@@ -26,41 +28,49 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Center(
+      body: Center(
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(30.0),
+                padding: const EdgeInsets.all(24.0),
                 width: double.infinity,
-                child: SegmentedButton<Option>(
-                  style: SegmentedButton.styleFrom(
-                    backgroundColor: Colors.grey[300],
-                    foregroundColor: Colors.black,
-                    selectedForegroundColor: Colors.white,
-                    selectedBackgroundColor: Colors.grey[800],
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    visualDensity:
-                        const VisualDensity(horizontal: -2, vertical: -2),
+                child: SegmentedButtonTheme(
+                  data: SegmentedButtonThemeData(
+                    style: SegmentedButton.styleFrom(
+                      side: BorderSide.none
+                    )
                   ),
-                  showSelectedIcon: false,
-                  segments: <ButtonSegment<Option>>[
-                    ButtonSegment<Option>(
-                      value: Option.first,
-                      label: Text(widget.leftLabel),
+                  child: SegmentedButton<Option>(
+                    style: SegmentedButton.styleFrom(
+                      backgroundColor: Colors.grey[300],
+                      foregroundColor: Colors.black,
+                      selectedForegroundColor: Colors.white,
+                      selectedBackgroundColor: Colors.grey[800],
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      visualDensity:
+                          const VisualDensity(horizontal: -2, vertical: -2),
                     ),
-                    ButtonSegment<Option>(
-                      value: Option.second,
-                      label: Text(widget.rightLabel),
-                    ),
-                  ],
-                  selected: {optionView},
-                  onSelectionChanged: (Set<Option> newSelection) {
-                    setState(() {
-                      optionView = newSelection.first;
-                    });
-                  },
+                    showSelectedIcon: false,
+                    segments: <ButtonSegment<Option>>[
+                      ButtonSegment<Option>(
+                        value: Option.first,
+                        label: Text(widget.leftLabel),
+                      ),
+                      ButtonSegment<Option>(
+                        value: Option.second,
+                        label: Text(widget.rightLabel),
+                      ),
+                    ],
+                    selected: {optionView},
+                    onSelectionChanged: (Set<Option> newSelection) {
+                      setState(() {
+                        optionView = newSelection.first;
+                        if (widget.onSwitch != null) {
+                            widget.onSwitch!();
+                        }
+                      });
+                    },
+                  ),
                 ),
               ),
               const SizedBox(height: 20.0),
@@ -74,7 +84,6 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
             ],
           ),
         ),
-      ),
     );
   }
 }

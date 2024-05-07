@@ -1,4 +1,4 @@
-import 'package:dw_flutter_app/components/custom_switch.dart';
+import 'package:dw_flutter_app/components/screen_switch.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/views/home/screens/tasks/standings_subpage.dart';
 import 'package:dw_flutter_app/views/home/screens/tasks/your_tasks_subpage.dart';
@@ -11,11 +11,11 @@ class TasksScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CustomSwitch(
-      firstScreen: const YourTasksSubpage(),
-      secondScreen: const StandingsSubpage(),
-      firstLabel: Strings.tasks,
-      secondLabel: Strings.standings,
+    return ScreenSwitch(
+      leftScreen: const YourTasksSubpage(),
+      rightScreen: const StandingsSubpage(),
+      leftLabel: Strings.tasks,
+      rightLabel: Strings.standings,
       onSwitch: ref.read(tasksSubpageProvider.notifier).switchTasksSubpage,
     );
   }
