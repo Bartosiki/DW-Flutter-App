@@ -2,7 +2,6 @@ import 'package:dw_flutter_app/components/default_bottom_navigation_bar.dart';
 import 'package:dw_flutter_app/views/home/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import 'tab_screen.dart';
 
 class HomeView extends ConsumerStatefulWidget {
@@ -21,6 +20,17 @@ class _HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(_screens[_selectedIndex].label),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              showProfileScreen(context);
+            }, 
+          )
+        ],
+      ),
       body: Center(
         child: _screens[_selectedIndex].screen,
       ),
