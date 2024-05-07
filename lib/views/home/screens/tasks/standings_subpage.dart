@@ -1,6 +1,8 @@
 import 'package:dw_flutter_app/components/divider_with_margins.dart';
+import 'package:dw_flutter_app/components/screen_description.dart';
 import 'package:dw_flutter_app/components/tasks/standings_card.dart';
 import 'package:dw_flutter_app/components/tasks/standings_info_card.dart';
+import 'package:dw_flutter_app/components/tasks/standings_info_cards_row.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,24 +38,18 @@ class StandingsSubpage extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                StandingsInfoCard(
-                  infoCardWidth: infoCardWidth,
-                  title: getTimeLeftFormatted(remainingTime),
-                  subtitle: 'TIME LEFT'
-                ),
-                const SizedBox(width: 24),
-                StandingsInfoCard(
-                  infoCardWidth: infoCardWidth,
-                  title: userRankingPosition.maybeWhen(
-                    data: (position) => "#$position",
-                    orElse: () => "# loading..",
-                  ),
-                  subtitle: 'YOUR PLACE'
-                )
-              ],
+            const SizedBox(height: 8),
+            const ScreenDescription(
+              description: Strings.standingsScreenDescription,
+            ),
+            const SizedBox(height: 16),
+            StandingsInfoCardRow(
+              infoCardWidth: infoCardWidth,
+              timeLeft: getTimeLeftFormatted(remainingTime),
+              position: userRankingPosition.maybeWhen(
+                data: (position) => "#$position",
+                orElse: () => "# loading..",
+              ),
             ),
             const SizedBox(height: 16),
             const DividerWithMargins(),
