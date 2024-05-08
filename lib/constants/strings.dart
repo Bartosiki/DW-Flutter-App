@@ -25,11 +25,13 @@ class Strings {
   static const String standings = 'Standings';
   static const String error = 'Error';
   static const String empty = 'Empty';
+  static const String standingsCardPoints = 'Points';
   static String youHaveXPoints(int points) {
     return 'You have $points points';
   }
-  static const String taskScreenDescription = "Task screen description Task screen description Task screen description";
+  static const String taskScreenDescription = 'Task screen description Task screen description Task screen description';
   static const String firstFloor = 'First Floor';
   static const String groundFloor = 'Ground Floor';
+  static const String standingsScreenDescription = 'The person who scores the highest amount of points wins. In case of ex aequo the person who finished faster wins';
   const Strings._();
 }

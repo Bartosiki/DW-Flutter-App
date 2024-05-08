@@ -46,7 +46,10 @@ class LoginView extends ConsumerWidget {
                       onPressed: () {},
                     ),
                     const SizedBox(height: 12.0),
-                    const DividerWithMargins(),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+                      child: DividerWithMargins(),
+                    ),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0),
                       child: LoginViewTermsAgreementWidget(),

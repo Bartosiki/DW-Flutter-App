@@ -11,5 +11,6 @@ class AppColors {
       Color.fromARGB(255, 253, 253, 253);
   static final dividerColor = '#FDFDFD'.toColor();
   static final navigationItemActiveColor = Colors.amber[800]!;
+  static final standingsCardForegroundColor = '2C2C2C'.toColor();
   const AppColors._();
 }

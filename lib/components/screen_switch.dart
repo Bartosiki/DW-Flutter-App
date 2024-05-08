@@ -32,7 +32,7 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.all(16.0),
                 width: double.infinity,
                 child: SegmentedButtonTheme(
                   data: SegmentedButtonThemeData(
@@ -73,7 +73,6 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20.0),
               Expanded(
                 child: Expanded(
                   child: optionView == Option.first
