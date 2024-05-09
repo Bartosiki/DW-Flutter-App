@@ -3,16 +3,11 @@ import 'package:flutter/material.dart';
 class SnackbarHelper {
   static void showSimpleSnackbar(
     GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey,
-    BuildContext context,
     String message,
     Color backgroundColor,
   ) {
-    final snackBarSource = scaffoldMessengerKey.currentState != null
-        ? scaffoldMessengerKey.currentState!
-        : ScaffoldMessenger.of(context);
-
-    snackBarSource.removeCurrentSnackBar();
-    snackBarSource.showSnackBar(
+    scaffoldMessengerKey.currentState?.removeCurrentSnackBar();
+    scaffoldMessengerKey.currentState?.showSnackBar(
       SnackBar(
         content: Text(
           message,
@@ -23,6 +18,7 @@ class SnackbarHelper {
           ),
         ),
         backgroundColor: backgroundColor,
+        duration: const Duration(seconds: 4),
       ),
     );
   }

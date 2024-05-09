@@ -1,23 +1,35 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:app_settings/app_settings.dart';
+import 'package:dw_flutter_app/extensions/log.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:sprintf/sprintf.dart';
+import '../../../auth/provider/user_id_provider.dart';
 import '../../../constants/strings.dart';
+import '../../../data/user_info_storage.dart';
+import '../../../exceptions/task_already_finished.dart';
+import '../../../exceptions/task_not_found.dart';
+import '../../../exceptions/user_not_found.dart';
+import '../../../model/task.dart';
+import '../../../provider/tasks_provider.dart';
+import '../../../snackbar/snackbar_helper.dart';
 
-class QrScannerScreen extends StatefulWidget {
+class QrScannerScreen extends ConsumerStatefulWidget {
   const QrScannerScreen({super.key});
 
   @override
-  State<QrScannerScreen> createState() => _QrScannerScreenState();
+  ConsumerState<QrScannerScreen> createState() => _QrScannerScreenState();
 }
 
-class _QrScannerScreenState extends State<QrScannerScreen>
+class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
     with WidgetsBindingObserver {
   final MobileScannerController controller = MobileScannerController();
   StreamSubscription<Object?>? _subscription;
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
+  bool isScanningStopped = false;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +77,7 @@ class _QrScannerScreenState extends State<QrScannerScreen>
   Widget _onError(
       BuildContext context, MobileScannerException error, Widget? child) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      error.log();
       _scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBar(
           content: const Text(
@@ -84,6 +97,7 @@ class _QrScannerScreenState extends State<QrScannerScreen>
               AppSettings.openAppSettings();
             },
           ),
+          duration: const Duration(seconds: 4),
         ),
       );
     });
@@ -155,7 +169,89 @@ class _QrScannerScreenState extends State<QrScannerScreen>
   }
 
   void _handleBarcode(BarcodeCapture? barcode) {
-    // Handle the barcode here.
+    if (barcode == null || isScanningStopped) {
+      return;
+    }
+    scanQrCode(
+      barcode.barcodes.first.rawValue ?? '',
+      ref.read(tasksProvider),
+      const UserInfoStorage(),
+    );
+  }
+
+  void scanQrCode(
+    String qrCode,
+    AsyncValue<List<Task>> allTasks,
+    UserInfoStorage userInfoStorage,
+  ) async {
+    final userId = ref.read(userIdProvider);
+    if (userId != null) {
+      await allTasks.maybeWhen(
+        data: (tasks) async {
+          try {
+            final finishedTask = await userInfoStorage.finishTask(
+              userId,
+              qrCode,
+              tasks,
+            );
+            if (context.mounted) {
+              SnackbarHelper.showSimpleSnackbar(
+                _scaffoldMessengerKey,
+                sprintf(
+                  Strings.taskFinishedSuccessfullyWithPoints,
+                  [finishedTask.title, finishedTask.points],
+                ),
+                Colors.green,
+              );
+            }
+          } on UserNotFound catch (e) {
+            e.message.log();
+            if (context.mounted) {
+              SnackbarHelper.showSimpleSnackbar(
+                _scaffoldMessengerKey,
+                Strings.errorPleaseLogOutAndTryAgain,
+                Colors.red,
+              );
+            }
+          } on TaskNotFound catch (e) {
+            e.message.log();
+            if (context.mounted) {
+              SnackbarHelper.showSimpleSnackbar(
+                _scaffoldMessengerKey,
+                Strings.thisQrCodeIsNotValidPleaseTryAgain,
+                Colors.red,
+              );
+            }
+          } on TaskAlreadyFinished catch (e) {
+            e.message.log();
+            if (context.mounted) {
+              SnackbarHelper.showSimpleSnackbar(
+                _scaffoldMessengerKey,
+                Strings.thisTaskHasAlreadyBeenCompleted,
+                Colors.yellow[800]!,
+              );
+            }
+          } catch (e) {
+            e.log();
+            if (context.mounted) {
+              SnackbarHelper.showSimpleSnackbar(
+                _scaffoldMessengerKey,
+                Strings.unknownErrorPleaseTryAgain,
+                Colors.red,
+              );
+            }
+          } finally {
+            // disable scanning for 2 seconds without stopping the camera
+            isScanningStopped = true;
+            await Future.delayed(const Duration(seconds: 4));
+            isScanningStopped = false;
+          }
+        },
+        orElse: () {
+          'Tasks not loaded, failed to finish task'.log();
+        },
+      );
+    }
   }
 }
 

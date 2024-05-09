@@ -39,5 +39,15 @@ class Strings {
   static const String cameraPermissionWasDenied =
       'Camera permission was denied, please enable it in app settings to scan QR codes';
   static const String openSettings = 'Open settings';
+  static const String taskFinishedSuccessfullyWithPoints =
+      'Task "%s" finished successfully, you have earned %d points';
+  static const String errorPleaseLogOutAndTryAgain =
+      'Error, please log out and try again';
+  static const String thisQrCodeIsNotValidPleaseTryAgain =
+      'This QR code is not valid, please try again';
+  static const String thisTaskHasAlreadyBeenCompleted =
+      'This task has already been completed';
+  static const String unknownErrorPleaseTryAgain =
+      'Unknown error, please try again';
   const Strings._();
 }
