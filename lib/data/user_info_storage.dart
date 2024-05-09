@@ -54,7 +54,7 @@ class UserInfoStorage {
     }
   }
 
-  Future<void> finishTask(
+  Future<Task> finishTask(
     String userId,
     String qrCode,
     List<Task> allTasks,
@@ -105,5 +105,7 @@ class UserInfoStorage {
             FieldValue.serverTimestamp(),
       },
     );
+
+    return task;
   }
 }

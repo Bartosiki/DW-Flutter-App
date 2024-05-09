@@ -1,9 +1,19 @@
 import 'dart:io';
 import 'package:app_settings/app_settings.dart';
+import 'package:dw_flutter_app/exceptions/user_not_found.dart';
+import 'package:dw_flutter_app/extensions/log.dart';
+import 'package:dw_flutter_app/snackbar/snackbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import '../../../auth/provider/user_id_provider.dart';
 import '../../../constants/strings.dart';
+import '../../../data/user_info_storage.dart';
+import '../../../exceptions/task_already_finished.dart';
+import '../../../exceptions/task_not_found.dart';
+import '../../../model/task.dart';
+import '../../../provider/tasks_provider.dart';
+import '../../../provider/user_info_provider.dart';
 
 class CameraScreen extends ConsumerStatefulWidget {
   const CameraScreen({super.key});
@@ -18,6 +28,8 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
+
+  final userInfoStorage = const UserInfoStorage();
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -64,6 +76,13 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        scanQrCode(
+          context,
+          result!.code ?? '',
+          ref.watch(tasksProvider),
+          userInfoStorage,
+          ref,
+        );
       });
     });
   }
@@ -94,6 +113,88 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
             },
           ),
         ),
+      );
+    }
+  }
+
+  void scanQrCode(
+    BuildContext context,
+    String qrCode,
+    AsyncValue<List<Task>> allTasks,
+    UserInfoStorage userInfoStorage,
+    WidgetRef ref,
+  ) async {
+    final userId = ref.read(userIdProvider);
+    if (userId != null) {
+      await allTasks.maybeWhen(
+        data: (tasks) async {
+          try {
+            final finishedTask = await userInfoStorage.finishTask(
+              userId,
+              qrCode,
+              tasks,
+            );
+            if (context.mounted) {
+              SnackbarHelper.showSimpleSnackbar(
+                _scaffoldMessengerKey,
+                context,
+                'Task ${finishedTask.title} finished successfully!',
+                Colors.green,
+              );
+            }
+          } on UserNotFound catch (e) {
+            e.message.log();
+            if (context.mounted) {
+              SnackbarHelper.showSimpleSnackbar(
+                _scaffoldMessengerKey,
+                context,
+                'Error, please log out and try again.',
+                Colors.red,
+              );
+            }
+          } on TaskNotFound catch (e) {
+            e.message.log();
+            if (context.mounted) {
+              SnackbarHelper.showSimpleSnackbar(
+                _scaffoldMessengerKey,
+                context,
+                'This QR code is not valid. Try scanning another one.',
+                Colors.red,
+              );
+            }
+          } on TaskAlreadyFinished catch (e) {
+            e.message.log();
+            if (context.mounted) {
+              SnackbarHelper.showSimpleSnackbar(
+                _scaffoldMessengerKey,
+                context,
+                'This task has already been finished. Try scanning another one.',
+                Colors.yellow,
+              );
+            }
+          } catch (e) {
+            e.log();
+            if (context.mounted) {
+              SnackbarHelper.showSimpleSnackbar(
+                _scaffoldMessengerKey,
+                context,
+                'Unknown error, please try again.',
+                Colors.red,
+              );
+            }
+          } finally {
+            // disable scanning for 2 seconds
+            Future.delayed(
+              const Duration(seconds: 2),
+              () {
+                controller?.resumeCamera();
+              },
+            );
+          }
+        },
+        orElse: () {
+          'Tasks not loaded, failed to finish task'.log();
+        },
       );
     }
   }
@@ -166,33 +267,4 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
 //     ],
 //   ),
 // );
-// }
-
-// void scanQrCode(
-//   String qrCode,
-//   AsyncValue<List<Task>> allTasks,
-//   UserInfoStorage userInfoStorage,
-//   WidgetRef ref,
-// ) async {
-//   final userId = ref.read(userIdProvider);
-//   if (userId != null) {
-//     await allTasks.maybeWhen(
-//       data: (tasks) async {
-//         try {
-//           await userInfoStorage.finishTask(
-//             userId,
-//             qrCode,
-//             tasks,
-//           );
-//         } on ExceptionWithMessage catch (e) {
-//           e.message.log();
-//         } catch (e) {
-//           e.log();
-//         }
-//       },
-//       orElse: () {
-//         'Tasks not loaded, failed to finish task'.log();
-//       },
-//     );
-//   }
 // }
