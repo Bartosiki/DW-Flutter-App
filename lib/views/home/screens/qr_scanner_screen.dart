@@ -274,9 +274,10 @@ class QrScannerOverlayShape extends ShapeBorder {
       "Border can't be larger than ${min(this.cutOutWidth, this.cutOutHeight) / 2 + borderWidth * 2}",
     );
     assert(
-        (cutOutWidth == null && cutOutHeight == null) ||
-            (cutOutSize == null && cutOutWidth != null && cutOutHeight != null),
-        'Use only cutOutWidth and cutOutHeight or only cutOutSize');
+      (cutOutWidth == null && cutOutHeight == null) ||
+          (cutOutSize == null && cutOutWidth != null && cutOutHeight != null),
+      'Use only cutOutWidth and cutOutHeight or only cutOutSize',
+    );
   }
 
   final Color borderColor;
