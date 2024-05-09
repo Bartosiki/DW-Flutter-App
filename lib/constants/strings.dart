@@ -17,7 +17,7 @@ class Strings {
       'to learn more about how we use your data.';
   static const String calendar = 'Calendar';
   static const String tasks = 'Tasks';
-  static const String camera = 'Camera';
+  static const String scanner = 'Scanner';
   static const String map = 'Map';
   static const String assistant = 'Assistant';
   static const String profile = 'Profile';
@@ -38,5 +38,6 @@ class Strings {
       'The person who scores the highest amount of points wins. In case of ex aequo the person who finished faster wins';
   static const String cameraPermissionWasDenied =
       'Camera permission was denied, please enable it in app settings to scan QR codes';
+  static const String openSettings = 'Open settings';
   const Strings._();
 }
