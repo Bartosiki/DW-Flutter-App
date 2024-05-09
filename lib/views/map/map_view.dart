@@ -1,26 +1,51 @@
 import 'package:dw_flutter_app/components/screen_switch.dart';
 import 'package:dw_flutter_app/views/map/map_container.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 
-class MapView extends StatelessWidget {
+import '../../provider/image_provider.dart';
+
+class MapView extends StatefulWidget {
   const MapView({super.key});
 
   @override
+  _MapViewState createState() => _MapViewState();
+}
+
+class _MapViewState extends State<MapView> {
+  List<Reference>? images;
+
+  @override
+  void initState() {
+    super.initState();
+    getMapImages().then((value) {
+      setState(() {
+        images = value;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ScreenSwitch(
-      leftLabel: Strings.groundFloor,
-      rightLabel: Strings.firstFloor,
-      leftScreen: MapContainer(
-        image: Image.asset(
-          'assets/images/ground_floor.png',
-        ),
-      ),
-      rightScreen: MapContainer(
-        image: Image.asset(
-          'assets/images/first_floor.png',
-        ),
-      ),
-    );
+    return FutureBuilder(
+        future: getMapImages(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ScreenSwitch(
+              leftLabel: Strings.groundFloor,
+              rightLabel: Strings.firstFloor,
+              leftScreen: MapContainer(
+                image: Image.network(snapshot.data![0].fullPath),
+              ),
+              rightScreen: MapContainer(
+                image: Image.network(snapshot.data![1].fullPath),
+              ),
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
   }
 }
