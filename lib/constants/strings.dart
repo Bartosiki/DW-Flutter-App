@@ -29,9 +29,14 @@ class Strings {
   static String youHaveXPoints(int points) {
     return 'You have $points points';
   }
-  static const String taskScreenDescription = 'Task screen description Task screen description Task screen description';
+
+  static const String taskScreenDescription =
+      'Task screen description Task screen description Task screen description';
   static const String firstFloor = 'First Floor';
   static const String groundFloor = 'Ground Floor';
-  static const String standingsScreenDescription = 'The person who scores the highest amount of points wins. In case of ex aequo the person who finished faster wins';
+  static const String standingsScreenDescription =
+      'The person who scores the highest amount of points wins. In case of ex aequo the person who finished faster wins';
+  static const String cameraPermissionWasDenied =
+      'Camera permission was denied, please enable it in app settings to scan QR codes';
   const Strings._();
 }

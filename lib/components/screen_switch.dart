@@ -65,9 +65,7 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
                   onSelectionChanged: (Set<Option> newSelection) {
                     setState(() {
                       optionView = newSelection.first;
-                      if (widget.onSwitch != null) {
-                        widget.onSwitch!();
-                      }
+                      widget.onSwitch?.call();
                     });
                   },
                 ),
