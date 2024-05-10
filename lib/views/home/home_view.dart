@@ -27,7 +27,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
             icon: const Icon(Icons.person),
             onPressed: () {
               showProfileScreen(context);
-            }, 
+            },
           )
         ],
       ),

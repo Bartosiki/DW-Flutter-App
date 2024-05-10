@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../constants/firestore_collections.dart';
 
-final contestTimeProvider = StreamProvider<DateTime>((ref) {
+final contestTimeProvider = AutoDisposeStreamProvider<DateTime>((ref) {
   return FirebaseFirestore.instance
       .collection(FirestoreCollections.contestTime)
       .doc(FirestoreCollections.contestTime)

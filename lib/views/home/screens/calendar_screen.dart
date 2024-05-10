@@ -1,3 +1,4 @@
+import 'package:dw_flutter_app/extensions/log.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -35,11 +36,14 @@ class CalendarScreen extends ConsumerWidget {
       loading: () => const Center(
         child: CircularProgressIndicator(),
       ),
-      error: (error, stackTrace) => const Center(
-        child: Text(
-          Strings.error,
-        ),
-      ),
+      error: (error, stackTrace) {
+        error.log();
+        return const Center(
+          child: Text(
+            Strings.error,
+          ),
+        );
+      },
     );
   }
 }

@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../constants/firestore_collections.dart';
 
-final patronsProvider = StreamProvider<List<Patron>>((ref) {
+final patronsProvider = AutoDisposeStreamProvider<List<Patron>>((ref) {
   return FirebaseFirestore.instance
       .collection(FirestoreCollections.patrons)
       .snapshots()

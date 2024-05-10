@@ -60,9 +60,10 @@ class CameraScreen extends ConsumerWidget {
               );
             },
             loading: () => const CircularProgressIndicator(),
-            error: (error, stackTrace) => Text(
-              error.toString(),
-            ),
+            error: (error, stackTrace) {
+              error.log();
+              return Text(error.toString());
+            },
           ),
         ],
       ),

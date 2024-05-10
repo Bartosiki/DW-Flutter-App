@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../constants/firestore_collections.dart';
 import '../constants/firestore_fields.dart';
 
-final userInfoProvider = StreamProvider<User>((ref) {
+final userInfoProvider = AutoDisposeStreamProvider<User>((ref) {
   return FirebaseFirestore.instance
       .collection(FirestoreCollections.users)
       .where(
