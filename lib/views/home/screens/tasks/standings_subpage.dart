@@ -1,9 +1,9 @@
 import 'package:dw_flutter_app/components/divider_with_margins.dart';
 import 'package:dw_flutter_app/components/screen_description.dart';
 import 'package:dw_flutter_app/components/tasks/standings_card.dart';
-import 'package:dw_flutter_app/components/tasks/standings_info_card.dart';
 import 'package:dw_flutter_app/components/tasks/standings_info_cards_row.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/extensions/log.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,10 +18,10 @@ class StandingsSubpage extends ConsumerWidget {
     if (remainingTime == null) {
       return 'loading..';
     }
-    
+
     var hours = remainingTime ~/ 3600;
     var minutes = (remainingTime % 3600) ~/ 60;
-    
+
     return '${hours}h ${minutes}m';
   }
 
@@ -70,9 +70,9 @@ class StandingsSubpage extends ConsumerWidget {
                             vertical: 8,
                           ),
                           child: StandingsCard(
-                            rankIndex: index+1,
+                            rankIndex: index + 1,
                             points: topPlayer.gainedPoints,
-                            name: topPlayer.displayName
+                            name: topPlayer.displayName,
                           ),
                         );
                       },
@@ -83,11 +83,14 @@ class StandingsSubpage extends ConsumerWidget {
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
-              error: (error, stackTrace) => const Center(
-                child: Text(
-                  Strings.error,
-                ),
-              ),
+              error: (error, stackTrace) {
+                error.log();
+                return const Center(
+                  child: Text(
+                    Strings.error,
+                  ),
+                );
+              },
             ),
           ],
         ),
