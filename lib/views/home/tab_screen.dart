@@ -2,13 +2,12 @@ import 'package:dw_flutter_app/constants/app_colors.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/views/home/screens/calendar_screen.dart';
 import 'package:dw_flutter_app/views/home/screens/map_screen.dart';
+import 'package:dw_flutter_app/views/home/screens/qr_scanner_screen.dart';
 import 'package:dw_flutter_app/views/home/screens/tasks/tasks_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../constants/paths.dart';
 import 'screens/assistant_screen.dart';
-import 'screens/camera_screen.dart';
 
 enum TabScreen {
   calendar(
@@ -21,10 +20,10 @@ enum TabScreen {
     Paths.trophyIcon,
     TasksScreen(),
   ),
-  camera(
-    Strings.camera,
+  qrScanner(
+    Strings.scanner,
     Paths.qrCodeIcon,
-    CameraScreen(),
+    QrScannerScreen(),
   ),
   map(
     Strings.map,
