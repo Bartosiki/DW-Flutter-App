@@ -17,7 +17,7 @@ class Strings {
       'to learn more about how we use your data.';
   static const String calendar = 'Calendar';
   static const String tasks = 'Tasks';
-  static const String camera = 'Camera';
+  static const String scanner = 'Scanner';
   static const String map = 'Map';
   static const String assistant = 'Assistant';
   static const String profile = 'Profile';
@@ -29,9 +29,25 @@ class Strings {
   static String youHaveXPoints(int points) {
     return 'You have $points points';
   }
-  static const String taskScreenDescription = 'Task screen description Task screen description Task screen description';
+
+  static const String taskScreenDescription =
+      'Task screen description Task screen description Task screen description';
   static const String firstFloor = 'First Floor';
   static const String groundFloor = 'Ground Floor';
-  static const String standingsScreenDescription = 'The person who scores the highest amount of points wins. In case of ex aequo the person who finished faster wins';
+  static const String standingsScreenDescription =
+      'The person who scores the highest amount of points wins. In case of ex aequo the person who finished faster wins';
+  static const String cameraPermissionWasDenied =
+      'Camera permission was denied, please enable it in app settings to scan QR codes';
+  static const String openSettings = 'Open settings';
+  static const String taskFinishedSuccessfullyWithPoints =
+      'Task "%s" finished successfully, you have earned %d points';
+  static const String errorPleaseLogOutAndTryAgain =
+      'Error, please log out and try again';
+  static const String thisQrCodeIsNotValidPleaseTryAgain =
+      'This QR code is not valid, please try again';
+  static const String thisTaskHasAlreadyBeenCompleted =
+      'This task has already been completed';
+  static const String unknownErrorPleaseTryAgain =
+      'Unknown error, please try again';
   const Strings._();
 }
