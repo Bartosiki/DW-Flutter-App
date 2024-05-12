@@ -60,11 +60,17 @@ class StandingsCard extends StatelessWidget {
               children: [
                 Text(
                   "$points",
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
                 ),
                 const Text(
                   Strings.standingsCardPoints,
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),

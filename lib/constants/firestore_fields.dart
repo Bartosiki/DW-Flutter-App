@@ -1,3 +1,8 @@
+class FirestoreConfigFields {
+  static const String mainColor = 'mainColor';
+  FirestoreConfigFields._();
+}
+
 class FirestoreEventsFields {
   static const String title = 'title';
   static const String description = 'description';
