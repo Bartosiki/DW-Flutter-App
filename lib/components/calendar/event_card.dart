@@ -4,56 +4,63 @@ import 'package:flutter/widgets.dart';
 import '../../constants/app_colors.dart';
 
 class EventCard extends StatelessWidget {
-  EventCard({super.key});
+  EventCard(
+      {super.key,
+      required this.eventTitle,
+      required this.partner,
+      required this.time,
+      required this.room});
+
+  final String eventTitle;
+  final String partner;
+  final String time;
+  final String room;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-            color: AppColors.standingsCardForegroundColor,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            border: Border.all(
-              color: Colors.transparent,
-              width: 2,
+    return const SizedBox(
+      child: Center(
+        child: Card(
+          color: Colors.white10,
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: ListTile(
+              title: Text(
+                'W jaki sposób AI zmienia rzeczywistość?',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+                softWrap: true,
+              ),
+              subtitle: Text(
+                'Accenture',
+                style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16,
+                    color: Color.fromRGBO(255, 255, 255, 0.5)),
+              ),
+              trailing: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '11:00',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    'Aula E1',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.transparent,
-                offset: Offset(2.0, 2.0),
-                blurRadius: 8.0,
-              )
-            ]),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    "W jaki sposób AI zmienia rzeczywistość?",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                  Text(
-                    "Accenture",
-                    style: TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    "11:00",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                  Text(
-                    "Aula E1",
-                    style: TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                ],
-              ),
-            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

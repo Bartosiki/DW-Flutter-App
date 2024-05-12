@@ -1,3 +1,4 @@
+import 'package:dw_flutter_app/components/calendar/event_card.dart';
 import 'package:dw_flutter_app/extensions/log.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,17 +21,7 @@ class CalendarScreen extends ConsumerWidget {
             ),
           );
         } else {
-          return ListView.builder(
-            itemCount: events.length,
-            itemBuilder: (context, index) {
-              final event = events.elementAt(index);
-              return ListTile(
-                title: Text(event.title),
-                subtitle: Text(event.description),
-                onTap: () {},
-              );
-            },
-          );
+          return EventCard();
         }
       },
       loading: () => const Center(
