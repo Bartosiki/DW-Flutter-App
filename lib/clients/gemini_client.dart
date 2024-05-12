@@ -9,12 +9,10 @@ class GeminiClient {
 
   GeminiClient();
 
-  Future<String?> generateTestResponse() async {
+  Future<String?> generateTestResponse(String userText) async {
     try {
       final GeminiChat chatHistory = GeminiChat(history: [
-        GeminiChatChunk(
-            role: 'user',
-            parts: [Part(text: 'Write a story about a magic backpack.')]),
+        GeminiChatChunk(role: 'user', parts: [Part(text: userText)]),
       ]);
       print(geminiEndpoint);
       print(jsonEncode(chatHistory));

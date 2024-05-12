@@ -38,8 +38,7 @@ class StandingsCard extends StatelessWidget {
                 offset: const Offset(2.0, 2.0),
                 blurRadius: 8.0,
               )
-            ]
-        ),
+            ]),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Row(
@@ -66,7 +65,6 @@ class StandingsCard extends StatelessWidget {
               )
             ],
           ),
-        )
-    );
+        ));
   }
 }
