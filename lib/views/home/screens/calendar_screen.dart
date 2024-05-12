@@ -1,8 +1,9 @@
 import 'package:dw_flutter_app/components/calendar/event_card.dart';
+import 'package:dw_flutter_app/components/calendar/event_list.dart';
 import 'package:dw_flutter_app/extensions/log.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import '../../../components/screen_description.dart';
 import '../../../constants/strings.dart';
 import '../../../provider/events_provider.dart';
 
@@ -21,7 +22,26 @@ class CalendarScreen extends ConsumerWidget {
             ),
           );
         } else {
-          return EventCard();
+          return Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 16),
+                  const ScreenDescription(
+                    description: Strings.eventScreenDescription,
+                  ),
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: EventList(
+                      eventList: events,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
         }
       },
       loading: () => const Center(

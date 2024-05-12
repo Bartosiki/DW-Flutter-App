@@ -13,28 +13,28 @@ class EventCard extends StatelessWidget {
 
   final String eventTitle;
   final String partner;
-  final String time;
+  final DateTime time;
   final String room;
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       child: Center(
         child: Card(
           color: Colors.white10,
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: ListTile(
               title: Text(
-                'W jaki sposób AI zmienia rzeczywistość?',
-                style: TextStyle(
+                eventTitle,
+                style: const TextStyle(
                   fontSize: 16,
                 ),
                 softWrap: true,
               ),
               subtitle: Text(
-                'Accenture',
-                style: TextStyle(
+                partner,
+                style: const TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 16,
                     color: Color.fromRGBO(255, 255, 255, 0.5)),
@@ -43,15 +43,15 @@ class EventCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '11:00',
-                    style: TextStyle(
+                    '${time.hour}:${time.minute}',
+                    style: const TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 16,
                     ),
                   ),
                   Text(
-                    'Aula E1',
-                    style: TextStyle(
+                    room,
+                    style: const TextStyle(
                       fontSize: 14,
                     ),
                   ),
