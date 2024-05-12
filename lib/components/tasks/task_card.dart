@@ -40,12 +40,15 @@ class TaskCard extends StatelessWidget {
                   fontSize: 16,
                 ),
               ),
-              subtitle: Text(
-                subtitle,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12,
+              subtitle: Opacity(
+                opacity: 0.8,
+                child: Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 12,
+                  ),
                 ),
               ),
               textColor: Colors.white,
