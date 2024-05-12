@@ -8,6 +8,8 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../model/gemini_chat.dart';
+
 class AssistantScreen extends ConsumerStatefulWidget {
   const AssistantScreen({super.key});
 
@@ -84,11 +86,13 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
     final prefs = await SharedPreferences.getInstance();
     final encodedMessages = prefs.getString('chatHistory');
     if (encodedMessages != null) {
-      final decodedMessages = jsonDecode(encodedMessages);
-      print(decodedMessages);
-      print(List<types.Message>.from(decodedMessages));
+      final decodedMessages = List<types.Message>.from(
+        jsonDecode(encodedMessages).map(
+          (x) => types.TextMessage.fromJson(x),
+        ),
+      );
       setState(() {
-        _messages = convertMessages(decodedMessages);
+        _messages = decodedMessages;
       });
     }
   }
@@ -96,19 +100,6 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
   Future<void> _saveChatHistory(List<types.Message> messages) async {
     final prefs = await SharedPreferences.getInstance();
     final encodedMessages = jsonEncode(messages);
-    print(encodedMessages);
     await prefs.setString('chatHistory', encodedMessages);
-  }
-
-  List<types.TextMessage> convertMessages(List<types.TextMessage> messages) {
-    return messages
-        .map((msg) => types.TextMessage(
-              author: msg.author,
-              createdAt: msg.createdAt,
-              id: msg.id,
-              type: types.MessageType.text,
-              text: msg.text,
-            ))
-        .toList();
   }
 }
