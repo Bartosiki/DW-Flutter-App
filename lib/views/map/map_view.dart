@@ -14,7 +14,7 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-  List<Reference>? images;
+  String? images;
 
   @override
   void initState() {
@@ -28,24 +28,15 @@ class _MapViewState extends State<MapView> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: getMapImages(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ScreenSwitch(
-              leftLabel: Strings.groundFloor,
-              rightLabel: Strings.firstFloor,
-              leftScreen: MapContainer(
-                image: Image.network(snapshot.data![0].fullPath),
-              ),
-              rightScreen: MapContainer(
-                image: Image.network(snapshot.data![1].fullPath),
-              ),
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+    return ScreenSwitch(
+      leftLabel: Strings.groundFloor,
+      rightLabel: Strings.firstFloor,
+      leftScreen: MapContainer(
+        image: Image.network(images!),
+      ),
+      rightScreen: MapContainer(
+        image: Image.network(images!),
+      ),
+    );
   }
 }
