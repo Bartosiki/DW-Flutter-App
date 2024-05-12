@@ -35,7 +35,7 @@ class GeminiChatChunk {
       role: json['role'],
       parts: List<Part>.from(
         json['parts'].map(
-          (x) => Part(text: x),
+          (x) => Part.fromJson(x),
         ),
       ),
     );

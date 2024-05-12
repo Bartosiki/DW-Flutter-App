@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:dw_flutter_app/clients/gemini_client.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 class AssistantScreen extends ConsumerStatefulWidget {
@@ -14,11 +17,11 @@ class AssistantScreen extends ConsumerStatefulWidget {
 }
 
 class _AssistantScreenState extends ConsumerState<AssistantScreen> {
-  final List<types.Message> _messages;
   final GeminiClient _client;
+  final Uuid _uuid;
   final types.User _user;
   final types.User _assistant;
-  final Uuid _uuid;
+  List<types.Message> _messages;
 
   _AssistantScreenState()
       : _client = GeminiClient(),
@@ -27,6 +30,18 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
         _assistant = const types.User(id: '2'),
         _uuid = const Uuid(),
         super();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadChatHistory();
+  }
+
+  @override
+  void dispose() {
+    _saveChatHistory(_messages);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +69,7 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
     );
     _addMessage(userMessage);
 
-    String response =
-        await _client.generateAssistantResponse(message.text) ?? '';
+    String response = await _client.generateAssistantResponse(message.text);
 
     final assistantMessage = types.TextMessage(
       author: _assistant,
@@ -64,5 +78,26 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
       text: response,
     );
     _addMessage(assistantMessage);
+  }
+
+  Future<void> _loadChatHistory() async {
+    final prefs = await SharedPreferences.getInstance();
+    final encodedMessages = prefs.getString('chatHistory');
+    if (encodedMessages != null) {
+      final decodedMessages = jsonDecode(encodedMessages);
+      print(decodedMessages);
+      setState(() {
+        _messages = decodedMessages
+            .map((messageMap) => types.Message.fromJson(messageMap))
+            .toList();
+      });
+    }
+  }
+
+  Future<void> _saveChatHistory(List<types.Message> messages) async {
+    final prefs = await SharedPreferences.getInstance();
+    final encodedMessages = jsonEncode(messages);
+    print(encodedMessages);
+    await prefs.setString('chatHistory', encodedMessages);
   }
 }
