@@ -9,18 +9,16 @@ class GeminiClient {
 
   GeminiClient();
 
-  Future<String?> generateTestResponse(String userText) async {
+  Future<String?> generateAssistantResponse(String userText) async {
     try {
       final GeminiChat chatHistory = GeminiChat(history: [
         GeminiChatChunk(role: 'user', parts: [Part(text: userText)]),
       ]);
-      print(geminiEndpoint);
-      print(jsonEncode(chatHistory));
       final geminiResponse =
           await http.post(geminiEndpoint, body: jsonEncode(chatHistory));
       return geminiResponse.body;
-    } catch (e) {
-      print(e);
+    } catch (error) {
+      print(error);
       return null;
     }
   }
