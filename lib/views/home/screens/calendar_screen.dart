@@ -23,6 +23,13 @@ class CalendarScreen extends ConsumerWidget {
           );
         } else {
           return Scaffold(
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: () {
+                'Add event'.log();
+              },
+              label: const Text(Strings.register),
+              icon: const Icon(Icons.edit_outlined),
+            ),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
