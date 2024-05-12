@@ -32,7 +32,8 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(16.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
               width: double.infinity,
               child: SegmentedButtonTheme(
                 data: SegmentedButtonThemeData(
@@ -40,15 +41,18 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
                 ),
                 child: SegmentedButton<Option>(
                   style: SegmentedButton.styleFrom(
-                    backgroundColor: Colors.grey[800],
-                    foregroundColor: Colors.white,
-                    selectedForegroundColor: Colors.black,
-                    selectedBackgroundColor: Colors.grey[300],
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    foregroundColor: Theme.of(context).colorScheme.onSecondary,
+                    selectedForegroundColor:
+                        Theme.of(context).colorScheme.onPrimary,
+                    selectedBackgroundColor:
+                        Theme.of(context).colorScheme.primary,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     visualDensity: const VisualDensity(
                       horizontal: -2,
                       vertical: -2,
                     ),
+                    padding: const EdgeInsets.symmetric(vertical: 19.0),
                   ),
                   showSelectedIcon: false,
                   segments: <ButtonSegment<Option>>[

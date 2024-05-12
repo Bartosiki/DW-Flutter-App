@@ -46,23 +46,29 @@ enum TabScreen {
   String toString() => label;
 }
 
-final bottomNavigationItems = [
-  for (final screen in TabScreen.values)
-    BottomNavigationBarItem(
-      label: screen.label,
-      icon: SvgPicture.asset(
-        screen.iconPath,
-        width: 24,
-        height: 24,
-      ),
-      activeIcon: SvgPicture.asset(
-        screen.iconPath,
-        width: 24,
-        height: 24,
-        colorFilter: ColorFilter.mode(
-          AppColors.navigationItemActiveColor,
-          BlendMode.srcIn,
+List<BottomNavigationBarItem> getBottomNavigationItems(BuildContext context) {
+  return [
+    for (final screen in TabScreen.values)
+      BottomNavigationBarItem(
+        label: screen.label,
+        icon: SvgPicture.asset(
+          screen.iconPath,
+          width: 24,
+          height: 24,
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.onBackground,
+            BlendMode.srcIn,
+          ),
+        ),
+        activeIcon: SvgPicture.asset(
+          screen.iconPath,
+          width: 24,
+          height: 24,
+          colorFilter: ColorFilter.mode(
+            AppColors.navigationItemActiveColor,
+            BlendMode.srcIn,
+          ),
         ),
       ),
-    ),
-];
+  ];
+}

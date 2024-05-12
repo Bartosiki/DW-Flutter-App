@@ -10,7 +10,7 @@ class StandingsInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(        
+      child: Container(
         decoration: BoxDecoration(
           color: AppColors.standingsCardForegroundColor,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
