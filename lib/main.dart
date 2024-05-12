@@ -5,26 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'auth/provider/is_logged_in_provider.dart';
-import 'clients/vertex_http_client.dart';
 import 'firebase_options.dart';
 
-import 'package:google_generative_ai/google_generative_ai.dart';
-
 void main() async {
-  const apiKey = String.fromEnvironment('API_KEY');
-  const projectUrl = String.fromEnvironment('VERTEX_AI_PROJECT_URL');
-
-  final model = GenerativeModel(
-    model: 'gemini-pro',
-    apiKey: apiKey,
-    httpClient: VertexHttpClient(projectUrl),
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  const prompt = 'Write a story about a magic backpack.';
-  final content = [Content.text(prompt)];
-  final response = await model.generateContent(content);
-
-  print(response.text);
+  runApp(
+    const ProviderScope(
+      child: App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {

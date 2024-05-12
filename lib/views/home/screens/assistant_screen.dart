@@ -14,19 +14,15 @@ class AssistantScreen extends ConsumerStatefulWidget {
 }
 
 class _AssistantScreenState extends ConsumerState<AssistantScreen> {
-  late GeminiClient client;
+  GeminiClient client;
+
   String geminiResponse = '';
 
-  _AssistantScreenState() {
-    init();
-  }
-
-  init() {
-    client = GeminiClient(
-      apiKey: const String.fromEnvironment('API_KEY'),
-      projectUrl: const String.fromEnvironment('VERTEX_AI_PROJECT_URL'),
-    );
-  }
+  _AssistantScreenState()
+      : client = GeminiClient(
+          apiKey: const String.fromEnvironment('API_KEY'),
+          projectUrl: const String.fromEnvironment('VERTEX_AI_PROJECT_URL'),
+        );
 
   @override
   Widget build(BuildContext context) {
