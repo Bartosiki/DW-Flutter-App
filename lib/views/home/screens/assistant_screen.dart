@@ -86,10 +86,9 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
     if (encodedMessages != null) {
       final decodedMessages = jsonDecode(encodedMessages);
       print(decodedMessages);
+      print(List<types.Message>.from(decodedMessages));
       setState(() {
-        _messages = decodedMessages
-            .map((messageMap) => types.Message.fromJson(messageMap))
-            .toList();
+        _messages = convertMessages(decodedMessages);
       });
     }
   }
@@ -99,5 +98,17 @@ class _AssistantScreenState extends ConsumerState<AssistantScreen> {
     final encodedMessages = jsonEncode(messages);
     print(encodedMessages);
     await prefs.setString('chatHistory', encodedMessages);
+  }
+
+  List<types.TextMessage> convertMessages(List<types.TextMessage> messages) {
+    return messages
+        .map((msg) => types.TextMessage(
+              author: msg.author,
+              createdAt: msg.createdAt,
+              id: msg.id,
+              type: types.MessageType.text,
+              text: msg.text,
+            ))
+        .toList();
   }
 }
