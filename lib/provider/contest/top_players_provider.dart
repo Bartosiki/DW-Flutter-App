@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../constants/firestore_collections.dart';
 import '../../model/top_player.dart';
 
-final topPlayersProvider = StreamProvider<List<TopPlayer>>((ref) {
+final topPlayersProvider = AutoDisposeStreamProvider<List<TopPlayer>>((ref) {
   return FirebaseFirestore.instance
       .collection(FirestoreCollections.users)
       .orderBy(FirestoreUsersFields.gainedPoints, descending: true)

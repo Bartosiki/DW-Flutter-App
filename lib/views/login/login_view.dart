@@ -15,7 +15,10 @@ class LoginView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24.0,
+          vertical: 8.0,
+        ),
         child: Scaffold(
           body: Stack(
             children: [
@@ -47,7 +50,8 @@ class LoginView extends ConsumerWidget {
                     ),
                     const SizedBox(height: 12.0),
                     const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
                       child: DividerWithMargins(),
                     ),
                     const Padding(

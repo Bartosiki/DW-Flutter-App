@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../auth/provider/user_id_provider.dart';
 import '../../constants/firestore_collections.dart';
 
-final userRankingPositionProvider = StreamProvider<int?>((ref) {
+final userRankingPositionProvider = AutoDisposeStreamProvider<int?>((ref) {
   final userId = ref.watch(userIdProvider);
   if (userId == null) {
     return Stream.value(null);

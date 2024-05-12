@@ -25,11 +25,6 @@ class ProfileScreen extends ConsumerWidget {
       body: Center(
         child: Column(
           children: [
-            const Image(
-              image: AssetImage(
-                'assets/images/roblox.png',
-              ),
-            ),
             IconButton(
               icon: const Icon(Icons.logout),
               onPressed: () async {
