@@ -55,6 +55,7 @@ dependencies:
   mobile_scanner: ^5.1.0
   sprintf: ^7.0.0
   http: ^1.2.1
+  flutter_chat_ui: ^1.6.12
 
 dev_dependencies:
   flutter_test:
