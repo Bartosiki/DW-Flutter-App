@@ -7,8 +7,7 @@ class DividerWithMargins extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Divider(
-      color: AppColors.dividerColor,
+    return const Divider(
       thickness: 1.5,
     );
   }

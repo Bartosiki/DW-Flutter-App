@@ -1,4 +1,7 @@
 import 'package:dw_flutter_app/constants/app_colors.dart';
+import 'package:dw_flutter_app/extensions/hex_string_color_to_color.dart';
+import 'package:dw_flutter_app/provider/config_provider.dart';
+import 'package:dw_flutter_app/provider/dark_mode_notifier.dart';
 import 'package:dw_flutter_app/views/home/home_view.dart';
 import 'package:dw_flutter_app/views/login/login_view.dart';
 import 'package:flutter/material.dart';
@@ -24,28 +27,36 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: AppColors.backgroundColor,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.blueGrey,
-        indicatorColor: Colors.blueGrey,
-        scaffoldBackgroundColor: AppColors.backgroundColor,
-      ),
-      themeMode: ThemeMode.dark,
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Consumer(
-          builder: (context, ref, child) {
-            final isLoggedIn = ref.watch(isLoggedInProvider);
-            return isLoggedIn ? const HomeView() : const LoginView();
-          },
-        ),
-      ),
+    return Consumer(
+      builder: (context, ref, child) {
+        final configValue = ref.watch(configProvider);
+        final mainColor = configValue.value?.mainColor.toColor() ??
+            AppColors.defaultMainColor;
+
+        final isDarkModeEnabled = ref.watch(darkModeProvider);
+        final isLoggedIn = ref.watch(isLoggedInProvider);
+
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: _buildTheme(mainColor, Brightness.light),
+          darkTheme: _buildTheme(mainColor, Brightness.dark),
+          themeMode:
+              isDarkModeEnabled == true ? ThemeMode.dark : ThemeMode.light,
+          home: isLoggedIn ? const HomeView() : const LoginView(),
+        );
+      },
+    );
+  }
+
+  ThemeData _buildTheme(Color primaryColor, Brightness brightness) {
+    var colorScheme =
+        ColorScheme.fromSeed(seedColor: primaryColor, brightness: brightness);
+    var basicTheme =
+        brightness == Brightness.dark ? ThemeData.dark() : ThemeData.light();
+
+    return basicTheme.copyWith(
+      colorScheme: colorScheme,
+      scaffoldBackgroundColor: colorScheme.background,
     );
   }
 }

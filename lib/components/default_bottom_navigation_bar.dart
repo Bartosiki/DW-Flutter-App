@@ -27,7 +27,7 @@ class _DefaultBottomNavigationBarState
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: <BottomNavigationBarItem>[
-          ...bottomNavigationItems,
+          ...getBottomNavigationItems(context),
         ],
         currentIndex: widget.selectedIndex,
         onTap: (index) {

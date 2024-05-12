@@ -26,6 +26,8 @@ class Strings {
   static const String error = 'Error';
   static const String empty = 'Empty';
   static const String standingsCardPoints = 'Points';
+  static const String darkMode = 'Dark mode';
+  static const String logOut = 'Log out';
   static String youHaveXPoints(int points) {
     return 'You have $points points';
   }

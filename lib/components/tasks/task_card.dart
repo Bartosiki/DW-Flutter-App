@@ -14,38 +14,42 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80,
-      child: Center(
-        child: Card(
-          color: Colors.white10,
-          child: ListTile(
-            trailing: CircleAvatar(
-              backgroundColor: Colors.white10,
-              child: Text(
-                "$points",
-                style: const TextStyle(
-                    color: Colors.white,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6.0),
+      child: SizedBox(
+        height: 80,
+        child: Center(
+          child: Card(
+            color: Theme.of(context).colorScheme.primary,
+            child: ListTile(
+              trailing: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+                child: Text(
+                  "$points",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSecondary,
                     fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            title: Text(
-              title,
-              style: const TextStyle(
-                  color: Colors.white,
+              title: Text(
+                title,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
+                ),
               ),
+              subtitle: Text(
+                subtitle,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                ),
+              ),
+              textColor: Colors.white,
             ),
-            subtitle: Text(subtitle,
-                style: const TextStyle(
-                    color: Colors.white60,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 12,
-                )
-            ),
-            textColor: Colors.white,
           ),
         ),
       ),
