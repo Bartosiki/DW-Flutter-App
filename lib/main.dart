@@ -6,6 +6,7 @@ import 'package:dw_flutter_app/views/home/home_view.dart';
 import 'package:dw_flutter_app/views/login/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'auth/provider/is_logged_in_provider.dart';
 import 'firebase_options.dart';
@@ -17,11 +18,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(
-    const ProviderScope(
-      child: App(),
-    ),
-  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(
+      const ProviderScope(
+        child: App(),
+      ),
+    );
+  });
 }
 
 class App extends StatelessWidget {
