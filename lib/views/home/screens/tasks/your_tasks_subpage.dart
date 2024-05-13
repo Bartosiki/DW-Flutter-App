@@ -32,6 +32,7 @@ class YourTasksSubpage extends ConsumerWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  const SizedBox(height: 8),
                   ScreenDescription(
                     description: Strings.taskScreenDescription,
                     trailingIcon: SvgPicture.asset(
