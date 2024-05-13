@@ -37,6 +37,10 @@ class Authenticator {
     }
   }
 
+  Future<String?> getUserIdToken() async {
+    return await FirebaseAuth.instance.currentUser?.getIdToken();
+  }
+
   Future<AuthResult> signInAnonymously() async {
     return AuthResult.success;
   }
