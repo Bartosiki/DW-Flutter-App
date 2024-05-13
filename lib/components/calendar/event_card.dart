@@ -3,14 +3,14 @@ import 'package:flutter/widgets.dart';
 
 class EventCard extends StatelessWidget {
   EventCard({
-    Key? key,
-    required this.eventTitle,
+    super.key,
+    required this.title,
     required this.partner,
     required this.time,
     required this.room,
-  }) : super(key: key);
+  });
 
-  final String eventTitle;
+  final String title;
   final String partner;
   final DateTime time;
   final String room;
@@ -29,7 +29,7 @@ class EventCard extends StatelessWidget {
             title: Padding(
               padding: const EdgeInsets.only(right: 30.0),
               child: Text(
-                eventTitle,
+                title,
                 style: const TextStyle(
                   fontSize: 16,
                 ),
@@ -48,7 +48,7 @@ class EventCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${time.hour}:${time.minute}',
+                  '${time.hour}:${time.minute.toString().padLeft(2, '0')}',
                   style: const TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 16,

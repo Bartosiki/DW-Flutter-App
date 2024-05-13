@@ -4,7 +4,7 @@ import '../../model/event.dart';
 import 'event_card.dart';
 
 class EventList extends StatelessWidget {
-  const EventList({Key? key, required this.eventList}) : super(key: key);
+  const EventList({super.key, required this.eventList});
 
   final List<Event> eventList;
 
@@ -14,7 +14,7 @@ class EventList extends StatelessWidget {
       itemCount: eventList.length,
       itemBuilder: (context, index) {
         return EventCard(
-          eventTitle: eventList[index].title,
+          title: eventList[index].title,
           partner: eventList[index].partner,
           time: eventList[index].timeStart,
           room: eventList[index].room,
