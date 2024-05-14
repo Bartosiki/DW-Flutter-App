@@ -81,9 +81,7 @@ class YourTasksSubpage extends ConsumerWidget {
       error: (error, stackTrace) {
         error.log();
         return const Center(
-          child: Text(
-            Strings.error,
-          ),
+          child: Text(Strings.error),
         );
       },
     );

@@ -32,8 +32,10 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
         child: Column(
           children: [
             Container(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+              padding: const EdgeInsets.symmetric(
+                vertical: 16.0,
+                horizontal: 30.0,
+              ),
               width: double.infinity,
               child: SegmentedButtonTheme(
                 data: SegmentedButtonThemeData(

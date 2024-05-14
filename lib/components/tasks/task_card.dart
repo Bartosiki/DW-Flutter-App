@@ -41,7 +41,7 @@ class TaskCard extends StatelessWidget {
                 ),
               ),
               subtitle: Opacity(
-                opacity: 0.8,
+                opacity: 0.6,
                 child: Text(
                   subtitle,
                   style: TextStyle(
@@ -51,7 +51,6 @@ class TaskCard extends StatelessWidget {
                   ),
                 ),
               ),
-              textColor: Colors.white,
             ),
           ),
         ),

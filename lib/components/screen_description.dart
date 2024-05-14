@@ -19,9 +19,10 @@ class ScreenDescription extends StatelessWidget {
           child: Text(
             description,
             style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
-                fontWeight: FontWeight.w400,
-                fontSize: 16),
+              color: Theme.of(context).colorScheme.onBackground,
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+            ),
           ),
         ),
         if (trailingIcon != null)

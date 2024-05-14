@@ -32,6 +32,21 @@ class StandingsCard extends StatelessWidget {
           color: getCardBorderColor(),
           width: 2,
         ),
+        gradient: Gradient.lerp(
+          LinearGradient(
+            colors: [
+              AppColors.standingsCardForegroundColor,
+              Theme.of(context).colorScheme.primary
+            ],
+          ),
+          LinearGradient(
+            colors: [
+              AppColors.standingsCardForegroundColor,
+              AppColors.standingsCardForegroundColor
+            ],
+          ),
+          0.85,
+        ),
         boxShadow: [
           BoxShadow(
             color: getCardBorderColor(),

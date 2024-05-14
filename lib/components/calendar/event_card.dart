@@ -22,7 +22,7 @@ class EventCard extends StatelessWidget {
         vertical: 3.0,
       ),
       child: Card(
-        color: Colors.white10,
+        color: Theme.of(context).colorScheme.primary,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: ListTile(
@@ -30,18 +30,22 @@ class EventCard extends StatelessWidget {
               padding: const EdgeInsets.only(right: 30.0),
               child: Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontSize: 16,
                 ),
                 softWrap: true,
               ),
             ),
-            subtitle: Text(
-              partner,
-              style: const TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 16,
-                color: Color.fromRGBO(255, 255, 255, 0.5),
+            subtitle: Opacity(
+              opacity: 0.6,
+              child: Text(
+                partner,
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
             ),
             trailing: Column(
@@ -49,15 +53,17 @@ class EventCard extends StatelessWidget {
               children: [
                 Text(
                   '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 16,
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
                 Text(
                   room,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
               ],
