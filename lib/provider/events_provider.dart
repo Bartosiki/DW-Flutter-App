@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dw_flutter_app/constants/firestore_collections.dart';
 import 'package:dw_flutter_app/constants/firestore_fields.dart';

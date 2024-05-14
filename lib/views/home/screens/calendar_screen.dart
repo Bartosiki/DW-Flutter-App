@@ -1,7 +1,9 @@
+import 'package:dw_flutter_app/components/calendar/event_card.dart';
+import 'package:dw_flutter_app/components/calendar/event_list.dart';
 import 'package:dw_flutter_app/extensions/log.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import '../../../components/screen_description.dart';
 import '../../../constants/strings.dart';
 import '../../../provider/events_provider.dart';
 
@@ -20,16 +22,32 @@ class CalendarScreen extends ConsumerWidget {
             ),
           );
         } else {
-          return ListView.builder(
-            itemCount: events.length,
-            itemBuilder: (context, index) {
-              final event = events.elementAt(index);
-              return ListTile(
-                title: Text(event.title),
-                subtitle: Text(event.description),
-                onTap: () {},
-              );
-            },
+          return Scaffold(
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: () {
+                'Add event'.log();
+              },
+              label: const Text(Strings.register),
+              icon: const Icon(Icons.edit_outlined),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 16),
+                  const ScreenDescription(
+                    description: Strings.eventScreenDescription,
+                  ),
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: EventList(
+                      eventList: events,
+                    ),
+                  )
+                ],
+              ),
+            ),
           );
         }
       },

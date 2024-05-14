@@ -30,6 +30,9 @@ class Strings {
     return 'You have $points points';
   }
 
+  static const String register = 'Register';
+  static const String eventScreenDescription =
+      'Task screen description Task screen description Task screen description';
   static const String taskScreenDescription =
       'Task screen description Task screen description Task screen description';
   static const String firstFloor = 'First Floor';
