@@ -9,6 +9,8 @@ class Authenticator {
   String? get userId => FirebaseAuth.instance.currentUser?.uid;
   String? get displayName => FirebaseAuth.instance.currentUser?.displayName;
   String? get email => FirebaseAuth.instance.currentUser?.email;
+  Future<String?> get userIdToken async =>
+      await FirebaseAuth.instance.currentUser?.getIdToken();
 
   bool get isAlreadySignedIn => userId != null;
 
@@ -35,13 +37,5 @@ class Authenticator {
     } catch (e) {
       return AuthResult.failure;
     }
-  }
-
-  Future<String?> getUserIdToken() async {
-    return await FirebaseAuth.instance.currentUser?.getIdToken();
-  }
-
-  Future<AuthResult> signInAnonymously() async {
-    return AuthResult.success;
   }
 }

@@ -57,6 +57,7 @@ dependencies:
   http: ^1.2.1
   flutter_chat_ui: ^1.6.12
   shared_preferences: ^2.2.3
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -96,6 +97,7 @@ flutter:
     - assets/icons/sort_icon.svg
     - assets/images/first_floor.png
     - assets/images/ground_floor.png
+    - .env
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
