@@ -22,16 +22,26 @@ class GeminiClient {
     }
 
     try {
-      final GeminiChat chatHistory = GeminiChat(history: [
-        GeminiChatChunk(role: 'user', parts: [Part(text: userText)]),
-      ]);
+      final GeminiChat chatHistory = GeminiChat(
+        history: [
+          GeminiChatChunk(
+            role: 'user',
+            parts: [
+              Part(text: userText),
+            ],
+          ),
+        ],
+      );
 
       final userIdToken = await _authenticator.userIdToken;
 
-      final geminiResponse = await http
-          .post(geminiEndpoint!, body: jsonEncode(chatHistory), headers: {
-        'Authorization': 'Bearer $userIdToken',
-      });
+      final geminiResponse = await http.post(
+        geminiEndpoint!,
+        body: jsonEncode(chatHistory),
+        headers: {
+          'Authorization': 'Bearer $userIdToken',
+        },
+      );
 
       return geminiResponse.body;
     } catch (error) {

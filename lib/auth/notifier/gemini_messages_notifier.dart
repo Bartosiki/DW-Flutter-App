@@ -18,6 +18,7 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
 
   void addMessage(Message message) {
     state = [message, ...state];
+    _saveChatHistory();
   }
 
   Future<void> handleSendPressed(PartialText message) async {
