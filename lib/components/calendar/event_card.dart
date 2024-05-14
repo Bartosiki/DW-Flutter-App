@@ -48,7 +48,7 @@ class EventCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${time.hour}:${time.minute.toString().padLeft(2, '0')}',
+                  '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}',
                   style: const TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 16,
