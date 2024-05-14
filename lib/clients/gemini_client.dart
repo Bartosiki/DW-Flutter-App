@@ -9,8 +9,8 @@ class GeminiClient {
   final Uri geminiEndpoint;
 
   GeminiClient()
-      : geminiEndpoint =
-            Uri.parse('http://10.0.2.2:5001/dw-flutter-app/us-central1/gemini'),
+      : geminiEndpoint = Uri.parse(
+            'https://us-central1-dw-flutter-app.cloudfunctions.net/gemini'),
         super();
 
   Future<String> generateAssistantResponse(String userText) async {
