@@ -16,9 +16,8 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text(
-          Strings.profile,
-        ),
+        title: const Text(Strings.profile,
+            style: TextStyle(fontWeight: FontWeight.w600)),
         actions: [
           IconButton(
             icon: const Icon(Icons.close),
@@ -39,7 +38,7 @@ class ProfileScreen extends ConsumerWidget {
                   Text(
                     Strings.logOut,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                   ),
                   IconButton(
@@ -66,7 +65,7 @@ class ProfileScreen extends ConsumerWidget {
                   Text(
                     Strings.darkMode,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                   ),
                   Switch(

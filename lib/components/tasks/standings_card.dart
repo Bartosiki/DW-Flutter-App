@@ -32,6 +32,21 @@ class StandingsCard extends StatelessWidget {
           color: getCardBorderColor(),
           width: 2,
         ),
+        gradient: Gradient.lerp(
+          LinearGradient(
+            colors: [
+              AppColors.standingsCardForegroundColor,
+              Theme.of(context).colorScheme.primary
+            ],
+          ),
+          LinearGradient(
+            colors: [
+              AppColors.standingsCardForegroundColor,
+              AppColors.standingsCardForegroundColor
+            ],
+          ),
+          0.85,
+        ),
         boxShadow: [
           BoxShadow(
             color: getCardBorderColor(),
@@ -48,19 +63,26 @@ class StandingsCard extends StatelessWidget {
             Text(
               '#$rankIndex  $name',
               style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16),
+                color: Colors.white,
+                fontWeight: FontWeight.normal,
+                fontSize: 16,
+              ),
             ),
             Column(
               children: [
                 Text(
                   "$points",
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
                 ),
                 const Text(
                   Strings.standingsCardPoints,
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
                 ),
               ],
             )
