@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../authenticator.dart';
-import '../model/auth_result.dart';
-import '../model/auth_state.dart';
+import '../../network/authenticator.dart';
+import '../../model/auth_result.dart';
+import '../../model/auth_state.dart';
 import '../../data/user_info_storage.dart';
 
 class AuthStateNotifier extends StateNotifier<AuthState> {

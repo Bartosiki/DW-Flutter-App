@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dw_flutter_app/auth/authenticator.dart';
+import 'package:dw_flutter_app/network/authenticator.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/model/gemini_chat.dart';
 import 'package:http/http.dart' as http;

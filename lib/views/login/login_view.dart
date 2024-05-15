@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../auth/provider/auth_state_provider.dart';
+import '../../provider/auth/auth_state_provider.dart';
 
 class LoginView extends ConsumerWidget {
   const LoginView({super.key});

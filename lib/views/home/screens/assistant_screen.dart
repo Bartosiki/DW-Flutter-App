@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import '../../../auth/provider/gemini_messages_provider.dart';
+import '../../../provider/gemini/gemini_messages_provider.dart';
 
 class AssistantScreen extends ConsumerWidget {
   const AssistantScreen({super.key});

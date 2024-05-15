@@ -3,7 +3,7 @@ import 'package:dw_flutter_app/provider/dark_mode/dark_mode_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../auth/provider/auth_state_provider.dart';
+import '../../../provider/auth/auth_state_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});

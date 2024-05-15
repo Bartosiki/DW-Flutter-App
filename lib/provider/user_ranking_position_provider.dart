@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dw_flutter_app/constants/firestore_fields.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../auth/provider/user_id_provider.dart';
-import '../../constants/firestore_collections.dart';
+import 'auth/user_id_provider.dart';
+import '../constants/firestore_collections.dart';
 
 final userRankingPositionProvider = AutoDisposeStreamProvider<int?>((ref) {
   final userId = ref.watch(userIdProvider);
