@@ -9,6 +9,8 @@ class Authenticator {
   String? get userId => FirebaseAuth.instance.currentUser?.uid;
   String? get displayName => FirebaseAuth.instance.currentUser?.displayName;
   String? get email => FirebaseAuth.instance.currentUser?.email;
+  Future<String?> get userIdToken async =>
+      await FirebaseAuth.instance.currentUser?.getIdToken();
 
   bool get isAlreadySignedIn => userId != null;
 

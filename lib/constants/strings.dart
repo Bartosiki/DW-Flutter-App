@@ -53,4 +53,6 @@ class Strings {
   static const String unknownErrorPleaseTryAgain =
       'Unknown error, please try again';
   const Strings._();
+  static const String assistantError =
+      'There was an error. Please try again later.';
 }

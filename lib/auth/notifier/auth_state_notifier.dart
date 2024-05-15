@@ -41,7 +41,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
           isLoading: false,
           userId: userId,
         );
-      } catch (e) {
+      } catch (error) {
         state = const AuthState.unknown();
         return;
       }
