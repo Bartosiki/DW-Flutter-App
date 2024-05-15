@@ -21,7 +21,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_screens[_selectedIndex].label),
+        title: Text(
+          _screens[_selectedIndex].label,
+          style: const TextStyle(fontWeight: FontWeight.w600),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.person),

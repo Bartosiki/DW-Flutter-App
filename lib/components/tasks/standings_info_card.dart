@@ -10,9 +10,9 @@ class StandingsInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(        
+      child: Container(
         decoration: BoxDecoration(
-          color: AppColors.standingsCardForegroundColor,
+          color: Theme.of(context).colorScheme.secondary,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         child: Padding(
@@ -21,16 +21,18 @@ class StandingsInfoCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondary,
                   fontSize: 16,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 subtitle,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondary,
                   fontSize: 12,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ],

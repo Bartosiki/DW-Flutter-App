@@ -16,11 +16,15 @@ class ScreenDescription extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(
-            child: Text(description,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16))),
+          child: Text(
+            description,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onBackground,
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+            ),
+          ),
+        ),
         if (trailingIcon != null)
           Column(
             children: [

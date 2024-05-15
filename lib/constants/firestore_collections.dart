@@ -5,5 +5,6 @@ class FirestoreCollections {
   static const String patrons = 'patrons';
   static const String partners = 'partners';
   static const String contestTime = 'contestTime';
+  static const String config = 'config';
   FirestoreCollections._();
 }

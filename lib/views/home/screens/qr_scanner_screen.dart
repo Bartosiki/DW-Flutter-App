@@ -68,6 +68,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
     return Container(
       decoration: ShapeDecoration(
         shape: QrScannerOverlayShape(
+          borderColor: Theme.of(context).colorScheme.primary,
           cutOutSize: scanArea,
         ),
       ),
@@ -257,7 +258,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
 
 class QrScannerOverlayShape extends ShapeBorder {
   QrScannerOverlayShape({
-    this.borderColor = Colors.red,
+    required this.borderColor,
     this.borderWidth = 10.0,
     this.overlayColor = const Color.fromRGBO(0, 0, 0, 80),
     this.borderRadius = 10,
