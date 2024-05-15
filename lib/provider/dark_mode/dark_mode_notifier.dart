@@ -1,3 +1,4 @@
+import 'package:dw_flutter_app/provider/dark_mode/dark_mode_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,12 +22,8 @@ class DarkModeNotifier extends StateNotifier<bool> {
   }
 }
 
-final _darkModeNotifierProvider = FutureProvider<DarkModeNotifier>((ref) {
-  return DarkModeNotifier.create();
-});
-
 final darkModeProvider = StateNotifierProvider<DarkModeNotifier, bool>((ref) {
-  final darkModeNotifierFuture = ref.watch(_darkModeNotifierProvider);
+  final darkModeNotifierFuture = ref.watch(darkModeNotifierProvider);
   return (darkModeNotifierFuture.value ??
       DarkModeNotifier(DarkModeNotifier.initialBrightness == Brightness.dark));
 });
