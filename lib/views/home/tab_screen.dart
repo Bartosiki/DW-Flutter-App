@@ -65,7 +65,7 @@ List<BottomNavigationBarItem> getBottomNavigationItems(BuildContext context) {
           width: 24,
           height: 24,
           colorFilter: ColorFilter.mode(
-            AppColors.navigationItemActiveColor,
+            Theme.of(context).colorScheme.tertiary,
             BlendMode.srcIn,
           ),
         ),

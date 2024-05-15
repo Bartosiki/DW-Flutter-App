@@ -43,8 +43,8 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
                 ),
                 child: SegmentedButton<Option>(
                   style: SegmentedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                    foregroundColor: Theme.of(context).colorScheme.onSecondary,
+                    backgroundColor: Theme.of(context).colorScheme.tertiary,
+                    foregroundColor: Theme.of(context).colorScheme.onTertiary,
                     selectedForegroundColor:
                         Theme.of(context).colorScheme.onPrimary,
                     selectedBackgroundColor:

@@ -1,17 +1,17 @@
-import 'package:dw_flutter_app/constants/app_colors.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:flutter/material.dart';
 
 class StandingsCard extends StatelessWidget {
-  StandingsCard(
-      {super.key,
-      required this.rankIndex,
-      required this.points,
-      required this.name});
+  const StandingsCard({
+    super.key,
+    required this.rankIndex,
+    required this.points,
+    required this.name,
+  });
 
-  int rankIndex;
-  int points;
-  String name;
+  final int rankIndex;
+  final int points;
+  final String name;
 
   Color getCardBorderColor() {
     return (switch (rankIndex) {
@@ -26,26 +26,11 @@ class StandingsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.standingsCardForegroundColor,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         border: Border.all(
           color: getCardBorderColor(),
           width: 2,
-        ),
-        gradient: Gradient.lerp(
-          LinearGradient(
-            colors: [
-              AppColors.standingsCardForegroundColor,
-              Theme.of(context).colorScheme.primary
-            ],
-          ),
-          LinearGradient(
-            colors: [
-              AppColors.standingsCardForegroundColor,
-              AppColors.standingsCardForegroundColor
-            ],
-          ),
-          0.85,
         ),
         boxShadow: [
           BoxShadow(
@@ -65,8 +50,8 @@ class StandingsCard extends StatelessWidget {
           children: [
             Text(
               '#$rankIndex  $name',
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.normal,
                 fontSize: 16,
               ),
@@ -75,15 +60,15 @@ class StandingsCard extends StatelessWidget {
               children: [
                 Text(
                   "$points",
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
                     fontSize: 16,
                   ),
                 ),
-                const Text(
+                Text(
                   Strings.standingsCardPoints,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onPrimary,
                     fontSize: 12,
                   ),
                 ),

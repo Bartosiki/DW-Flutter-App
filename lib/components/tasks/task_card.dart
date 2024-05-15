@@ -23,11 +23,11 @@ class TaskCard extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
             child: ListTile(
               trailing: CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.secondary,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
                 child: Text(
                   "$points",
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSecondary,
+                    color: Theme.of(context).colorScheme.onTertiary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
