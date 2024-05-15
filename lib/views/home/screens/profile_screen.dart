@@ -33,6 +33,30 @@ class ProfileScreen extends ConsumerWidget {
         child: Column(
           children: [
             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    Strings.darkMode,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w400,
+                        ),
+                  ),
+                  Switch(
+                    value: isDarkModeEnabled,
+                    onChanged: (value) {
+                      darkModeState.setDarkMode(value);
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Divider(),
+            ),
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,30 +74,6 @@ class ProfileScreen extends ConsumerWidget {
                       if (context.mounted) {
                         Navigator.of(context).pop();
                       }
-                    },
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Divider(),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    Strings.darkMode,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w400,
-                        ),
-                  ),
-                  Switch(
-                    value: isDarkModeEnabled,
-                    onChanged: (value) {
-                      darkModeState.setDarkMode(value);
                     },
                   ),
                 ],

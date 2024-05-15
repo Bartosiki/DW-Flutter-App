@@ -21,6 +21,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        forceMaterialTransparency: true,
         title: Text(
           _screens[_selectedIndex].label,
           style: const TextStyle(fontWeight: FontWeight.w600),

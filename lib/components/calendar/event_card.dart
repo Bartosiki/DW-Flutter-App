@@ -22,7 +22,7 @@ class EventCard extends StatelessWidget {
         vertical: 3.0,
       ),
       child: Card(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.surfaceVariant,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: ListTile(
@@ -31,7 +31,7 @@ class EventCard extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 16,
                 ),
                 softWrap: true,
@@ -44,7 +44,7 @@ class EventCard extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 16,
-                  color: Theme.of(context).colorScheme.onPrimary,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -56,14 +56,14 @@ class EventCard extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 16,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 Text(
                   room,
                   style: TextStyle(
                     fontSize: 14,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],

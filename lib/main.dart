@@ -33,6 +33,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.transparent,
+      ),
+    );
+
     return Consumer(
       builder: (context, ref, child) {
         final configValue = ref.watch(configProvider);
