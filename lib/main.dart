@@ -44,8 +44,7 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: _buildTheme(mainColor, Brightness.light),
           darkTheme: _buildTheme(mainColor, Brightness.dark),
-          themeMode:
-              isDarkModeEnabled == true ? ThemeMode.dark : ThemeMode.light,
+          themeMode: isDarkModeEnabled ? ThemeMode.dark : ThemeMode.light,
           home: isLoggedIn ? const HomeView() : const LoginView(),
         );
       },

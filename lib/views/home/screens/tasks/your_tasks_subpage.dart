@@ -59,7 +59,6 @@ class YourTasksSubpage extends ConsumerWidget {
                       child: CircularProgressIndicator(),
                     ),
                     error: (error, stackTrace) {
-                      error.log();
                       return const Center(
                         child: Text(
                           Strings.error,
@@ -79,7 +78,6 @@ class YourTasksSubpage extends ConsumerWidget {
         child: CircularProgressIndicator(),
       ),
       error: (error, stackTrace) {
-        error.log();
         return const Center(
           child: Text(Strings.error),
         );
