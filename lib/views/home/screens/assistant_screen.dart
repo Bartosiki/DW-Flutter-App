@@ -1,4 +1,3 @@
-import 'package:dw_flutter_app/views/home/screens/chat_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
