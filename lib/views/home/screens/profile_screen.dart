@@ -16,8 +16,10 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text(Strings.profile,
-            style: TextStyle(fontWeight: FontWeight.w600)),
+        title: const Text(
+          Strings.profile,
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.close),
