@@ -15,7 +15,7 @@ class MapView extends ConsumerWidget {
     return imagesAsyncValue.when(
       data: (images) {
         if (images == null || images.isEmpty) {
-          return const Center(child: Text("No map images found."));
+          return const Center(child: Text(Strings.noMapImagesError));
         } else {
           return ScreenSwitch(
             leftLabel: Strings.groundFloor,
@@ -30,7 +30,7 @@ class MapView extends ConsumerWidget {
         }
       },
       error: (error, stackTrace) =>
-          const Center(child: Text('Error loading map images')),
+          const Center(child: Text(Strings.errorLoadingMapImages)),
       loading: () => const Center(child: CircularProgressIndicator()),
     );
   }

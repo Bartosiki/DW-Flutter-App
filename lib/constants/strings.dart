@@ -57,4 +57,6 @@ class Strings {
   const Strings._();
   static const String assistantError =
       'There was an error. Please try again later.';
+  static const String noMapImagesError = 'No map images found.';
+  static const String errorLoadingMapImages = 'Error loading map images';
 }
