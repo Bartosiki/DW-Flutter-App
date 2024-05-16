@@ -55,7 +55,7 @@ class StandingsCard extends StatelessWidget {
                 '#$rankIndex  $name',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.w500,
                   fontSize: 16,
                 ),
               ),
@@ -66,6 +66,7 @@ class StandingsCard extends StatelessWidget {
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
                       fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(

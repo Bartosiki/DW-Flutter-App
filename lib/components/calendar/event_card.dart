@@ -29,8 +29,7 @@ class EventCard extends StatelessWidget {
               padding: const EdgeInsets.only(right: 30.0),
               child: Text(
                 title,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
+                style: const TextStyle(
                   fontSize: 16,
                 ),
                 softWrap: true,
@@ -40,10 +39,9 @@ class EventCard extends StatelessWidget {
               opacity: 0.6,
               child: Text(
                 partner,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 16,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ),
@@ -52,17 +50,15 @@ class EventCard extends StatelessWidget {
               children: [
                 Text(
                   '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 16,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
                 Text(
                   room,
                   style: TextStyle(
                     fontSize: 14,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
               ],
