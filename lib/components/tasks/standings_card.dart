@@ -39,8 +39,8 @@ class StandingsCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
           side: BorderSide(
-            color: getCardBorderColor(), // Set the border color
-            width: 2.0, // Set the border width
+            color: getCardBorderColor(),
+            width: 2.0,
           ),
         ),
         child: Padding(
