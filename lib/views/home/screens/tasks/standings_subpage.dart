@@ -62,6 +62,7 @@ class StandingsSubpage extends ConsumerWidget {
                 } else {
                   return Expanded(
                     child: ListView.builder(
+                      clipBehavior: Clip.none,
                       itemCount: topPlayers.length,
                       itemBuilder: (context, index) {
                         final topPlayer = topPlayers.elementAt(index);

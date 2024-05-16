@@ -15,7 +15,7 @@ class AssistantScreen extends ConsumerWidget {
         theme: DefaultChatTheme(
           backgroundColor: Theme.of(context).colorScheme.background,
           inputBackgroundColor: Theme.of(context).colorScheme.primary,
-          inputTextColor: Theme.of(context).colorScheme.onSecondary,
+          inputTextColor: Theme.of(context).colorScheme.onPrimary,
           dateDividerTextStyle: TextStyle(
             color: Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
             fontSize: 12,

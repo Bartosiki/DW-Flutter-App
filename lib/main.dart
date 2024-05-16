@@ -38,6 +38,7 @@ class App extends StatelessWidget {
         systemNavigationBarColor: Colors.transparent,
       ),
     );
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
     return Consumer(
       builder: (context, ref, child) {

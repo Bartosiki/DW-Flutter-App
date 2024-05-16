@@ -22,7 +22,6 @@ class EventCard extends StatelessWidget {
         vertical: 3.0,
       ),
       child: Card(
-        color: Theme.of(context).colorScheme.surfaceVariant,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: ListTile(
