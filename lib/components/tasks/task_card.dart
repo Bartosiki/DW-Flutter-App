@@ -20,22 +20,20 @@ class TaskCard extends StatelessWidget {
         height: 80,
         child: Center(
           child: Card(
-            color: Theme.of(context).colorScheme.primary,
             child: ListTile(
               trailing: CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.secondary,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 child: Text(
                   "$points",
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSecondary,
+                    color: Theme.of(context).colorScheme.onPrimary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               title: Text(
                 title,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
@@ -44,10 +42,9 @@ class TaskCard extends StatelessWidget {
                 opacity: 0.6,
                 child: Text(
                   subtitle,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimary,
+                  style: const TextStyle(
                     fontWeight: FontWeight.normal,
-                    fontSize: 12,
+                    fontSize: 14,
                   ),
                 ),
               ),

@@ -2,49 +2,36 @@ import 'package:dw_flutter_app/components/screen_switch.dart';
 import 'package:dw_flutter_app/views/map/map_container.dart';
 import 'package:flutter/material.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
-
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../provider/image_provider.dart';
 
-class MapView extends StatefulWidget {
+class MapView extends ConsumerWidget {
   const MapView({super.key});
 
   @override
-  _MapViewState createState() => _MapViewState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final imagesAsyncValue = ref.watch(mapImagesProvider);
 
-class _MapViewState extends State<MapView> {
-  List<String>? images;
-
-  @override
-  void initState() {
-    super.initState();
-    getMapImages().then((value) {
-      setState(() {
-        images = value;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: getMapImages(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ScreenSwitch(
-              leftLabel: Strings.groundFloor,
-              rightLabel: Strings.firstFloor,
-              leftScreen: MapContainer(
-                image: Image.network(snapshot.data![0]),
-              ),
-              rightScreen: MapContainer(
-                image: Image.network(snapshot.data![1]),
-              ),
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
+    return imagesAsyncValue.when(
+      data: (images) {
+        if (images == null || images.isEmpty) {
+          return const Center(child: Text(Strings.noMapImagesError));
+        } else {
+          return ScreenSwitch(
+            leftLabel: Strings.groundFloor,
+            rightLabel: Strings.firstFloor,
+            leftScreen: MapContainer(
+              image: Image.network(images[0]),
+            ),
+            rightScreen: MapContainer(
+              image: Image.network(images[1]),
+            ),
           );
-        });
+        }
+      },
+      error: (error, stackTrace) =>
+          const Center(child: Text(Strings.errorLoadingMapImages)),
+      loading: () => const Center(child: CircularProgressIndicator()),
+    );
   }
 }

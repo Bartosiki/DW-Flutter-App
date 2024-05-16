@@ -5,8 +5,11 @@ class DefaultBottomNavigationBar extends StatefulWidget {
   final int selectedIndex;
   final Function(int) onItemSelected;
 
-  const DefaultBottomNavigationBar(
-      {super.key, required this.selectedIndex, required this.onItemSelected});
+  const DefaultBottomNavigationBar({
+    super.key,
+    required this.selectedIndex,
+    required this.onItemSelected,
+  });
 
   @override
   State<DefaultBottomNavigationBar> createState() =>
@@ -22,17 +25,31 @@ class _DefaultBottomNavigationBarState
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      child: BottomNavigationBar(
-        enableFeedback: true,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: <BottomNavigationBarItem>[
-          ...getBottomNavigationItems(context),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Divider(
+            height: 1,
+            thickness: 1,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 6.0),
+            child: BottomNavigationBar(
+              backgroundColor: Theme.of(context).colorScheme.background,
+              enableFeedback: true,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              type: BottomNavigationBarType.fixed,
+              items: <BottomNavigationBarItem>[
+                ...getBottomNavigationItems(context),
+              ],
+              currentIndex: widget.selectedIndex,
+              onTap: (index) {
+                widget.onItemSelected(index);
+              },
+            ),
+          ),
         ],
-        currentIndex: widget.selectedIndex,
-        onTap: (index) {
-          widget.onItemSelected(index);
-        },
       ),
     );
   }

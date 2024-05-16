@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:sprintf/sprintf.dart';
-import '../../../auth/provider/user_id_provider.dart';
+import '../../../provider/auth/user_id_provider.dart';
 import '../../../constants/strings.dart';
 import '../../../data/user_info_storage.dart';
 import '../../../exceptions/task_already_finished.dart';

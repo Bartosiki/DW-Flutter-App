@@ -1,4 +1,9 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+
+final mapImagesProvider = FutureProvider<List<String>?>(
+  (ref) async => await getMapImages(),
+);
 
 Future<List<String>?> getMapImages() async {
   try {

@@ -7,9 +7,9 @@ import 'package:dw_flutter_app/extensions/log.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../provider/contest/remaining_time_provider.dart';
-import '../../../../provider/contest/top_players_provider.dart';
-import '../../../../provider/contest/user_ranking_position_provider.dart';
+import '../../../../provider/remaining_time_provider.dart';
+import '../../../../provider/top_players_provider.dart';
+import '../../../../provider/user_ranking_position_provider.dart';
 
 class StandingsSubpage extends ConsumerWidget {
   const StandingsSubpage({super.key});
@@ -62,6 +62,7 @@ class StandingsSubpage extends ConsumerWidget {
                 } else {
                   return Expanded(
                     child: ListView.builder(
+                      clipBehavior: Clip.none,
                       itemCount: topPlayers.length,
                       itemBuilder: (context, index) {
                         final topPlayer = topPlayers.elementAt(index);

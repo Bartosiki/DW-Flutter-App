@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:dw_flutter_app/clients/gemini_client.dart';
+import 'package:dw_flutter_app/network/gemini_client.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
