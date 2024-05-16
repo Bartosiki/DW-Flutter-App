@@ -33,8 +33,7 @@ class TaskCard extends StatelessWidget {
               ),
               title: Text(
                 title,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface,
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
@@ -43,8 +42,7 @@ class TaskCard extends StatelessWidget {
                 opacity: 0.6,
                 child: Text(
                   subtitle,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  style: const TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 14,
                   ),

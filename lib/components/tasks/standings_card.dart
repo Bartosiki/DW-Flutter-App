@@ -53,8 +53,7 @@ class StandingsCard extends StatelessWidget {
             children: [
               Text(
                 '#$rankIndex  $name',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 16,
                 ),
@@ -63,16 +62,14 @@ class StandingsCard extends StatelessWidget {
                 children: [
                   Text(
                     "$points",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text(
+                  const Text(
                     Strings.standingsCardPoints,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
                       fontSize: 12,
                     ),
                   ),
