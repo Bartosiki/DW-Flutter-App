@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class EventCard extends StatelessWidget {
-  EventCard({
+  const EventCard({
     super.key,
     required this.title,
     required this.partner,
@@ -57,7 +56,7 @@ class EventCard extends StatelessWidget {
                 ),
                 Text(
                   room,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                   ),
                 ),

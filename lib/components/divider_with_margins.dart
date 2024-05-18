@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants/app_colors.dart';
-
 class DividerWithMargins extends StatelessWidget {
   const DividerWithMargins({super.key});
 

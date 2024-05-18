@@ -1,5 +1,5 @@
 import 'package:dw_flutter_app/components/default_bottom_navigation_bar.dart';
-import 'package:dw_flutter_app/views/home/screens/profile_screen.dart';
+import 'package:dw_flutter_app/views/home/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'tab_screen.dart';

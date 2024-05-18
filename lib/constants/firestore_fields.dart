@@ -32,6 +32,7 @@ class FirestoreUsersFields {
   static const String finishedTasks = 'finishedTasks';
   static const String gainedPoints = 'gainedPoints';
   static const String isWinner = 'isWinner';
+  static const String allowedNotifications = 'allowedNotifications';
   static const String lastScannedQrCodeTime = 'lastScannedQrCodeTime';
   FirestoreUsersFields._();
 }

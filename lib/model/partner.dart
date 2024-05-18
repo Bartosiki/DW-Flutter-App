@@ -40,3 +40,9 @@ class Partner {
         ],
       );
 }
+
+class PartnerPackage {
+  static const standard = 'standard';
+  static const silver = 'silver';
+  static const gold = 'gold';
+}

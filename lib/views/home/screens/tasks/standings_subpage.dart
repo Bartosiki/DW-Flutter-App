@@ -59,33 +59,31 @@ class StandingsSubpage extends ConsumerWidget {
                       Strings.empty,
                     ),
                   );
-                } else {
-                  return Expanded(
-                    child: ListView.builder(
-                      clipBehavior: Clip.none,
-                      itemCount: topPlayers.length,
-                      itemBuilder: (context, index) {
-                        final topPlayer = topPlayers.elementAt(index);
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                          ),
-                          child: StandingsCard(
-                            rankIndex: index + 1,
-                            points: topPlayer.gainedPoints,
-                            name: topPlayer.displayName,
-                          ),
-                        );
-                      },
-                    ),
-                  );
                 }
+                return Expanded(
+                  child: ListView.builder(
+                    clipBehavior: Clip.none,
+                    itemCount: topPlayers.length,
+                    itemBuilder: (context, index) {
+                      final topPlayer = topPlayers.elementAt(index);
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                        ),
+                        child: StandingsCard(
+                          rankIndex: index + 1,
+                          points: topPlayer.gainedPoints,
+                          name: topPlayer.displayName,
+                        ),
+                      );
+                    },
+                  ),
+                );
               },
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
               error: (error, stackTrace) {
-                error.log();
                 return const Center(
                   child: Text(
                     Strings.error,

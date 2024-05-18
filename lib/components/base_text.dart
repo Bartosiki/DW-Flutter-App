@@ -1,5 +1,4 @@
 import 'package:dw_flutter_app/constants/app_colors.dart';
-import 'package:flutter/foundation.dart' show VoidCallback, immutable;
 import 'package:flutter/material.dart';
 
 import 'link_text.dart';

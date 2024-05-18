@@ -18,7 +18,7 @@ class ScreenSwitch extends StatefulWidget {
   final void Function()? onSwitch;
 
   @override
-  _ScreenSwitchState createState() => _ScreenSwitchState();
+  State<ScreenSwitch> createState() => _ScreenSwitchState();
 }
 
 class _ScreenSwitchState extends State<ScreenSwitch> {
