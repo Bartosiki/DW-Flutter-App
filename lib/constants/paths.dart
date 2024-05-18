@@ -5,5 +5,6 @@ class Paths {
   static const String mapIcon = "assets/icons/map.svg";
   static const String aiAssistantIcon = "assets/icons/ai_sparkles.svg";
   static const String sortIcon = "assets/icons/sort_icon.svg";
+  static const String noImage = "assets/icons/no-image.svg";
   Paths._();
 }

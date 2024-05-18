@@ -97,6 +97,7 @@ flutter:
     - assets/icons/qr_code.svg
     - assets/icons/trophy.svg
     - assets/icons/sort_icon.svg
+    - assets/icons/no-image.svg
     - assets/images/first_floor.png
     - assets/images/ground_floor.png
     - .env
