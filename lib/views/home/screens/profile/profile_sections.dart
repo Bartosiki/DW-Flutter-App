@@ -8,6 +8,7 @@ import 'package:dw_flutter_app/provider/combined_patrons_provider.dart';
 import 'package:dw_flutter_app/provider/dark_mode/dark_mode_notifier.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 List<Widget> buildProfileAccountDetails(BuildContext context, WidgetRef ref) {
@@ -176,21 +177,23 @@ List<Widget> buildProfilePatrons(BuildContext context, WidgetRef ref) {
             alignment: WrapAlignment.center,
             spacing: 12.0,
             runSpacing: 12.0,
-            children: patronImages.map<Widget>((path) {
-              return SizedBox(
-                height: ImageSizes.goldPackagePartnerSize,
-                child: AspectRatio(
-                  aspectRatio: 1.0,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: Image.network(
-                      path as String,
-                      fit: BoxFit.cover,
+            children: patronImages.map<Widget>(
+              (path) {
+                return SizedBox(
+                  height: ImageSizes.goldPackagePartnerSize,
+                  child: AspectRatio(
+                    aspectRatio: 1.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: Image.network(
+                        path as String,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-              );
-            }).toList(),
+                );
+              },
+            ).toList(),
           ),
         );
       },
@@ -227,42 +230,56 @@ List<Widget> buildProfilePartners(BuildContext context, WidgetRef ref) {
             ),
           );
         }
+        final partnersSorted =
+            partners.map((partner) => partner as Partner).toList()
+              ..sort(
+                (a, b) => PartnerPackage.getPackageOrder(a.package).compareTo(
+                  PartnerPackage.getPackageOrder(b.package),
+                ),
+              );
+
         return SizedBox(
           width: double.infinity,
           child: Wrap(
             alignment: WrapAlignment.center,
             spacing: 12.0,
             runSpacing: 12.0,
-            children: partnerImages.map<Widget>((path) {
-              final partner = (partners as List<Partner>).firstWhere(
-                (partner) => Uri.decodeComponent(path as String)
-                    .contains(partner.imageSrc),
-                orElse: () => const Partner(
-                  imageSrc: '',
-                  package: PartnerPackage.standard,
-                  name: '',
-                ),
-              );
-              return SizedBox(
-                height: switch (partner.package) {
-                  PartnerPackage.gold => ImageSizes.goldPackagePartnerSize,
-                  PartnerPackage.silver => ImageSizes.silverPackagePartnerSize,
-                  PartnerPackage.standard =>
-                    ImageSizes.standardPackagePartnerSize,
-                  _ => ImageSizes.standardPackagePartnerSize
-                },
-                child: AspectRatio(
-                  aspectRatio: 1.0,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child: Image.network(
-                      path as String,
-                      fit: BoxFit.cover,
+            children: partnersSorted.map<Widget>(
+              (partner) {
+                final partnerImageUrl =
+                    (partnerImages as List<String>).firstWhere(
+                  (partnerImage) => Uri.decodeComponent(partnerImage)
+                      .contains(partner.imageSrc),
+                  orElse: () => '',
+                );
+
+                return SizedBox(
+                  height: switch (partner.package) {
+                    PartnerPackage.gold => ImageSizes.goldPackagePartnerSize,
+                    PartnerPackage.silver =>
+                      ImageSizes.silverPackagePartnerSize,
+                    PartnerPackage.standard =>
+                      ImageSizes.standardPackagePartnerSize,
+                    _ => ImageSizes.standardPackagePartnerSize
+                  },
+                  child: AspectRatio(
+                    aspectRatio: 1.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: partnerImageUrl.isNotEmpty
+                          ? Image.network(
+                              partnerImageUrl,
+                              fit: BoxFit.cover,
+                            )
+                          : SvgPicture.asset(
+                              'assets/icons/no-image.svg',
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
-                ),
-              );
-            }).toList(),
+                );
+              },
+            ).toList(),
           ),
         );
       },

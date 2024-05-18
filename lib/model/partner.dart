@@ -1,4 +1,5 @@
 import 'package:dw_flutter_app/constants/firestore_fields.dart';
+import 'package:dw_flutter_app/constants/image_sizes.dart';
 import 'package:flutter/material.dart';
 
 @immutable
@@ -45,4 +46,30 @@ class PartnerPackage {
   static const standard = 'standard';
   static const silver = 'silver';
   static const gold = 'gold';
+
+  static int getPackageOrder(String package) {
+    switch (package) {
+      case PartnerPackage.gold:
+        return 0;
+      case PartnerPackage.silver:
+        return 1;
+      case PartnerPackage.standard:
+        return 2;
+      default:
+        return 2;
+    }
+  }
+
+  static double getImageSize(String package) {
+    switch (package) {
+      case PartnerPackage.gold:
+        return ImageSizes.goldPackagePartnerSize;
+      case PartnerPackage.silver:
+        return ImageSizes.silverPackagePartnerSize;
+      case PartnerPackage.standard:
+        return ImageSizes.standardPackagePartnerSize;
+      default:
+        return ImageSizes.standardPackagePartnerSize;
+    }
+  }
 }
