@@ -272,9 +272,23 @@ List<Widget> buildProfilePartners(BuildContext context, WidgetRef ref) {
                               partnerImageUrl,
                               fit: BoxFit.cover,
                             )
-                          : SvgPicture.asset(
-                              Paths.noImage,
-                              fit: BoxFit.cover,
+                          : Container(
+                              alignment: Alignment.center,
+                              color: Theme.of(context).colorScheme.surfaceTint,
+                              child: Text(
+                                partner.name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                    ),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                     ),
                   ),
