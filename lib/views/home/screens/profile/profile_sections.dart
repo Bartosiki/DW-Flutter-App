@@ -1,6 +1,5 @@
 import 'package:dw_flutter_app/components/tasks/standings_info_card.dart';
 import 'package:dw_flutter_app/constants/image_sizes.dart';
-import 'package:dw_flutter_app/constants/paths.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/model/partner.dart';
 import 'package:dw_flutter_app/provider/auth/auth_state_provider.dart';
@@ -9,7 +8,6 @@ import 'package:dw_flutter_app/provider/combined_patrons_provider.dart';
 import 'package:dw_flutter_app/provider/dark_mode/dark_mode_notifier.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 List<Widget> buildProfileAccountDetails(BuildContext context, WidgetRef ref) {
