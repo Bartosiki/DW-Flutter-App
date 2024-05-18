@@ -3,7 +3,6 @@ import 'package:dw_flutter_app/components/screen_description.dart';
 import 'package:dw_flutter_app/components/tasks/standings_card.dart';
 import 'package:dw_flutter_app/components/tasks/standings_info_cards_row.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
-import 'package:dw_flutter_app/extensions/log.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

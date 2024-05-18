@@ -2,7 +2,6 @@ import 'package:dw_flutter_app/components/tasks/standings_info_card.dart';
 import 'package:dw_flutter_app/constants/image_sizes.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/model/partner.dart';
-import 'package:dw_flutter_app/model/patron.dart';
 import 'package:dw_flutter_app/provider/auth/auth_state_provider.dart';
 import 'package:dw_flutter_app/provider/combined_partners_provider.dart';
 import 'package:dw_flutter_app/provider/combined_patrons_provider.dart';
