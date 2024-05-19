@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ProfileElement extends StatelessWidget {
-  const ProfileElement(
-      {super.key, required this.title, required this.children});
+  const ProfileElement({
+    super.key,
+    required this.title,
+    required this.children,
+  });
 
   final String title;
   final List<Widget> children;

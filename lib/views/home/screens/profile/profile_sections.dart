@@ -71,7 +71,7 @@ List<Widget> buildProfileAccountDetails(BuildContext context, WidgetRef ref) {
               child: Text(
                 Strings.winner,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.w600,
                     ),
                 textAlign: TextAlign.center,
