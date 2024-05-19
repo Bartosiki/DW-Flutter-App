@@ -20,7 +20,7 @@ class ProfileElement extends StatelessWidget {
           child: Text(
             title,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontSize: 26,
+                  fontSize: 24,
                   fontWeight: FontWeight.w500,
                 ),
           ),

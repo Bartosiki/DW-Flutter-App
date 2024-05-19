@@ -28,7 +28,7 @@ class Strings {
   static const String standingsCardPoints = 'Points';
   static const String darkMode = 'Dark mode';
   static const String logOut = 'Log out';
-  static const String allowedNotifications = 'Allowed notifications';
+  static const String notifications = 'Notifications';
   static String youHaveXPoints(int points) {
     return 'You have $points points';
   }

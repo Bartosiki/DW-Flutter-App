@@ -1,6 +1,6 @@
 import 'package:firebase_storage/firebase_storage.dart';
 
-Future<List<String>?> getMapImages(String storagePath) async {
+Future<List<String>?> getImages(String storagePath) async {
   try {
     final storageRef = FirebaseStorage.instance.ref();
     final imagesRef = storageRef.child(storagePath);
