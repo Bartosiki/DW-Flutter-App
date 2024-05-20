@@ -41,6 +41,7 @@ class UserInfoStorage {
         FirestoreUsersFields.finishedTasks: [],
         FirestoreUsersFields.gainedPoints: 0,
         FirestoreUsersFields.isWinner: false,
+        FirestoreUsersFields.allowedNotifications: false,
         FirestoreUsersFields.lastScannedQrCodeTime: null,
       };
       await FirebaseFirestore.instance
@@ -107,5 +108,26 @@ class UserInfoStorage {
     );
 
     return task;
+  }
+
+  Future<void> changeNotificationStatus(
+    String userId,
+    bool newStatus,
+  ) async {
+    final userSnapshot = await FirebaseFirestore.instance
+        .collection(FirestoreCollections.users)
+        .where(FirestoreUsersFields.userId, isEqualTo: userId)
+        .limit(1)
+        .get();
+    if (userSnapshot.docs.isEmpty) {
+      throw UserNotFound(userId);
+    }
+    final userDoc = userSnapshot.docs.first;
+
+    await userDoc.reference.update(
+      {
+        FirestoreUsersFields.allowedNotifications: newStatus,
+      },
+    );
   }
 }

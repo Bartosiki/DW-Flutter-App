@@ -28,6 +28,7 @@ class Strings {
   static const String standingsCardPoints = 'Points';
   static const String darkMode = 'Dark mode';
   static const String logOut = 'Log out';
+  static const String notifications = 'Notifications';
   static String youHaveXPoints(int points) {
     return 'You have $points points';
   }
@@ -59,4 +60,14 @@ class Strings {
       'There was an error. Please try again later.';
   static const String noMapImagesError = 'No map images found.';
   static const String errorLoadingMapImages = 'Error loading map images';
+  static const String settingsTitle = 'Settings';
+  static const String accountDetailsTitle = 'Account details';
+  static const String timeLeft = 'TIME LEFT';
+  static const String yourPlace = 'YOUR PLACE';
+  static const String finishedTasks = 'Finished tasks';
+  static const String gainedPoints = 'Gained points';
+  static const String welcome = 'Welcome';
+  static const String winner = 'Congratulations!\n You are the winner!';
+  static const String patronsTitle = 'Patrons';
+  static const String partnersTitle = 'Partners';
 }

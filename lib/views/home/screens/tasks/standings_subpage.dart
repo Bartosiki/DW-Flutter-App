@@ -3,7 +3,6 @@ import 'package:dw_flutter_app/components/screen_description.dart';
 import 'package:dw_flutter_app/components/tasks/standings_card.dart';
 import 'package:dw_flutter_app/components/tasks/standings_info_cards_row.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
-import 'package:dw_flutter_app/extensions/log.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -59,33 +58,31 @@ class StandingsSubpage extends ConsumerWidget {
                       Strings.empty,
                     ),
                   );
-                } else {
-                  return Expanded(
-                    child: ListView.builder(
-                      clipBehavior: Clip.none,
-                      itemCount: topPlayers.length,
-                      itemBuilder: (context, index) {
-                        final topPlayer = topPlayers.elementAt(index);
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                          ),
-                          child: StandingsCard(
-                            rankIndex: index + 1,
-                            points: topPlayer.gainedPoints,
-                            name: topPlayer.displayName,
-                          ),
-                        );
-                      },
-                    ),
-                  );
                 }
+                return Expanded(
+                  child: ListView.builder(
+                    clipBehavior: Clip.none,
+                    itemCount: topPlayers.length,
+                    itemBuilder: (context, index) {
+                      final topPlayer = topPlayers.elementAt(index);
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                        ),
+                        child: StandingsCard(
+                          rankIndex: index + 1,
+                          points: topPlayer.gainedPoints,
+                          name: topPlayer.displayName,
+                        ),
+                      );
+                    },
+                  ),
+                );
               },
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
               error: (error, stackTrace) {
-                error.log();
                 return const Center(
                   child: Text(
                     Strings.error,

@@ -1,4 +1,3 @@
-import 'package:dw_flutter_app/constants/app_colors.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/views/home/screens/calendar_screen.dart';
 import 'package:dw_flutter_app/views/home/screens/map_screen.dart';

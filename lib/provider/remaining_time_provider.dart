@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'contest_time_provider.dart';

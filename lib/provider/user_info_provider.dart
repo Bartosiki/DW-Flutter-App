@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dw_flutter_app/provider/auth/user_id_provider.dart';
 import 'package:dw_flutter_app/model/user.dart';

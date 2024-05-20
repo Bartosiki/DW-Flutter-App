@@ -11,6 +11,7 @@ class User {
   final List<UserFinishedTask> finishedTasks;
   final int gainedPoints;
   final bool isWinner;
+  final bool allowedNotifications;
   final Timestamp? lastScannedQrCodeTime;
 
   const User({
@@ -20,6 +21,7 @@ class User {
     required this.finishedTasks,
     required this.gainedPoints,
     required this.isWinner,
+    required this.allowedNotifications,
     required this.lastScannedQrCodeTime,
   });
 
@@ -37,6 +39,7 @@ class User {
           .toList(),
       gainedPoints: json[FirestoreUsersFields.gainedPoints],
       isWinner: json[FirestoreUsersFields.isWinner],
+      allowedNotifications: json[FirestoreUsersFields.allowedNotifications],
       lastScannedQrCodeTime:
           json[FirestoreUsersFields.lastScannedQrCodeTime] as Timestamp?,
     );

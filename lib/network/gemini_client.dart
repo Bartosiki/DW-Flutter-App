@@ -4,7 +4,6 @@ import 'package:dw_flutter_app/network/authenticator.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/model/gemini_chat.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class GeminiClient {

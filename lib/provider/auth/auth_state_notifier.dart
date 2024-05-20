@@ -49,4 +49,19 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       state = const AuthState.unknown();
     }
   }
+
+  Future<void> changeNotificationStatus(bool status) async {
+    state = state.copiedWithIsLoading(true);
+    final userId = _authenticator.userId;
+    if (userId != null) {
+      try {
+        await _userInfoStorage.changeNotificationStatus(userId, status);
+        state = state.copiedWithIsLoading(false);
+      } catch (error) {
+        state = const AuthState.unknown();
+      }
+    } else {
+      state = const AuthState.unknown();
+    }
+  }
 }

@@ -78,7 +78,6 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
   Widget _onError(
       BuildContext context, MobileScannerException error, Widget? child) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      error.log();
       _scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBar(
           content: const Text(
