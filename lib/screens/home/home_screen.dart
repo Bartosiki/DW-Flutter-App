@@ -8,10 +8,10 @@ class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  ConsumerState<HomeScreen> createState() => _HomeViewState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeViewState extends ConsumerState<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   int _selectedIndex = 0;
   final List<TabScreen> _screens = [
     for (final screen in TabScreen.values) screen,

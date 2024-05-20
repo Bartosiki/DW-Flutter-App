@@ -1,9 +1,9 @@
 import 'package:dw_flutter_app/constants/strings.dart';
-import 'package:dw_flutter_app/views/home/screens/profile/profile_element.dart';
-import 'package:dw_flutter_app/views/home/screens/profile/sections/account_details.dart';
-import 'package:dw_flutter_app/views/home/screens/profile/sections/account_settings.dart';
-import 'package:dw_flutter_app/views/home/screens/profile/sections/partners.dart';
-import 'package:dw_flutter_app/views/home/screens/profile/sections/patrons.dart';
+import 'package:dw_flutter_app/screens/home/screens/profile/profile_element.dart';
+import 'package:dw_flutter_app/screens/home/screens/profile/sections/account_details.dart';
+import 'package:dw_flutter_app/screens/home/screens/profile/sections/account_settings.dart';
+import 'package:dw_flutter_app/screens/home/screens/profile/sections/partners.dart';
+import 'package:dw_flutter_app/screens/home/screens/profile/sections/patrons.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

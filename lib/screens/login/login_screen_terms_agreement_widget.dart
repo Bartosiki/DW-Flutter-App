@@ -5,8 +5,8 @@ import '../../components/base_text.dart';
 import '../../components/rich_text_widget.dart';
 import '../../constants/strings.dart';
 
-class LoginViewTermsAgreementWidget extends StatelessWidget {
-  const LoginViewTermsAgreementWidget({super.key});
+class LoginScreenTermsAgreementWidget extends StatelessWidget {
+  const LoginScreenTermsAgreementWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
