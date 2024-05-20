@@ -70,4 +70,5 @@ class Strings {
   static const String winner = 'Congratulations!\n You are the winner!';
   static const String patronsTitle = 'Patrons';
   static const String partnersTitle = 'Partners';
+  static const String you = 'You';
 }

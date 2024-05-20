@@ -1,5 +1,6 @@
 import 'package:dw_flutter_app/components/divider_with_margins.dart';
 import 'package:dw_flutter_app/components/tasks/standings_card.dart';
+import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:flutter/material.dart';
 
 class SeparatedStanding extends StatelessWidget {
@@ -22,7 +23,7 @@ class SeparatedStanding extends StatelessWidget {
             rankIndex: rankIndex,
             points: points,
             isCurrentUser: true,
-            name: "You",
+            name: Strings.you,
           ),
         ],
       ),

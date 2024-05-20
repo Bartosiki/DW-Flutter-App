@@ -54,7 +54,7 @@ class StandingsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                isCurrentUser ? '#$rankIndex  You' : '#$rankIndex  $name',
+                isCurrentUser ? '#$rankIndex  ${Strings.you}' : '#$rankIndex  $name',
                 style: TextStyle(
                   fontWeight: isCurrentUser ? FontWeight.bold : FontWeight.w500,
                   fontSize: 16,
