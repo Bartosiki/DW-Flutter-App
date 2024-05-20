@@ -43,8 +43,12 @@ class App extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child) {
         final configValue = ref.watch(configProvider);
-        final mainColor = configValue.value?.mainColor.toColor() ??
-            AppColors.defaultMainColor;
+        final mainColor = configValue.when(
+          data: (config) =>
+              config?.mainColor.toColor() ?? AppColors.defaultMainColor,
+          loading: () => AppColors.defaultMainColor,
+          error: (_, __) => AppColors.defaultMainColor,
+        );
 
         final isDarkModeEnabled = ref.watch(darkModeProvider);
         final isLoggedIn = ref.watch(isLoggedInProvider);
