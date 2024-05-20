@@ -1,17 +1,17 @@
 import 'package:dw_flutter_app/components/default_bottom_navigation_bar.dart';
-import 'package:dw_flutter_app/views/home/screens/profile/profile_screen.dart';
+import 'package:dw_flutter_app/screens/home/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'tab_screen.dart';
 
-class HomeView extends ConsumerStatefulWidget {
-  const HomeView({super.key});
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  ConsumerState<HomeView> createState() => _HomeViewState();
+  ConsumerState<HomeScreen> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends ConsumerState<HomeView> {
+class _HomeViewState extends ConsumerState<HomeScreen> {
   int _selectedIndex = 0;
   final List<TabScreen> _screens = [
     for (final screen in TabScreen.values) screen,
