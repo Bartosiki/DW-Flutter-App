@@ -1,8 +1,10 @@
 import 'package:dw_flutter_app/components/divider_with_margins.dart';
 import 'package:dw_flutter_app/components/screen_description.dart';
+import 'package:dw_flutter_app/components/tasks/separated_standing.dart';
 import 'package:dw_flutter_app/components/tasks/standings_card.dart';
 import 'package:dw_flutter_app/components/tasks/standings_info_cards_row.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -29,6 +31,7 @@ class StandingsSubpage extends ConsumerWidget {
     final remainingTime = ref.watch(remainingTimeProvider);
     final topPlayers = ref.watch(topPlayersProvider);
     final userRankingPosition = ref.watch(userRankingPositionProvider);
+    final userInfo = ref.watch(userInfoProvider);
 
     return SafeArea(
       child: Padding(
@@ -62,16 +65,33 @@ class StandingsSubpage extends ConsumerWidget {
                 return Expanded(
                   child: ListView.builder(
                     clipBehavior: Clip.none,
-                    itemCount: topPlayers.length,
+                    itemCount: topPlayers.length + 1,
                     itemBuilder: (context, index) {
+                      if (index == topPlayers.length) {
+                        return userRankingPosition.maybeWhen(
+                          data: (position) => position != null && position > 10
+                              ? SeparatedStanding(
+                                  rankIndex: position,
+                                  points: userInfo.maybeWhen(
+                                    data: (info) => info.gainedPoints,
+                                    orElse: () => 0,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                          orElse: () => const SizedBox.shrink(),
+                        );
+                      }
                       final topPlayer = topPlayers.elementAt(index);
                       return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8,
-                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
                         child: StandingsCard(
                           rankIndex: index + 1,
                           points: topPlayer.gainedPoints,
+                          isCurrentUser: index + 1 ==
+                              userRankingPosition.maybeWhen(
+                                data: (position) => position,
+                                orElse: () => 0,
+                              ),
                           name: topPlayer.displayName,
                         ),
                       );

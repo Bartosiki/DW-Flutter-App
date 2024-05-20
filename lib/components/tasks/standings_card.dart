@@ -6,11 +6,12 @@ class StandingsCard extends StatelessWidget {
     super.key,
     required this.rankIndex,
     required this.points,
+    required this.isCurrentUser,
     required this.name,
   });
 
-  final int rankIndex;
-  final int points;
+  final int rankIndex, points;
+  final bool isCurrentUser;
   final String name;
 
   Color getCardBorderColor() {
@@ -36,6 +37,7 @@ class StandingsCard extends StatelessWidget {
         ],
       ),
       child: Card(
+        color: isCurrentUser ? Theme.of(context).colorScheme.secondaryContainer : null,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
           side: BorderSide(
@@ -52,9 +54,9 @@ class StandingsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '#$rankIndex  $name',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
+                isCurrentUser ? '#$rankIndex  You' : '#$rankIndex  $name',
+                style: TextStyle(
+                  fontWeight: isCurrentUser ? FontWeight.bold : FontWeight.w500,
                   fontSize: 16,
                 ),
               ),
