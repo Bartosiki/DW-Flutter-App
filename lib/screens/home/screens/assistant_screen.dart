@@ -8,7 +8,7 @@ class AssistantScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final messages = ref.watch(messagesProvider);
+    final messages = ref.watch(geminiMessagesProvider);
 
     return Scaffold(
       body: Chat(
@@ -50,8 +50,9 @@ class AssistantScreen extends ConsumerWidget {
             height: 1.333,
           ),
         ),
-        onSendPressed: (partialText) =>
-            ref.read(messagesProvider.notifier).handleSendPressed(partialText),
+        onSendPressed: (partialText) => ref
+            .read(geminiMessagesProvider.notifier)
+            .handleSendPressed(partialText),
         messages: messages,
         user: ref.watch(userProvider),
       ),

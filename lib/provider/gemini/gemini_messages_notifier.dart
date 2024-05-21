@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:collection/collection.dart';
 import 'package:dw_flutter_app/model/gemini_chat.dart';
 import 'package:dw_flutter_app/network/gemini_client.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -6,13 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 
-class MessagesNotifier extends StateNotifier<List<Message>> {
+class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
   final Uuid uuid;
   final User user;
   final User assistant;
   final GeminiClient client;
 
-  MessagesNotifier(this.uuid, this.user, this.assistant, this.client)
+  GeminiMessagesNotifier(this.uuid, this.user, this.assistant, this.client)
       : super([]) {
     _loadChatHistory();
   }
@@ -33,29 +34,35 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
     );
     addMessage(userMessage);
 
-    final previousUserMessage = wholeHistory.firstWhere(
+    final previousUserMessage = wholeHistory.firstWhereOrNull(
       (element) => element.author == user,
-      orElse: () => userMessage,
     );
-    final lastAssistantMessage = wholeHistory.firstWhere(
+    final lastAssistantMessage = wholeHistory.firstWhereOrNull(
       (element) => element.author == assistant,
-      orElse: () => userMessage,
     );
+
+    final previousUserMessageChunk = previousUserMessage != null
+        ? GeminiChatChunk(
+            role: previousUserMessage.author == user ? 'user' : 'assistant',
+            parts: [
+              Part(text: (previousUserMessage as TextMessage).text),
+            ],
+          )
+        : null;
+    final lastAssistantMessageChunk = lastAssistantMessage != null
+        ? GeminiChatChunk(
+            role:
+                lastAssistantMessage.author == assistant ? 'assistant' : 'user',
+            parts: [
+              Part(text: (lastAssistantMessage as TextMessage).text),
+            ],
+          )
+        : null;
 
     final historyToSend = GeminiChat(
       history: [
-        GeminiChatChunk(
-          role: previousUserMessage.author == user ? 'user' : 'assistant',
-          parts: [
-            Part(text: (previousUserMessage as TextMessage).text),
-          ],
-        ),
-        GeminiChatChunk(
-          role: lastAssistantMessage.author == assistant ? 'assistant' : 'user',
-          parts: [
-            Part(text: (lastAssistantMessage as TextMessage).text),
-          ],
-        ),
+        if (previousUserMessageChunk != null) previousUserMessageChunk,
+        if (lastAssistantMessageChunk != null) lastAssistantMessageChunk,
         GeminiChatChunk(
           role: 'user',
           parts: [
@@ -99,5 +106,11 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
     final prefs = await SharedPreferences.getInstance();
     final encodedMessages = jsonEncode(state);
     await prefs.setString('chatHistory', encodedMessages);
+  }
+
+  Future<void> clearChatHistory() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('chatHistory');
+    state = [];
   }
 }
