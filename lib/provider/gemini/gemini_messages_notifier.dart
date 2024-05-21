@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dw_flutter_app/model/gemini_chat.dart';
 import 'package:dw_flutter_app/network/gemini_client.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,8 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
   }
 
   Future<void> handleSendPressed(PartialText message) async {
+    final wholeHistory = state;
+
     final userMessage = TextMessage(
       author: user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
@@ -30,7 +33,39 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
     );
     addMessage(userMessage);
 
-    String response = await client.generateAssistantResponse(message.text);
+    final previousUserMessage = wholeHistory.firstWhere(
+      (element) => element.author == user,
+      orElse: () => userMessage,
+    );
+    final lastAssistantMessage = wholeHistory.firstWhere(
+      (element) => element.author == assistant,
+      orElse: () => userMessage,
+    );
+
+    final historyToSend = GeminiChat(
+      history: [
+        GeminiChatChunk(
+          role: previousUserMessage.author == user ? 'user' : 'assistant',
+          parts: [
+            Part(text: (previousUserMessage as TextMessage).text),
+          ],
+        ),
+        GeminiChatChunk(
+          role: lastAssistantMessage.author == assistant ? 'assistant' : 'user',
+          parts: [
+            Part(text: (lastAssistantMessage as TextMessage).text),
+          ],
+        ),
+        GeminiChatChunk(
+          role: 'user',
+          parts: [
+            Part(text: message.text),
+          ],
+        )
+      ],
+    );
+
+    String response = await client.generateAssistantResponse(historyToSend);
 
     final assistantMessage = TextMessage(
       author: assistant,
