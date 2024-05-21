@@ -1,4 +1,5 @@
 import 'package:dw_flutter_app/components/divider_with_margins.dart';
+import 'package:dw_flutter_app/constants/app_colors.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/screens/login/login_button.dart';
 import 'package:dw_flutter_app/screens/login/login_screen_terms_agreement_widget.dart';
@@ -14,6 +15,7 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -61,7 +63,7 @@ class LoginScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              Positioned(
+              const Positioned(
                 top: 0,
                 left: 0,
                 right: 0,
@@ -70,20 +72,20 @@ class LoginScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Image(
+                    Image(
                       image: AssetImage("assets/images/dw_logo_white.png"),
                       height: 100.0,
                     ),
-                    const SizedBox(height: 26.0),
+                    SizedBox(height: 26.0),
                     Padding(
-                      padding: const EdgeInsets.only(right: 64.0),
+                      padding: EdgeInsets.only(right: 64.0),
                       child: Text(
                         Strings.signUpToTakePartInOurEvent,
-                        style:
-                            Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                  fontSize: 36.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 36.0,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],

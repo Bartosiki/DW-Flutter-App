@@ -19,10 +19,6 @@ class LoginButton extends StatelessWidget {
       style: TextButton.styleFrom(
         backgroundColor: AppColors.loginButtonColor,
         foregroundColor: AppColors.loginButtonTextColor,
-        textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontSize: 18.0,
-              fontWeight: FontWeight.w600,
-            ),
       ),
       onPressed: onPressed,
       child: SizedBox(
@@ -39,6 +35,10 @@ class LoginButton extends StatelessWidget {
               ),
               Text(
                 text,
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const SizedBox(width: 24.0),
             ],

@@ -66,7 +66,7 @@ class App extends StatelessWidget {
                   loading: () => const CircularProgressIndicator(),
                   error: (err, stack) => const LoginScreen(),
                 )
-              : const HomeScreen(),
+              : const LoginScreen(),
         );
       },
     );
