@@ -11,9 +11,9 @@ class LoginScreenTermsAgreementWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RichTextWidget(
-      styleForAll: Theme.of(context).textTheme.titleSmall?.copyWith(
-            color: AppColors.loginAgreementTextColor,
-          ),
+      styleForAll: TextStyle(
+        color: AppColors.loginAgreementTextColor,
+      ),
       texts: [
         BaseText.plain(
           text: Strings.bySigningUpYouAgreeToOur,
