@@ -1,26 +1,26 @@
 import 'package:dw_flutter_app/components/divider_with_margins.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
-import 'package:dw_flutter_app/views/login/login_button.dart';
-import 'package:dw_flutter_app/views/login/login_view_terms_agreement_widget.dart';
+import 'package:dw_flutter_app/screens/login/login_button.dart';
+import 'package:dw_flutter_app/screens/login/login_screen_terms_agreement_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../provider/auth/auth_state_provider.dart';
 
-class LoginView extends ConsumerWidget {
-  const LoginView({super.key});
+class LoginScreen extends ConsumerWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24.0,
-          vertical: 8.0,
-        ),
-        child: Scaffold(
-          body: Stack(
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24.0,
+            vertical: 16,
+          ),
+          child: Stack(
             children: [
               Positioned(
                 bottom: 0,
@@ -56,7 +56,7 @@ class LoginView extends ConsumerWidget {
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: LoginViewTermsAgreementWidget(),
+                      child: LoginScreenTermsAgreementWidget(),
                     ),
                   ],
                 ),

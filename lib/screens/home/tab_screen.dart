@@ -1,8 +1,8 @@
 import 'package:dw_flutter_app/constants/strings.dart';
-import 'package:dw_flutter_app/views/home/screens/calendar_screen.dart';
-import 'package:dw_flutter_app/views/home/screens/map_screen.dart';
-import 'package:dw_flutter_app/views/home/screens/qr_scanner_screen.dart';
-import 'package:dw_flutter_app/views/home/screens/tasks/tasks_screen.dart';
+import 'package:dw_flutter_app/screens/home/screens/calendar_screen.dart';
+import 'package:dw_flutter_app/screens/home/screens/map_screen.dart';
+import 'package:dw_flutter_app/screens/home/screens/qr_scanner_screen.dart';
+import 'package:dw_flutter_app/screens/home/screens/tasks/tasks_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../constants/paths.dart';

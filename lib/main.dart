@@ -2,8 +2,8 @@ import 'package:dw_flutter_app/constants/app_colors.dart';
 import 'package:dw_flutter_app/extensions/hex_string_color_to_color.dart';
 import 'package:dw_flutter_app/provider/config_provider.dart';
 import 'package:dw_flutter_app/provider/dark_mode/dark_mode_notifier.dart';
-import 'package:dw_flutter_app/views/home/home_view.dart';
-import 'package:dw_flutter_app/views/login/login_view.dart';
+import 'package:dw_flutter_app/screens/home/home_screen.dart';
+import 'package:dw_flutter_app/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -54,7 +54,7 @@ class App extends StatelessWidget {
           theme: _buildTheme(mainColor, Brightness.light),
           darkTheme: _buildTheme(mainColor, Brightness.dark),
           themeMode: isDarkModeEnabled ? ThemeMode.dark : ThemeMode.light,
-          home: isLoggedIn ? const HomeView() : const LoginView(),
+          home: isLoggedIn ? const HomeScreen() : const LoginScreen(),
         );
       },
     );

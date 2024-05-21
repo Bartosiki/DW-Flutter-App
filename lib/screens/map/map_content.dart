@@ -1,12 +1,12 @@
 import 'package:dw_flutter_app/components/screen_switch.dart';
 import 'package:dw_flutter_app/provider/images/map_images_provider.dart';
-import 'package:dw_flutter_app/views/map/map_container.dart';
+import 'package:dw_flutter_app/screens/map/map_container.dart';
 import 'package:flutter/material.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MapView extends ConsumerWidget {
-  const MapView({super.key});
+class MapContent extends ConsumerWidget {
+  const MapContent({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

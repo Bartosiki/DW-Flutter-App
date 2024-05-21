@@ -1,4 +1,4 @@
-import 'package:dw_flutter_app/views/map/map_view.dart';
+import 'package:dw_flutter_app/screens/map/map_content.dart';
 import 'package:flutter/material.dart';
 
 class MapScreen extends StatelessWidget {
@@ -8,7 +8,7 @@ class MapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: MapView(),
+        child: MapContent(),
       ),
     );
   }

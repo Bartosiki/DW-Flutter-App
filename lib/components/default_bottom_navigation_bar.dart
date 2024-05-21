@@ -1,4 +1,4 @@
-import 'package:dw_flutter_app/views/home/tab_screen.dart';
+import 'package:dw_flutter_app/screens/home/tab_screen.dart';
 import 'package:flutter/material.dart';
 
 class DefaultBottomNavigationBar extends StatefulWidget {
