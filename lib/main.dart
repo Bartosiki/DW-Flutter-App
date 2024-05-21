@@ -58,7 +58,15 @@ class App extends StatelessWidget {
           theme: _buildTheme(mainColor, Brightness.light),
           darkTheme: _buildTheme(mainColor, Brightness.dark),
           themeMode: isDarkModeEnabled ? ThemeMode.dark : ThemeMode.light,
-          home: isLoggedIn ? const HomeScreen() : const LoginScreen(),
+          home: isLoggedIn
+              ? configValue.when(
+                  data: (config) => config != null
+                      ? const HomeScreen()
+                      : const CircularProgressIndicator(),
+                  loading: () => const CircularProgressIndicator(),
+                  error: (err, stack) => const LoginScreen(),
+                )
+              : const HomeScreen(),
         );
       },
     );
