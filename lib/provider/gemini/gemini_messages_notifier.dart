@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:collection/collection.dart';
+import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/model/gemini_chat.dart';
 import 'package:dw_flutter_app/network/gemini_client.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -34,13 +35,27 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
     );
     addMessage(userMessage);
 
-    final previousUserMessage = wholeHistory.firstWhereOrNull(
-      (element) => element.author == user,
-    );
     final lastAssistantMessage = wholeHistory.firstWhereOrNull(
       (element) => element.author == assistant,
     );
+    final previousUserMessage = wholeHistory.firstWhereOrNull(
+      (element) => element.author == user,
+    );
+    final previousAssistantMessage = wholeHistory.firstWhereOrNull(
+      (element) =>
+          element.author == assistant && element != lastAssistantMessage,
+    );
 
+    final previousAssistantMessageChunk = previousAssistantMessage != null
+        ? GeminiChatChunk(
+            role: previousAssistantMessage.author == assistant
+                ? 'assistant'
+                : 'user',
+            parts: [
+              Part(text: (previousAssistantMessage as TextMessage).text),
+            ],
+          )
+        : null;
     final previousUserMessageChunk = previousUserMessage != null
         ? GeminiChatChunk(
             role: previousUserMessage.author == user ? 'user' : 'assistant',
@@ -61,6 +76,8 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
 
     final historyToSend = GeminiChat(
       history: [
+        if (previousAssistantMessageChunk != null)
+          previousAssistantMessageChunk,
         if (previousUserMessageChunk != null) previousUserMessageChunk,
         if (lastAssistantMessageChunk != null) lastAssistantMessageChunk,
         GeminiChatChunk(
@@ -93,12 +110,14 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
     final prefs = await SharedPreferences.getInstance();
     final encodedMessages = prefs.getString('chatHistory');
 
-    if (encodedMessages != null) {
+    if (encodedMessages != null && encodedMessages != '[]') {
       final decodedMessages = (jsonDecode(encodedMessages) as List)
           .map((x) => TextMessage.fromJson(x as Map<String, dynamic>))
           .toList();
 
       state = decodedMessages;
+    } else {
+      state = [_getWelcomeMessage()];
     }
   }
 
@@ -112,5 +131,15 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('chatHistory');
     state = [];
+    _loadChatHistory();
+  }
+
+  Message _getWelcomeMessage() {
+    return TextMessage(
+      author: assistant,
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      id: uuid.v4(),
+      text: Strings.assistantWelcomeMessage,
+    );
   }
 }

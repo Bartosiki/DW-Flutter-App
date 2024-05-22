@@ -71,4 +71,6 @@ class Strings {
   static const String patronsTitle = 'Patrons';
   static const String partnersTitle = 'Partners';
   static const String you = 'You';
+  static const String assistantWelcomeMessage =
+      'Hello! I am your EEIA Faculty Day assistant. How can I help you today? 🚀\nI can provide you with information about the event, help you with tasks, and answer your questions. Feel free to ask me anything!';
 }
