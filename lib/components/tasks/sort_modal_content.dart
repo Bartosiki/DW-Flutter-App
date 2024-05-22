@@ -46,7 +46,7 @@ class SortModalContent extends StatelessWidget {
                     isPointsSortingSelected: sortType == SortType.points,
                     onPointsPressed: onPointsPressed,
                     onNamePressed: onNamePressed,
-                  )
+                  ),
                 ],
               ),
             ),

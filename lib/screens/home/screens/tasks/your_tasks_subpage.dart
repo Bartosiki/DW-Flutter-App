@@ -115,11 +115,13 @@ class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
                   },
                 ),
                 const SizedBox(height: 8),
-                Expanded(child: TaskList(
-                  tasks: tasks,
-                  sortByPoints: _sortType == SortType.points,
-                  isAscending: _orderType == OrderType.ascending,
-                )),
+                Expanded(
+                  child: TaskList(
+                    tasks: tasks,
+                    sortByPoints: _sortType == SortType.points,
+                    isAscending: _orderType == OrderType.ascending,
+                  ),
+                ),
               ],
             ),
           ),

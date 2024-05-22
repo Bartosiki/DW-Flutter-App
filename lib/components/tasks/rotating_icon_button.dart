@@ -17,7 +17,7 @@ class RotatingIconButton extends StatefulWidget {
 class _RotatingIconButtonState extends State<RotatingIconButton> {
   void _rotateIcon() {
     setState(() {
-      widget.turns += 0.5;
+      widget.turns += 0.5 % 1;
     });
     widget.onPressed();
   }
