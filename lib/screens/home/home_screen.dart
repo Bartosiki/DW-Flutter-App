@@ -32,7 +32,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             onPressed: () {
               showProfileScreen(context);
             },
-          )
+          ),
         ],
       ),
       body: Center(

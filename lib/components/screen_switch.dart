@@ -9,12 +9,13 @@ class ScreenSwitch extends StatefulWidget {
       required this.rightScreen,
       required this.leftLabel,
       required this.rightLabel,
+      required this.leftIcon,
+      required this.rightIcon,
       this.onSwitch});
 
-  final Widget leftScreen;
-  final Widget rightScreen;
-  final String leftLabel;
-  final String rightLabel;
+  final Widget leftScreen, rightScreen;
+  final String leftLabel, rightLabel;
+  final Icon leftIcon, rightIcon;
   final void Function()? onSwitch;
 
   @override
@@ -62,10 +63,12 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
                   segments: <ButtonSegment<Option>>[
                     ButtonSegment<Option>(
                       value: Option.first,
+                      icon: widget.leftIcon,
                       label: Text(widget.leftLabel),
                     ),
                     ButtonSegment<Option>(
                       value: Option.second,
+                      icon: widget.rightIcon,
                       label: Text(widget.rightLabel),
                     ),
                   ],

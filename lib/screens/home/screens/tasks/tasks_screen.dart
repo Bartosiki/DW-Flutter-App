@@ -16,6 +16,8 @@ class TasksScreen extends ConsumerWidget {
       rightScreen: const StandingsSubpage(),
       leftLabel: Strings.tasks,
       rightLabel: Strings.standings,
+      leftIcon: const Icon(Icons.star),
+      rightIcon: const Icon(Icons.leaderboard),
       onSwitch: ref.read(tasksSubpageProvider.notifier).switchTasksSubpage,
     );
   }

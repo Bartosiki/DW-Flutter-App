@@ -6,25 +6,31 @@ class TaskCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.points,
+    required this.isDone,
   });
 
-  final String title;
-  final String subtitle;
+  final String title, subtitle;
   final int points;
+  final bool isDone;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: SizedBox(
         height: 80,
         child: Center(
           child: Card(
+            color: isDone
+                ? Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.1)
+                : null,
             child: ListTile(
               trailing: CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: isDone
+                    ? Theme.of(context).colorScheme.tertiary.withOpacity(0.4)
+                    : Theme.of(context).colorScheme.primary,
                 child: Text(
-                  "$points",
+                  points.toString(),
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onPrimary,
                     fontWeight: FontWeight.bold,
@@ -33,7 +39,14 @@ class TaskCard extends StatelessWidget {
               ),
               title: Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
+                  color: isDone
+                      ? Theme.of(context)
+                          .colorScheme
+                          .onSurfaceVariant
+                          .withOpacity(0.5)
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
+                  decoration: isDone ? TextDecoration.lineThrough : null,
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
@@ -42,7 +55,13 @@ class TaskCard extends StatelessWidget {
                 opacity: 0.6,
                 child: Text(
                   subtitle,
-                  style: const TextStyle(
+                  style: TextStyle(
+                    color: isDone
+                        ? Theme.of(context)
+                            .colorScheme
+                            .onSurfaceVariant
+                            .withOpacity(0.5)
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
                     fontWeight: FontWeight.normal,
                     fontSize: 14,
                   ),

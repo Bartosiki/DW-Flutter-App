@@ -71,4 +71,8 @@ class Strings {
   static const String patronsTitle = 'Patrons';
   static const String partnersTitle = 'Partners';
   static const String you = 'You';
+  static const String sortBy = 'Sort by';
+  static const String orderBy = 'Order by';
+  static const String points = 'Points';
+  static const String name = 'Name';
 }
