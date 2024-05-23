@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dw_flutter_app/network/authenticator.dart';
-import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/model/gemini_chat.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -15,9 +14,10 @@ class GeminiClient {
         _authenticator = const Authenticator(),
         super();
 
-  Future<String> generateAssistantResponse(GeminiChat chatHistory) async {
+  Future<String> generateAssistantResponse(
+      GeminiChat chatHistory, String assistantError) async {
     if (geminiEndpoint == null) {
-      return Strings.assistantError;
+      return assistantError;
     }
 
     try {
@@ -33,7 +33,7 @@ class GeminiClient {
 
       return geminiResponse.body;
     } catch (error) {
-      return Strings.assistantError;
+      return assistantError;
     }
   }
 }

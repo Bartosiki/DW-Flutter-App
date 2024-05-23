@@ -1,7 +1,11 @@
-import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/config/language_settings.dart';
+import 'package:dw_flutter_app/constants/strings_en.dart';
+import 'package:dw_flutter_app/constants/strings_pl.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class StandingsCard extends StatelessWidget {
+class StandingsCard extends ConsumerWidget {
   const StandingsCard({
     super.key,
     required this.rankIndex,
@@ -24,7 +28,12 @@ class StandingsCard extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedLanguage = ref.watch(languageProvider);
+    final strings = selectedLanguage == LanguageSettings.defaultLanguage
+        ? StringsEn.en
+        : StringsPl.pl;
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -37,7 +46,9 @@ class StandingsCard extends StatelessWidget {
         ],
       ),
       child: Card(
-        color: isCurrentUser ? Theme.of(context).colorScheme.secondaryContainer : null,
+        color: isCurrentUser
+            ? Theme.of(context).colorScheme.secondaryContainer
+            : null,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
           side: BorderSide(
@@ -54,7 +65,9 @@ class StandingsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                isCurrentUser ? '#$rankIndex  ${Strings.you}' : '#$rankIndex  $name',
+                isCurrentUser
+                    ? '#$rankIndex  ${strings.you}'
+                    : '#$rankIndex  $name',
                 style: TextStyle(
                   fontWeight: isCurrentUser ? FontWeight.bold : FontWeight.w500,
                   fontSize: 16,
@@ -69,9 +82,9 @@ class StandingsCard extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const Text(
-                    Strings.standingsCardPoints,
-                    style: TextStyle(
+                  Text(
+                    strings.standingsCardPoints,
+                    style: const TextStyle(
                       fontSize: 12,
                     ),
                   ),

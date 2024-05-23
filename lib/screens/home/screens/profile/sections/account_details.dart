@@ -1,17 +1,24 @@
 import 'package:dw_flutter_app/components/tasks/standings_info_card.dart';
-import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/config/language_settings.dart';
+import 'package:dw_flutter_app/constants/strings_en.dart';
+import 'package:dw_flutter_app/constants/strings_pl.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 List<Widget> buildProfileAccountDetails(BuildContext context, WidgetRef ref) {
   final userInfo = ref.watch(userInfoProvider);
+  final selectedLanguage = ref.watch(languageProvider);
+  final strings = selectedLanguage == LanguageSettings.defaultLanguage
+      ? StringsEn.en
+      : StringsPl.pl;
 
   final List<Widget> children = [
     Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Text(
-        '${Strings.welcome} ${userInfo.value?.displayName ?? ''}',
+        '${strings.welcome} ${userInfo.value?.displayName ?? ''}',
         style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -23,12 +30,12 @@ List<Widget> buildProfileAccountDetails(BuildContext context, WidgetRef ref) {
       children: [
         StandingsInfoCard(
           title: userInfo.value?.finishedTasks.length.toString() ?? '0',
-          subtitle: Strings.finishedTasks,
+          subtitle: strings.finishedTasks,
         ),
         const SizedBox(width: 24),
         StandingsInfoCard(
           title: userInfo.value?.gainedPoints.toString() ?? '0',
-          subtitle: Strings.gainedPoints,
+          subtitle: strings.gainedPoints,
         ),
       ],
     ),
@@ -63,7 +70,7 @@ List<Widget> buildProfileAccountDetails(BuildContext context, WidgetRef ref) {
                 vertical: 12,
               ),
               child: Text(
-                Strings.winner,
+                strings.winner,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,

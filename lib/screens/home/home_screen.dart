@@ -14,46 +14,51 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   int _selectedIndex = 0;
-  final List<TabScreen> _screens = [
-    for (final screen in TabScreen.values) screen,
-  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-        title: Text(
-          _screens[_selectedIndex].label,
-          style: const TextStyle(fontWeight: FontWeight.w600),
-        ),
-        actions: [
-          if (_selectedIndex == 4)
-            IconButton(
-              icon: const Icon(Icons.rotate_left),
-              onPressed: () {
-                ref.read(geminiMessagesProvider.notifier).clearChatHistory();
-              },
+    return Consumer(
+      builder: (context, ref, _) {
+        final screens = TabScreen.getScreens(ref);
+
+        return Scaffold(
+          appBar: AppBar(
+            forceMaterialTransparency: true,
+            title: Text(
+              screens[_selectedIndex].label,
+              style: const TextStyle(fontWeight: FontWeight.w600),
             ),
-          IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {
-              showProfileScreen(context);
+            actions: [
+              if (_selectedIndex == 4)
+                IconButton(
+                  icon: const Icon(Icons.rotate_left),
+                  onPressed: () {
+                    ref
+                        .read(geminiMessagesProvider.notifier)
+                        .clearChatHistory();
+                  },
+                ),
+              IconButton(
+                icon: const Icon(Icons.person),
+                onPressed: () {
+                  showProfileScreen(context);
+                },
+              ),
+            ],
+          ),
+          body: Center(
+            child: screens[_selectedIndex].screen,
+          ),
+          bottomNavigationBar: DefaultBottomNavigationBar(
+            selectedIndex: _selectedIndex,
+            onItemSelected: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
             },
           ),
-        ],
-      ),
-      body: Center(
-        child: _screens[_selectedIndex].screen,
-      ),
-      bottomNavigationBar: DefaultBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemSelected: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
+        );
+      },
     );
   }
 }

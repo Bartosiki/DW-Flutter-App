@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class Strings {
-  static const String appName = 'Dzień Wydziału EEIA';
+  static const String appName = 'EEIA Faculty Day';
   static const String signUpToTakePartInOurEvent =
       'Sign up to take part in our event!';
   static const String continueWithGoogle = 'Continue with Google';
@@ -55,7 +55,6 @@ class Strings {
       'This task has already been completed';
   static const String unknownErrorPleaseTryAgain =
       'Unknown error, please try again';
-  const Strings._();
   static const String assistantError =
       'There was an error. Please try again later.';
   static const String noMapImagesError = 'No map images found.';
@@ -77,4 +76,5 @@ class Strings {
   static const String name = 'Name';
   static const String assistantWelcomeMessage =
       'Hello! I am your EEIA Faculty Day assistant. How can I help you today? 🚀\nI can provide you with information about the event, help you with tasks, and answer your questions. Feel free to ask me anything!';
+  const Strings._();
 }

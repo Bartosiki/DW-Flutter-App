@@ -24,7 +24,8 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
     _saveChatHistory();
   }
 
-  Future<void> handleSendPressed(PartialText message) async {
+  Future<void> handleSendPressed(
+      PartialText message, String assistantError) async {
     final wholeHistory = state;
 
     final userMessage = TextMessage(
@@ -89,7 +90,8 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
       ],
     );
 
-    String response = await client.generateAssistantResponse(historyToSend);
+    String response =
+        await client.generateAssistantResponse(historyToSend, assistantError);
 
     final assistantMessage = TextMessage(
       author: assistant,

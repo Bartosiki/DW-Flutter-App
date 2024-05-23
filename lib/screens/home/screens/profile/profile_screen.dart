@@ -1,4 +1,7 @@
-import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/config/language_settings.dart';
+import 'package:dw_flutter_app/constants/strings_en.dart';
+import 'package:dw_flutter_app/constants/strings_pl.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:dw_flutter_app/screens/home/screens/profile/profile_element.dart';
 import 'package:dw_flutter_app/screens/home/screens/profile/sections/account_details.dart';
 import 'package:dw_flutter_app/screens/home/screens/profile/sections/account_settings.dart';
@@ -12,12 +15,17 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final selectedLanguage = ref.watch(languageProvider);
+    final strings = selectedLanguage == LanguageSettings.defaultLanguage
+        ? StringsEn.en
+        : StringsPl.pl;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text(
-          Strings.profile,
-          style: TextStyle(fontWeight: FontWeight.w600),
+        title: Text(
+          strings.profile,
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
         actions: [
           IconButton(
@@ -35,19 +43,19 @@ class ProfileScreen extends ConsumerWidget {
             child: Column(
               children: [
                 ProfileElement(
-                  title: Strings.accountDetailsTitle,
+                  title: strings.accountDetailsTitle,
                   children: buildProfileAccountDetails(context, ref),
                 ),
                 ProfileElement(
-                  title: Strings.settingsTitle,
+                  title: strings.settingsTitle,
                   children: buildProfileSettings(context, ref),
                 ),
                 ProfileElement(
-                  title: Strings.patronsTitle,
+                  title: strings.patronsTitle,
                   children: buildProfilePatrons(context, ref),
                 ),
                 ProfileElement(
-                  title: Strings.partnersTitle,
+                  title: strings.partnersTitle,
                   children: buildProfilePartners(context, ref),
                 ),
               ],
