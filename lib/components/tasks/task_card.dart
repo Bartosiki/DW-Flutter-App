@@ -17,9 +17,7 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: SizedBox(
-        height: 80,
-        child: Center(
+      child: Center(
           child: Card(
             color: isDone
                 ? Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.1)
@@ -70,7 +68,6 @@ class TaskCard extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }
