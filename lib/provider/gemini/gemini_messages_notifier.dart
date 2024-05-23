@@ -21,7 +21,8 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
     _saveChatHistory();
   }
 
-  Future<void> handleSendPressed(PartialText message) async {
+  Future<void> handleSendPressed(
+      PartialText message, String assistantError) async {
     final userMessage = TextMessage(
       author: user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
@@ -30,7 +31,8 @@ class MessagesNotifier extends StateNotifier<List<Message>> {
     );
     addMessage(userMessage);
 
-    String response = await client.generateAssistantResponse(message.text);
+    String response =
+        await client.generateAssistantResponse(message.text, assistantError);
 
     final assistantMessage = TextMessage(
       author: assistant,

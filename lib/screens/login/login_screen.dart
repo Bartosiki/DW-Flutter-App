@@ -1,6 +1,9 @@
 import 'package:dw_flutter_app/components/divider_with_margins.dart';
+import 'package:dw_flutter_app/config/language_settings.dart';
 import 'package:dw_flutter_app/constants/app_colors.dart';
-import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/constants/strings_en.dart';
+import 'package:dw_flutter_app/constants/strings_pl.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:dw_flutter_app/screens/login/login_button.dart';
 import 'package:dw_flutter_app/screens/login/login_screen_terms_agreement_widget.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +17,11 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final selectedLanguage = ref.watch(languageProvider);
+    final strings = selectedLanguage == LanguageSettings.defaultLanguage
+        ? StringsEn.en
+        : StringsPl.pl;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
@@ -38,7 +46,7 @@ class LoginScreen extends ConsumerWidget {
                       ),
                     ),
                     LoginButton(
-                      text: Strings.continueWithGoogle,
+                      text: strings.continueWithGoogle,
                       imagePath: "assets/images/google_logo.png",
                       onPressed: () {
                         ref.read(authStateProvider.notifier).loginWithGoogle();
@@ -46,7 +54,7 @@ class LoginScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 12.0),
                     LoginButton(
-                      text: Strings.continueWithApple,
+                      text: strings.continueWithApple,
                       imagePath: "assets/images/apple_logo.png",
                       onPressed: () {},
                     ),
@@ -63,7 +71,7 @@ class LoginScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              const Positioned(
+              Positioned(
                 top: 0,
                 left: 0,
                 right: 0,
@@ -72,16 +80,16 @@ class LoginScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Image(
+                    const Image(
                       image: AssetImage("assets/images/dw_logo_white.png"),
                       height: 100.0,
                     ),
-                    SizedBox(height: 26.0),
+                    const SizedBox(height: 26.0),
                     Padding(
-                      padding: EdgeInsets.only(right: 64.0),
+                      padding: const EdgeInsets.only(right: 64.0),
                       child: Text(
-                        Strings.signUpToTakePartInOurEvent,
-                        style: TextStyle(
+                        strings.signUpToTakePartInOurEvent,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 36.0,
                           fontWeight: FontWeight.w500,

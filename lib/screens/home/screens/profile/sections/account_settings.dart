@@ -1,7 +1,11 @@
-import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/config/language_settings.dart';
+import 'package:dw_flutter_app/constants/strings_en.dart';
+import 'package:dw_flutter_app/constants/strings_pl.dart';
 import 'package:dw_flutter_app/provider/auth/auth_state_provider.dart';
 import 'package:dw_flutter_app/provider/dark_mode/dark_mode_notifier.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
+import 'package:dw_flutter_app/screens/home/screens/profile/language_select.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -9,13 +13,17 @@ List<Widget> buildProfileSettings(BuildContext context, WidgetRef ref) {
   final userInfo = ref.watch(userInfoProvider);
   final darkModeState = ref.watch(darkModeProvider.notifier);
   final isDarkModeEnabled = ref.watch(darkModeProvider);
+  final selectedLanguage = ref.watch(languageProvider);
+  final strings = selectedLanguage == LanguageSettings.defaultLanguage
+      ? StringsEn.en
+      : StringsPl.pl;
 
   return [
     Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          Strings.darkMode,
+          strings.darkMode,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.w400,
@@ -33,7 +41,7 @@ List<Widget> buildProfileSettings(BuildContext context, WidgetRef ref) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          Strings.notifications,
+          strings.notifications,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.w400,
@@ -53,7 +61,20 @@ List<Widget> buildProfileSettings(BuildContext context, WidgetRef ref) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          Strings.logOut,
+          strings.selectedLanguage,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+              ),
+        ),
+        const LanguageSelect(),
+      ],
+    ),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          strings.logOut,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.w400,
