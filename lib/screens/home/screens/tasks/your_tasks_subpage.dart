@@ -1,18 +1,52 @@
 import 'package:dw_flutter_app/components/screen_description.dart';
+import 'package:dw_flutter_app/components/tasks/sort_modal_content.dart';
 import 'package:dw_flutter_app/components/tasks/task_list.dart';
 import 'package:dw_flutter_app/constants/paths.dart';
 import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/provider/tasks_provider.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
+import 'package:dw_flutter_app/screens/home/screens/tasks/sorting_enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class YourTasksSubpage extends ConsumerWidget {
+class YourTasksSubpage extends ConsumerStatefulWidget {
   const YourTasksSubpage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<YourTasksSubpage> createState() {
+    return _YourTasksSubpageState();
+  }
+}
+
+class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
+  var _sortType = SortType.points;
+  var _orderType = OrderType.ascending;
+
+  void _onPointsPressed() {
+    setState(() {
+      _sortType = SortType.points;
+    });
+  }
+
+  void _onNamePressed() {
+    setState(() {
+      _sortType = SortType.name;
+    });
+  }
+
+  void _onOrderPressed() {
+    setState(() {
+      if (_orderType == OrderType.ascending) {
+        _orderType = OrderType.descending;
+      } else {
+        _orderType = OrderType.ascending;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final userInfo = ref.watch(userInfoProvider);
     final tasks = ref.watch(tasksProvider);
 
@@ -31,18 +65,33 @@ class YourTasksSubpage extends ConsumerWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height: 8),
                 ScreenDescription(
                   description: Strings.taskScreenDescription,
-                  trailingIcon: SvgPicture.asset(
-                    Paths.sortIcon,
-                    colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.onBackground,
-                      BlendMode.srcIn,
+                  trailingIcon: IconButton(
+                    icon: SvgPicture.asset(
+                      Paths.sortIcon,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.onBackground,
+                        BlendMode.srcIn,
+                      ),
                     ),
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return SortModalContent(
+                            sortType: _sortType,
+                            orderType: _orderType,
+                            onPointsPressed: _onPointsPressed,
+                            onNamePressed: _onNamePressed,
+                            onOrderPressed: _onOrderPressed,
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
                 userInfo.when(
                   data: (user) {
                     return Text(
@@ -66,7 +115,13 @@ class YourTasksSubpage extends ConsumerWidget {
                   },
                 ),
                 const SizedBox(height: 8),
-                Expanded(child: TaskList(tasks: tasks)),
+                Expanded(
+                  child: TaskList(
+                    tasks: tasks,
+                    sortByPoints: _sortType == SortType.points,
+                    isAscending: _orderType == OrderType.ascending,
+                  ),
+                ),
               ],
             ),
           ),

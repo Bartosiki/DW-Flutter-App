@@ -26,6 +26,8 @@ class MapContent extends ConsumerWidget {
           rightScreen: MapContainer(
             image: Image.network(images[1]),
           ),
+          leftIcon: const Icon(Icons.arrow_downward),
+          rightIcon: const Icon(Icons.arrow_upward),
         );
       },
       error: (error, stackTrace) =>

@@ -7,6 +7,7 @@ class Task {
   final int points;
   final String qrCode;
   final String imageSrc;
+  bool isDone = false;
 
   Task({
     required this.taskId,
@@ -15,6 +16,7 @@ class Task {
     required this.points,
     required this.qrCode,
     required this.imageSrc,
+    this.isDone = false,
   });
 
   factory Task.fromJson(Map<String, dynamic> json) {
