@@ -75,4 +75,6 @@ class Strings {
   static const String orderBy = 'Order by';
   static const String points = 'Points';
   static const String name = 'Name';
+  static const String assistantWelcomeMessage =
+      'Hello! I am your EEIA Faculty Day assistant. How can I help you today? 🚀\nI can provide you with information about the event, help you with tasks, and answer your questions. Feel free to ask me anything!';
 }

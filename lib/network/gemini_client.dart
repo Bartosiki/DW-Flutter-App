@@ -15,23 +15,12 @@ class GeminiClient {
         _authenticator = const Authenticator(),
         super();
 
-  Future<String> generateAssistantResponse(String userText) async {
+  Future<String> generateAssistantResponse(GeminiChat chatHistory) async {
     if (geminiEndpoint == null) {
       return Strings.assistantError;
     }
 
     try {
-      final GeminiChat chatHistory = GeminiChat(
-        history: [
-          GeminiChatChunk(
-            role: 'user',
-            parts: [
-              Part(text: userText),
-            ],
-          ),
-        ],
-      );
-
       final userIdToken = await _authenticator.userIdToken;
 
       final geminiResponse = await http.post(
