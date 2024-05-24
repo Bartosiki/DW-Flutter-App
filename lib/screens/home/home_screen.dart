@@ -21,52 +21,48 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, _) {
-        final screens = TabScreen.getScreens(ref);
-        final selectedLanguage = ref.watch(languageProvider);
-        final strings = selectedLanguage == LanguageSettings.defaultLanguage
-            ? StringsEn.en
-            : StringsPl.pl;
+    final screens = TabScreen.getScreens(ref);
+    final selectedLanguage = ref.watch(languageProvider);
+    final strings = selectedLanguage == LanguageSettings.defaultLanguage
+        ? StringsEn.en
+        : StringsPl.pl;
 
-        return Scaffold(
-          appBar: AppBar(
-            forceMaterialTransparency: true,
-            title: Text(
-              screens[_selectedIndex].label,
-              style: const TextStyle(fontWeight: FontWeight.w600),
+    return Scaffold(
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+        title: Text(
+          screens[_selectedIndex].label,
+          style: const TextStyle(fontWeight: FontWeight.w600),
+        ),
+        actions: [
+          if (_selectedIndex == 4)
+            IconButton(
+              icon: const Icon(Icons.rotate_left),
+              onPressed: () {
+                ref
+                    .read(geminiMessagesProvider.notifier)
+                    .clearChatHistory(strings.assistantWelcomeMessage);
+              },
             ),
-            actions: [
-              if (_selectedIndex == 4)
-                IconButton(
-                  icon: const Icon(Icons.rotate_left),
-                  onPressed: () {
-                    ref
-                        .read(geminiMessagesProvider.notifier)
-                        .clearChatHistory(strings.assistantWelcomeMessage);
-                  },
-                ),
-              IconButton(
-                icon: const Icon(Icons.person),
-                onPressed: () {
-                  showProfileScreen(context);
-                },
-              ),
-            ],
-          ),
-          body: Center(
-            child: screens[_selectedIndex].screen,
-          ),
-          bottomNavigationBar: DefaultBottomNavigationBar(
-            selectedIndex: _selectedIndex,
-            onItemSelected: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              showProfileScreen(context);
             },
           ),
-        );
-      },
+        ],
+      ),
+      body: Center(
+        child: screens[_selectedIndex].screen,
+      ),
+      bottomNavigationBar: DefaultBottomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemSelected: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
     );
   }
 }
