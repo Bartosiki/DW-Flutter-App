@@ -1,11 +1,8 @@
 import 'package:dw_flutter_app/components/screen_description.dart';
 import 'package:dw_flutter_app/components/tasks/sort_modal_content.dart';
 import 'package:dw_flutter_app/components/tasks/task_list.dart';
-import 'package:dw_flutter_app/config/language_settings.dart';
 import 'package:dw_flutter_app/constants/paths.dart';
-import 'package:dw_flutter_app/constants/strings_en.dart';
-import 'package:dw_flutter_app/constants/strings_pl.dart';
-import 'package:dw_flutter_app/provider/language/language_notifier.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/provider/tasks_provider.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:dw_flutter_app/screens/home/screens/tasks/sorting_enums.dart';
@@ -53,10 +50,7 @@ class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
   Widget build(BuildContext context) {
     final userInfo = ref.watch(userInfoProvider);
     final tasks = ref.watch(tasksProvider);
-    final selectedLanguage = ref.watch(languageProvider);
-    final strings = selectedLanguage == LanguageSettings.defaultLanguage
-        ? StringsEn.en
-        : StringsPl.pl;
+    final strings = ref.watch(selectedStringsProvider);
 
     return tasks.when(
       data: (tasks) {

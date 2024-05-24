@@ -1,8 +1,5 @@
-import 'package:dw_flutter_app/config/language_settings.dart';
 import 'package:dw_flutter_app/constants/app_colors.dart';
-import 'package:dw_flutter_app/constants/strings_en.dart';
-import 'package:dw_flutter_app/constants/strings_pl.dart';
-import 'package:dw_flutter_app/provider/language/language_notifier.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,10 +11,7 @@ class LoginScreenTermsAgreementWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedLanguage = ref.watch(languageProvider);
-    final strings = selectedLanguage == LanguageSettings.defaultLanguage
-        ? StringsEn.en
-        : StringsPl.pl;
+    final strings = ref.watch(selectedStringsProvider);
 
     return RichTextWidget(
       styleForAll: TextStyle(

@@ -1,7 +1,4 @@
-import 'package:dw_flutter_app/config/language_settings.dart';
-import 'package:dw_flutter_app/constants/strings_en.dart';
-import 'package:dw_flutter_app/constants/strings_pl.dart';
-import 'package:dw_flutter_app/provider/language/language_notifier.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/screens/home/screens/calendar_screen.dart';
 import 'package:dw_flutter_app/screens/home/screens/map_screen.dart';
 import 'package:dw_flutter_app/screens/home/screens/qr_scanner_screen.dart';
@@ -34,10 +31,7 @@ class TabScreen {
   }
 
   static List<TabScreen> getScreens(WidgetRef ref) {
-    final selectedLanguage = ref.watch(languageProvider);
-    final strings = selectedLanguage == LanguageSettings.defaultLanguage
-        ? StringsEn.en
-        : StringsPl.pl;
+    final strings = ref.watch(selectedStringsProvider);
 
     return [
       TabScreen(

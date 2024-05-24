@@ -1,18 +1,12 @@
 import 'package:dw_flutter_app/components/tasks/standings_info_card.dart';
-import 'package:dw_flutter_app/config/language_settings.dart';
-import 'package:dw_flutter_app/constants/strings_en.dart';
-import 'package:dw_flutter_app/constants/strings_pl.dart';
-import 'package:dw_flutter_app/provider/language/language_notifier.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 List<Widget> buildProfileAccountDetails(BuildContext context, WidgetRef ref) {
   final userInfo = ref.watch(userInfoProvider);
-  final selectedLanguage = ref.watch(languageProvider);
-  final strings = selectedLanguage == LanguageSettings.defaultLanguage
-      ? StringsEn.en
-      : StringsPl.pl;
+  final strings = ref.watch(selectedStringsProvider);
 
   final List<Widget> children = [
     Padding(

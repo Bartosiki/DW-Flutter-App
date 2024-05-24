@@ -1,9 +1,6 @@
-import 'package:dw_flutter_app/config/language_settings.dart';
-import 'package:dw_flutter_app/constants/strings_en.dart';
-import 'package:dw_flutter_app/constants/strings_pl.dart';
 import 'package:dw_flutter_app/provider/auth/auth_state_provider.dart';
 import 'package:dw_flutter_app/provider/dark_mode/dark_mode_notifier.dart';
-import 'package:dw_flutter_app/provider/language/language_notifier.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:dw_flutter_app/screens/home/screens/profile/language_select.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +10,7 @@ List<Widget> buildProfileSettings(BuildContext context, WidgetRef ref) {
   final userInfo = ref.watch(userInfoProvider);
   final darkModeState = ref.watch(darkModeProvider.notifier);
   final isDarkModeEnabled = ref.watch(darkModeProvider);
-  final selectedLanguage = ref.watch(languageProvider);
-  final strings = selectedLanguage == LanguageSettings.defaultLanguage
-      ? StringsEn.en
-      : StringsPl.pl;
+  final strings = ref.watch(selectedStringsProvider);
 
   return [
     Row(

@@ -1,9 +1,6 @@
 import 'package:dw_flutter_app/components/calendar/event_list.dart';
-import 'package:dw_flutter_app/config/language_settings.dart';
-import 'package:dw_flutter_app/constants/strings_en.dart';
-import 'package:dw_flutter_app/constants/strings_pl.dart';
 import 'package:dw_flutter_app/extensions/log.dart';
-import 'package:dw_flutter_app/provider/language/language_notifier.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../components/screen_description.dart';
@@ -15,10 +12,7 @@ class CalendarScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final events = ref.watch(eventsProvider);
-    final selectedLanguage = ref.watch(languageProvider);
-    final strings = selectedLanguage == LanguageSettings.defaultLanguage
-        ? StringsEn.en
-        : StringsPl.pl;
+    final strings = ref.watch(selectedStringsProvider);
 
     return events.when(
       data: (events) {

@@ -1,11 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:app_settings/app_settings.dart';
-import 'package:dw_flutter_app/config/language_settings.dart';
-import 'package:dw_flutter_app/constants/strings_en.dart';
-import 'package:dw_flutter_app/constants/strings_pl.dart';
 import 'package:dw_flutter_app/extensions/log.dart';
-import 'package:dw_flutter_app/provider/language/language_notifier.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -80,10 +77,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
 
   Widget _onError(
       BuildContext context, MobileScannerException error, Widget? child) {
-    final selectedLanguage = ref.watch(languageProvider);
-    final strings = selectedLanguage == LanguageSettings.defaultLanguage
-        ? StringsEn.en
-        : StringsPl.pl;
+    final strings = ref.watch(selectedStringsProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scaffoldMessengerKey.currentState?.showSnackBar(
@@ -193,10 +187,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
     UserInfoStorage userInfoStorage,
   ) async {
     final userId = ref.read(userIdProvider);
-    final selectedLanguage = ref.watch(languageProvider);
-    final strings = selectedLanguage == LanguageSettings.defaultLanguage
-        ? StringsEn.en
-        : StringsPl.pl;
+    final strings = ref.watch(selectedStringsProvider);
 
     if (userId != null) {
       await allTasks.maybeWhen(
