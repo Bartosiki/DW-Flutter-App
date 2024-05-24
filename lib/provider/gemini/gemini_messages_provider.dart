@@ -9,9 +9,9 @@ final userProvider = Provider((_) => const User(id: '1'));
 final assistantProvider = Provider((_) => const User(id: '2'));
 final geminiClientProvider = Provider((_) => GeminiClient());
 
-final messagesProvider =
-    StateNotifierProvider.autoDispose<MessagesNotifier, List<Message>>(
-  (ref) => MessagesNotifier(
+final geminiMessagesProvider =
+    StateNotifierProvider.autoDispose<GeminiMessagesNotifier, List<Message>>(
+  (ref) => GeminiMessagesNotifier(
     ref.watch(uuidProvider),
     ref.watch(userProvider),
     ref.watch(assistantProvider),

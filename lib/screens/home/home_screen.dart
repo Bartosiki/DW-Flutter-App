@@ -1,4 +1,5 @@
 import 'package:dw_flutter_app/components/default_bottom_navigation_bar.dart';
+import 'package:dw_flutter_app/provider/gemini/gemini_messages_provider.dart';
 import 'package:dw_flutter_app/screens/home/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,12 +28,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           style: const TextStyle(fontWeight: FontWeight.w600),
         ),
         actions: [
+          if (_selectedIndex == 4)
+            IconButton(
+              icon: const Icon(Icons.rotate_left),
+              onPressed: () {
+                ref.read(geminiMessagesProvider.notifier).clearChatHistory();
+              },
+            ),
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () {
               showProfileScreen(context);
             },
-          )
+          ),
         ],
       ),
       body: Center(
