@@ -71,7 +71,7 @@ class StandingsSubpage extends ConsumerWidget {
                 }
                 return Expanded(
                   child: ListView.builder(
-                    clipBehavior: Clip.none,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     itemCount: topPlayers.length + 1,
                     itemBuilder: (context, index) {
                       if (index == topPlayers.length) {

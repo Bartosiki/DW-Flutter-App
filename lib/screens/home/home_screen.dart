@@ -1,5 +1,9 @@
 import 'package:dw_flutter_app/components/default_bottom_navigation_bar.dart';
+import 'package:dw_flutter_app/config/language_settings.dart';
+import 'package:dw_flutter_app/constants/strings_en.dart';
+import 'package:dw_flutter_app/constants/strings_pl.dart';
 import 'package:dw_flutter_app/provider/gemini/gemini_messages_provider.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:dw_flutter_app/screens/home/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,6 +24,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Consumer(
       builder: (context, ref, _) {
         final screens = TabScreen.getScreens(ref);
+        final selectedLanguage = ref.watch(languageProvider);
+        final strings = selectedLanguage == LanguageSettings.defaultLanguage
+            ? StringsEn.en
+            : StringsPl.pl;
 
         return Scaffold(
           appBar: AppBar(
@@ -35,7 +43,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   onPressed: () {
                     ref
                         .read(geminiMessagesProvider.notifier)
-                        .clearChatHistory();
+                        .clearChatHistory(strings.assistantWelcomeMessage);
                   },
                 ),
               IconButton(

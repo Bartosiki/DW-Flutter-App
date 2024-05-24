@@ -1,8 +1,8 @@
-import 'package:dw_flutter_app/constants/strings1.dart';
+import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
-class StringsPl extends Strings1 {
+class StringsPl extends Strings {
   static const StringsPl pl = StringsPl._();
 
   const StringsPl._()
@@ -69,5 +69,11 @@ class StringsPl extends Strings1 {
           partnersTitle: 'Partnerzy',
           you: 'Ty',
           selectedLanguage: 'Język',
+          sortBy: 'Sortuj według',
+          orderBy: 'Sortuj po',
+          points: 'Punkty',
+          name: 'Nazwa',
+          assistantWelcomeMessage:
+              'Cześć! Jestem asystentem EEIA Faculty Day. Jak mogę Ci dzisiaj pomóc? 🚀\nMogę udzielić informacji na temat wydarzenia, pomóc w zadaniach i odpowiedzieć na pytania. Zapraszam do zadawania mi pytań!',
         );
 }

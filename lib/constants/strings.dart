@@ -2,79 +2,121 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class Strings {
-  static const String appName = 'EEIA Faculty Day';
-  static const String signUpToTakePartInOurEvent =
-      'Sign up to take part in our event!';
-  static const String continueWithGoogle = 'Continue with Google';
-  static const String continueWithApple = 'Continue with Apple';
-  static const String bySigningUpYouAgreeToOur =
-      'By signing up you agree to our ';
-  static const String termsOfService = 'Terms of Service ';
-  static const String andConfirmThatYouHaveReadOur =
-      'and confirm that you have read our ';
-  static const String privacyPolicy = 'Privacy Policy ';
-  static const String toLearnMoreAboutHowWeUseYourData =
-      'to learn more about how we use your data.';
-  static const String calendar = 'Calendar';
-  static const String tasks = 'Tasks';
-  static const String scanner = 'Scanner';
-  static const String map = 'Map';
-  static const String assistant = 'Assistant';
-  static const String profile = 'Profile';
-  static const String yourTasks = 'Your tasks';
-  static const String standings = 'Standings';
-  static const String error = 'Error';
-  static const String empty = 'Empty';
-  static const String standingsCardPoints = 'Points';
-  static const String darkMode = 'Dark mode';
-  static const String logOut = 'Log out';
-  static const String notifications = 'Notifications';
-  static String youHaveXPoints(int points) {
-    return 'You have $points points';
-  }
+  final String appName;
+  final String signUpToTakePartInOurEvent;
+  final String continueWithGoogle;
+  final String continueWithApple;
+  final String bySigningUpYouAgreeToOur;
+  final String termsOfService;
+  final String andConfirmThatYouHaveReadOur;
+  final String privacyPolicy;
+  final String toLearnMoreAboutHowWeUseYourData;
+  final String calendar;
+  final String tasks;
+  final String scanner;
+  final String map;
+  final String assistant;
+  final String profile;
+  final String yourTasks;
+  final String standings;
+  final String error;
+  final String empty;
+  final String standingsCardPoints;
+  final String darkMode;
+  final String logOut;
+  final String notifications;
+  final String youHaveXPoints;
+  final String register;
+  final String eventScreenDescription;
+  final String taskScreenDescription;
+  final String firstFloor;
+  final String groundFloor;
+  final String standingsScreenDescription;
+  final String cameraPermissionWasDenied;
+  final String openSettings;
+  final String taskFinishedSuccessfullyWithPoints;
+  final String errorPleaseLogOutAndTryAgain;
+  final String thisQrCodeIsNotValidPleaseTryAgain;
+  final String thisTaskHasAlreadyBeenCompleted;
+  final String unknownErrorPleaseTryAgain;
+  final String assistantError;
+  final String noMapImagesError;
+  final String errorLoadingMapImages;
+  final String settingsTitle;
+  final String accountDetailsTitle;
+  final String timeLeft;
+  final String yourPlace;
+  final String finishedTasks;
+  final String gainedPoints;
+  final String welcome;
+  final String winner;
+  final String patronsTitle;
+  final String partnersTitle;
+  final String you;
+  final String selectedLanguage;
+  final String sortBy;
+  final String orderBy;
+  final String points;
+  final String name;
+  final String assistantWelcomeMessage;
 
-  static const String register = 'Register';
-  static const String eventScreenDescription =
-      'Task screen description Task screen description Task screen description';
-  static const String taskScreenDescription =
-      'Task screen description Task screen description Task screen description';
-  static const String firstFloor = 'First Floor';
-  static const String groundFloor = 'Ground Floor';
-  static const String standingsScreenDescription =
-      'The person who scores the highest amount of points wins. In case of ex aequo the person who finished faster wins';
-  static const String cameraPermissionWasDenied =
-      'Camera permission was denied, please enable it in app settings to scan QR codes';
-  static const String openSettings = 'Open settings';
-  static const String taskFinishedSuccessfullyWithPoints =
-      'Task "%s" finished successfully, you have earned %d points';
-  static const String errorPleaseLogOutAndTryAgain =
-      'Error, please log out and try again';
-  static const String thisQrCodeIsNotValidPleaseTryAgain =
-      'This QR code is not valid, please try again';
-  static const String thisTaskHasAlreadyBeenCompleted =
-      'This task has already been completed';
-  static const String unknownErrorPleaseTryAgain =
-      'Unknown error, please try again';
-  static const String assistantError =
-      'There was an error. Please try again later.';
-  static const String noMapImagesError = 'No map images found.';
-  static const String errorLoadingMapImages = 'Error loading map images';
-  static const String settingsTitle = 'Settings';
-  static const String accountDetailsTitle = 'Account details';
-  static const String timeLeft = 'TIME LEFT';
-  static const String yourPlace = 'YOUR PLACE';
-  static const String finishedTasks = 'Finished tasks';
-  static const String gainedPoints = 'Gained points';
-  static const String welcome = 'Welcome';
-  static const String winner = 'Congratulations!\n You are the winner!';
-  static const String patronsTitle = 'Patrons';
-  static const String partnersTitle = 'Partners';
-  static const String you = 'You';
-  static const String sortBy = 'Sort by';
-  static const String orderBy = 'Order by';
-  static const String points = 'Points';
-  static const String name = 'Name';
-  static const String assistantWelcomeMessage =
-      'Hello! I am your EEIA Faculty Day assistant. How can I help you today? 🚀\nI can provide you with information about the event, help you with tasks, and answer your questions. Feel free to ask me anything!';
-  const Strings._();
+  const Strings({
+    required this.appName,
+    required this.signUpToTakePartInOurEvent,
+    required this.continueWithGoogle,
+    required this.continueWithApple,
+    required this.bySigningUpYouAgreeToOur,
+    required this.termsOfService,
+    required this.andConfirmThatYouHaveReadOur,
+    required this.privacyPolicy,
+    required this.toLearnMoreAboutHowWeUseYourData,
+    required this.calendar,
+    required this.tasks,
+    required this.scanner,
+    required this.map,
+    required this.assistant,
+    required this.profile,
+    required this.yourTasks,
+    required this.standings,
+    required this.error,
+    required this.empty,
+    required this.standingsCardPoints,
+    required this.darkMode,
+    required this.logOut,
+    required this.notifications,
+    required this.youHaveXPoints,
+    required this.register,
+    required this.eventScreenDescription,
+    required this.taskScreenDescription,
+    required this.firstFloor,
+    required this.groundFloor,
+    required this.standingsScreenDescription,
+    required this.cameraPermissionWasDenied,
+    required this.openSettings,
+    required this.taskFinishedSuccessfullyWithPoints,
+    required this.errorPleaseLogOutAndTryAgain,
+    required this.thisQrCodeIsNotValidPleaseTryAgain,
+    required this.thisTaskHasAlreadyBeenCompleted,
+    required this.unknownErrorPleaseTryAgain,
+    required this.assistantError,
+    required this.noMapImagesError,
+    required this.errorLoadingMapImages,
+    required this.settingsTitle,
+    required this.accountDetailsTitle,
+    required this.timeLeft,
+    required this.yourPlace,
+    required this.finishedTasks,
+    required this.gainedPoints,
+    required this.welcome,
+    required this.winner,
+    required this.patronsTitle,
+    required this.partnersTitle,
+    required this.you,
+    required this.selectedLanguage,
+    required this.sortBy,
+    required this.orderBy,
+    required this.points,
+    required this.name,
+    required this.assistantWelcomeMessage,
+  });
 }

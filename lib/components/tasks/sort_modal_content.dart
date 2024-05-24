@@ -1,11 +1,15 @@
 import 'package:dw_flutter_app/components/tasks/rotating_icon_button.dart';
 import 'package:dw_flutter_app/components/tasks/sort_toggle_button.dart';
-import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/config/language_settings.dart';
+import 'package:dw_flutter_app/constants/strings_en.dart';
+import 'package:dw_flutter_app/constants/strings_pl.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:dw_flutter_app/screens/home/screens/tasks/sorting_enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SortModalContent extends StatelessWidget {
+class SortModalContent extends ConsumerWidget {
   const SortModalContent({
     super.key,
     required this.sortType,
@@ -20,7 +24,12 @@ class SortModalContent extends StatelessWidget {
   final void Function() onPointsPressed, onNamePressed, onOrderPressed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedLanguage = ref.watch(languageProvider);
+    final strings = selectedLanguage == LanguageSettings.defaultLanguage
+        ? StringsEn.en
+        : StringsPl.pl;
+
     return SizedBox(
       height: 150,
       child: Padding(
@@ -34,9 +43,9 @@ class SortModalContent extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    Strings.sortBy,
-                    style: TextStyle(
+                  Text(
+                    strings.sortBy,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -55,9 +64,9 @@ class SortModalContent extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    Strings.orderBy,
-                    style: TextStyle(
+                  Text(
+                    strings.orderBy,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),

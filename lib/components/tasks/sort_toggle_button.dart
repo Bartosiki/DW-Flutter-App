@@ -1,5 +1,9 @@
-import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/config/language_settings.dart';
+import 'package:dw_flutter_app/constants/strings_en.dart';
+import 'package:dw_flutter_app/constants/strings_pl.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SortToggleButton extends StatefulWidget {
   SortToggleButton({
@@ -25,52 +29,64 @@ class _SortToggleButtonState extends State<SortToggleButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ToggleButtons(
-      borderRadius: BorderRadius.circular(16),
-      isSelected: [widget.isPointsSortingSelected, !widget.isPointsSortingSelected],
-      onPressed: (index) {
-        if (index == 0) {
-          widget.onPointsPressed();
-        } else {
-          widget.onNamePressed();
-        }
-        _toggleSort();
+    return Consumer(
+      builder: (context, ref, _) {
+        final selectedLanguage = ref.watch(languageProvider);
+        final strings = selectedLanguage == LanguageSettings.defaultLanguage
+            ? StringsEn.en
+            : StringsPl.pl;
+
+        return ToggleButtons(
+          borderRadius: BorderRadius.circular(16),
+          isSelected: [
+            widget.isPointsSortingSelected,
+            !widget.isPointsSortingSelected
+          ],
+          onPressed: (index) {
+            if (index == 0) {
+              widget.onPointsPressed();
+            } else {
+              widget.onNamePressed();
+            }
+            _toggleSort();
+          },
+          children: [
+            SizedBox(
+              width: 100,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      size: 16,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(strings.points),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 100,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.sort_by_alpha_rounded,
+                      size: 16,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(strings.name),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
       },
-      children: const [
-        SizedBox(
-          width: 100,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.star,
-                  size: 16,
-                ),
-                SizedBox(width: 6),
-                Text(Strings.points),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 100,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.sort_by_alpha_rounded,
-                  size: 16,
-                ),
-                SizedBox(width: 6),
-                Text(Strings.name),
-              ],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
