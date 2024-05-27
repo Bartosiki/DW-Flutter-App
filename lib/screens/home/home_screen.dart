@@ -1,5 +1,6 @@
 import 'package:dw_flutter_app/components/default_bottom_navigation_bar.dart';
 import 'package:dw_flutter_app/provider/gemini/gemini_messages_provider.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/screens/home/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,17 +15,17 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   int _selectedIndex = 0;
-  final List<TabScreen> _screens = [
-    for (final screen in TabScreen.values) screen,
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final screens = TabScreen.getScreens(ref);
+    final strings = ref.watch(selectedStringsProvider);
+
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text(
-          _screens[_selectedIndex].label,
+          screens[_selectedIndex].label,
           style: const TextStyle(fontWeight: FontWeight.w600),
         ),
         actions: [
@@ -32,7 +33,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             IconButton(
               icon: const Icon(Icons.rotate_left),
               onPressed: () {
-                ref.read(geminiMessagesProvider.notifier).clearChatHistory();
+                ref
+                    .read(geminiMessagesProvider.notifier)
+                    .clearChatHistory(strings.assistantWelcomeMessage);
               },
             ),
           IconButton(
@@ -44,7 +47,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ],
       ),
       body: Center(
-        child: _screens[_selectedIndex].screen,
+        child: screens[_selectedIndex].screen,
       ),
       bottomNavigationBar: DefaultBottomNavigationBar(
         selectedIndex: _selectedIndex,

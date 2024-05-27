@@ -11,7 +11,7 @@ class Event {
   final DateTime timeStart;
   final DateTime timeEnd;
   final String partner;
-  final String imageSrc;
+  final String category;
 
   const Event({
     required this.title,
@@ -21,7 +21,7 @@ class Event {
     required this.timeStart,
     required this.timeEnd,
     required this.partner,
-    required this.imageSrc,
+    required this.category,
   });
 
   factory Event.fromJson(Map<String, dynamic> json) {
@@ -33,7 +33,7 @@ class Event {
       timeStart: (json[FirestoreEventsFields.timeStart] as Timestamp).toDate(),
       timeEnd: (json[FirestoreEventsFields.timeEnd] as Timestamp).toDate(),
       partner: json[FirestoreEventsFields.partner],
-      imageSrc: json[FirestoreEventsFields.imageSrc],
+      category: json[FirestoreEventsFields.category],
     );
   }
 
@@ -49,7 +49,7 @@ class Event {
             timeStart == other.timeStart &&
             timeEnd == other.timeEnd &&
             partner == other.partner &&
-            imageSrc == other.imageSrc;
+            category == other.category;
   }
 
   @override
@@ -62,7 +62,7 @@ class Event {
           timeStart,
           timeEnd,
           partner,
-          imageSrc,
+          category,
         ],
       );
 }

@@ -1,10 +1,14 @@
 import 'package:dw_flutter_app/components/calendar/event_list.dart';
 import 'package:dw_flutter_app/extensions/log.dart';
+import 'package:dw_flutter_app/provider/contest_time_provider.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
+import 'package:dw_flutter_app/utility/string_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../components/screen_description.dart';
-import '../../../constants/strings.dart';
 import '../../../provider/events_provider.dart';
+import 'package:sprintf/sprintf.dart';
 
 class CalendarScreen extends ConsumerWidget {
   const CalendarScreen({super.key});
@@ -12,12 +16,16 @@ class CalendarScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final events = ref.watch(eventsProvider);
+    final strings = ref.watch(selectedStringsProvider);
+    final contestTime = ref.watch(contestTimeProvider);
+    final languageCode = ref.watch(languageProvider);
+
     return events.when(
       data: (events) {
         if (events.isEmpty) {
-          return const Center(
+          return Center(
             child: Text(
-              Strings.empty,
+              strings.empty,
             ),
           );
         }
@@ -26,7 +34,7 @@ class CalendarScreen extends ConsumerWidget {
             onPressed: () {
               'Add event'.log();
             },
-            label: const Text(Strings.register),
+            label: Text(strings.register),
             icon: const Icon(Icons.edit_outlined),
           ),
           body: Padding(
@@ -35,8 +43,14 @@ class CalendarScreen extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: 16),
-                const ScreenDescription(
-                  description: Strings.eventScreenDescription,
+                ScreenDescription(
+                  description: sprintf(strings.eventScreenDescription, [
+                    formatDate(
+                        contestTime.value != null
+                            ? (contestTime.value as DateTime)
+                            : DateTime.now(),
+                        languageCode)
+                  ]),
                 ),
                 const SizedBox(height: 16),
                 Expanded(
@@ -53,9 +67,9 @@ class CalendarScreen extends ConsumerWidget {
         child: CircularProgressIndicator(),
       ),
       error: (error, stackTrace) {
-        return const Center(
+        return Center(
           child: Text(
-            Strings.error,
+            strings.error,
           ),
         );
       },

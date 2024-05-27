@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:math';
 import 'package:app_settings/app_settings.dart';
 import 'package:dw_flutter_app/extensions/log.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:sprintf/sprintf.dart';
 import '../../../provider/auth/user_id_provider.dart';
-import '../../../constants/strings.dart';
 import '../../../data/user_info_storage.dart';
 import '../../../exceptions/task_already_finished.dart';
 import '../../../exceptions/task_not_found.dart';
@@ -77,12 +77,14 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
 
   Widget _onError(
       BuildContext context, MobileScannerException error, Widget? child) {
+    final strings = ref.watch(selectedStringsProvider);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBar(
-          content: const Text(
-            Strings.cameraPermissionWasDenied,
-            style: TextStyle(
+          content: Text(
+            strings.cameraPermissionWasDenied,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 16.0,
               fontWeight: FontWeight.w600,
@@ -90,7 +92,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
           ),
           backgroundColor: Colors.red,
           action: SnackBarAction(
-            label: Strings.openSettings,
+            label: strings.openSettings,
             textColor: Colors.black,
             backgroundColor: Colors.white,
             onPressed: () {
@@ -185,6 +187,8 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
     UserInfoStorage userInfoStorage,
   ) async {
     final userId = ref.read(userIdProvider);
+    final strings = ref.watch(selectedStringsProvider);
+
     if (userId != null) {
       await allTasks.maybeWhen(
         data: (tasks) async {
@@ -198,7 +202,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
               SnackbarHelper.showSimpleSnackbar(
                 _scaffoldMessengerKey,
                 sprintf(
-                  Strings.taskFinishedSuccessfullyWithPoints,
+                  strings.taskFinishedSuccessfullyWithPoints,
                   [finishedTask.title, finishedTask.points],
                 ),
                 Colors.green,
@@ -209,7 +213,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
             if (context.mounted) {
               SnackbarHelper.showSimpleSnackbar(
                 _scaffoldMessengerKey,
-                Strings.errorPleaseLogOutAndTryAgain,
+                strings.errorPleaseLogOutAndTryAgain,
                 Colors.red,
               );
             }
@@ -218,7 +222,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
             if (context.mounted) {
               SnackbarHelper.showSimpleSnackbar(
                 _scaffoldMessengerKey,
-                Strings.thisQrCodeIsNotValidPleaseTryAgain,
+                strings.thisQrCodeIsNotValidPleaseTryAgain,
                 Colors.red,
               );
             }
@@ -227,7 +231,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
             if (context.mounted) {
               SnackbarHelper.showSimpleSnackbar(
                 _scaffoldMessengerKey,
-                Strings.thisTaskHasAlreadyBeenCompleted,
+                strings.thisTaskHasAlreadyBeenCompleted,
                 Colors.yellow[800]!,
               );
             }
@@ -236,7 +240,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
             if (context.mounted) {
               SnackbarHelper.showSimpleSnackbar(
                 _scaffoldMessengerKey,
-                Strings.unknownErrorPleaseTryAgain,
+                strings.unknownErrorPleaseTryAgain,
                 Colors.red,
               );
             }

@@ -3,7 +3,7 @@ import 'package:dw_flutter_app/components/screen_description.dart';
 import 'package:dw_flutter_app/components/tasks/separated_standing.dart';
 import 'package:dw_flutter_app/components/tasks/standings_card.dart';
 import 'package:dw_flutter_app/components/tasks/standings_info_cards_row.dart';
-import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -32,6 +32,7 @@ class StandingsSubpage extends ConsumerWidget {
     final topPlayers = ref.watch(topPlayersProvider);
     final userRankingPosition = ref.watch(userRankingPositionProvider);
     final userInfo = ref.watch(userInfoProvider);
+    final strings = ref.watch(selectedStringsProvider);
 
     return SafeArea(
       child: Padding(
@@ -39,8 +40,8 @@ class StandingsSubpage extends ConsumerWidget {
         child: Column(
           children: [
             const SizedBox(height: 8),
-            const ScreenDescription(
-              description: Strings.standingsScreenDescription,
+            ScreenDescription(
+              description: strings.standingsScreenDescription,
             ),
             const SizedBox(height: 16),
             StandingsInfoCardRow(
@@ -56,15 +57,15 @@ class StandingsSubpage extends ConsumerWidget {
             topPlayers.when(
               data: (topPlayers) {
                 if (topPlayers.isEmpty) {
-                  return const Center(
+                  return Center(
                     child: Text(
-                      Strings.empty,
+                      strings.empty,
                     ),
                   );
                 }
                 return Expanded(
                   child: ListView.builder(
-                    clipBehavior: Clip.none,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     itemCount: topPlayers.length + 1,
                     itemBuilder: (context, index) {
                       if (index == topPlayers.length) {
@@ -103,9 +104,9 @@ class StandingsSubpage extends ConsumerWidget {
                 child: CircularProgressIndicator(),
               ),
               error: (error, stackTrace) {
-                return const Center(
+                return Center(
                   child: Text(
-                    Strings.error,
+                    strings.error,
                   ),
                 );
               },

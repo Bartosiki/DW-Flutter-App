@@ -11,7 +11,7 @@ class FirestoreEventsFields {
   static const String timeStart = 'timeStart';
   static const String timeEnd = 'timeEnd';
   static const String partner = 'partner';
-  static const String imageSrc = 'imageSrc';
+  static const String category = 'category';
   FirestoreEventsFields._();
 }
 

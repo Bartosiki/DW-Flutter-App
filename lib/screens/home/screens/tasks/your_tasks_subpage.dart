@@ -2,13 +2,14 @@ import 'package:dw_flutter_app/components/screen_description.dart';
 import 'package:dw_flutter_app/components/tasks/sort_modal_content.dart';
 import 'package:dw_flutter_app/components/tasks/task_list.dart';
 import 'package:dw_flutter_app/constants/paths.dart';
-import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/provider/tasks_provider.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:dw_flutter_app/screens/home/screens/tasks/sorting_enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sprintf/sprintf.dart';
 
 class YourTasksSubpage extends ConsumerStatefulWidget {
   const YourTasksSubpage({super.key});
@@ -49,13 +50,14 @@ class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
   Widget build(BuildContext context) {
     final userInfo = ref.watch(userInfoProvider);
     final tasks = ref.watch(tasksProvider);
+    final strings = ref.watch(selectedStringsProvider);
 
     return tasks.when(
       data: (tasks) {
         if (tasks.isEmpty) {
-          return const Center(
+          return Center(
             child: Text(
-              Strings.empty,
+              strings.empty,
             ),
           );
         }
@@ -66,7 +68,7 @@ class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ScreenDescription(
-                  description: Strings.taskScreenDescription,
+                  description: strings.taskScreenDescription,
                   trailingIcon: IconButton(
                     icon: SvgPicture.asset(
                       Paths.sortIcon,
@@ -95,7 +97,10 @@ class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
                 userInfo.when(
                   data: (user) {
                     return Text(
-                      Strings.youHaveXPoints(user.gainedPoints),
+                      sprintf(
+                        strings.youHaveXPoints,
+                        [user.gainedPoints],
+                      ),
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onBackground,
                         fontWeight: FontWeight.w700,
@@ -107,9 +112,9 @@ class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
                     child: CircularProgressIndicator(),
                   ),
                   error: (error, stackTrace) {
-                    return const Center(
+                    return Center(
                       child: Text(
-                        Strings.error,
+                        strings.error,
                       ),
                     );
                   },
@@ -131,8 +136,8 @@ class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
         child: CircularProgressIndicator(),
       ),
       error: (error, stackTrace) {
-        return const Center(
-          child: Text(Strings.error),
+        return Center(
+          child: Text(strings.error),
         );
       },
     );

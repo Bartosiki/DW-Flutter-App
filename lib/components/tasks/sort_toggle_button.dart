@@ -1,7 +1,8 @@
-import 'package:dw_flutter_app/constants/strings.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SortToggleButton extends StatefulWidget {
+class SortToggleButton extends ConsumerStatefulWidget {
   SortToggleButton({
     super.key,
     required this.isPointsSortingSelected,
@@ -13,10 +14,10 @@ class SortToggleButton extends StatefulWidget {
   bool isPointsSortingSelected;
 
   @override
-  State<SortToggleButton> createState() => _SortToggleButtonState();
+  ConsumerState<SortToggleButton> createState() => _SortToggleButtonState();
 }
 
-class _SortToggleButtonState extends State<SortToggleButton> {
+class _SortToggleButtonState extends ConsumerState<SortToggleButton> {
   void _toggleSort() {
     setState(() {
       widget.isPointsSortingSelected = !widget.isPointsSortingSelected;
@@ -25,9 +26,14 @@ class _SortToggleButtonState extends State<SortToggleButton> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = ref.watch(selectedStringsProvider);
+
     return ToggleButtons(
-      borderRadius: BorderRadius.circular(16),
-      isSelected: [widget.isPointsSortingSelected, !widget.isPointsSortingSelected],
+      borderRadius: BorderRadius.circular(15.0),
+      isSelected: [
+        widget.isPointsSortingSelected,
+        !widget.isPointsSortingSelected
+      ],
       onPressed: (index) {
         if (index == 0) {
           widget.onPointsPressed();
@@ -36,19 +42,19 @@ class _SortToggleButtonState extends State<SortToggleButton> {
         }
         _toggleSort();
       },
-      children: const [
+      children: [
         SizedBox(
           width: 100,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.star,
                   size: 16,
                 ),
-                SizedBox(width: 6),
-                Text(Strings.points),
+                const SizedBox(width: 6),
+                Text(strings.points),
               ],
             ),
           ),
@@ -56,16 +62,16 @@ class _SortToggleButtonState extends State<SortToggleButton> {
         SizedBox(
           width: 100,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.sort_by_alpha_rounded,
                   size: 16,
                 ),
-                SizedBox(width: 6),
-                Text(Strings.name),
+                const SizedBox(width: 6),
+                Text(strings.name),
               ],
             ),
           ),

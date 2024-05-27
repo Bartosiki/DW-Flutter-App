@@ -1,3 +1,6 @@
+import 'package:dw_flutter_app/config/language_settings.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
+import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
@@ -9,6 +12,8 @@ class AssistantScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final messages = ref.watch(geminiMessagesProvider);
+    final selectedLanguage = ref.watch(languageProvider);
+    final strings = ref.watch(selectedStringsProvider);
 
     return Scaffold(
       body: Chat(
@@ -52,7 +57,10 @@ class AssistantScreen extends ConsumerWidget {
         ),
         onSendPressed: (partialText) => ref
             .read(geminiMessagesProvider.notifier)
-            .handleSendPressed(partialText),
+            .handleSendPressed(partialText, strings.assistantError),
+        l10n: selectedLanguage == LanguageSettings.defaultLanguage
+            ? const ChatL10nEn()
+            : const ChatL10nPl(),
         messages: messages,
         user: ref.watch(userProvider),
       ),

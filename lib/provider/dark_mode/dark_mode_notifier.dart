@@ -22,8 +22,11 @@ class DarkModeNotifier extends StateNotifier<bool> {
   }
 }
 
-final darkModeProvider = StateNotifierProvider<DarkModeNotifier, bool>((ref) {
-  final darkModeNotifierFuture = ref.watch(darkModeNotifierProvider);
-  return (darkModeNotifierFuture.value ??
-      DarkModeNotifier(DarkModeNotifier.initialBrightness == Brightness.dark));
-});
+final darkModeProvider = StateNotifierProvider<DarkModeNotifier, bool>(
+  (ref) {
+    final darkModeNotifierFuture = ref.watch(darkModeNotifierProvider);
+    return (darkModeNotifierFuture.value ??
+        DarkModeNotifier(
+            DarkModeNotifier.initialBrightness == Brightness.dark));
+  },
+);

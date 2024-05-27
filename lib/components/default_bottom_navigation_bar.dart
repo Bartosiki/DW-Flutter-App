@@ -1,7 +1,8 @@
 import 'package:dw_flutter_app/screens/home/tab_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class DefaultBottomNavigationBar extends StatefulWidget {
+class DefaultBottomNavigationBar extends ConsumerStatefulWidget {
   final int selectedIndex;
   final Function(int) onItemSelected;
 
@@ -12,12 +13,12 @@ class DefaultBottomNavigationBar extends StatefulWidget {
   });
 
   @override
-  State<DefaultBottomNavigationBar> createState() =>
+  ConsumerState<DefaultBottomNavigationBar> createState() =>
       _DefaultBottomNavigationBarState();
 }
 
 class _DefaultBottomNavigationBarState
-    extends State<DefaultBottomNavigationBar> {
+    extends ConsumerState<DefaultBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -41,7 +42,7 @@ class _DefaultBottomNavigationBarState
               showUnselectedLabels: false,
               type: BottomNavigationBarType.fixed,
               items: <BottomNavigationBarItem>[
-                ...getBottomNavigationItems(context),
+                ...getBottomNavigationItems(context, ref),
               ],
               currentIndex: widget.selectedIndex,
               onTap: (index) {

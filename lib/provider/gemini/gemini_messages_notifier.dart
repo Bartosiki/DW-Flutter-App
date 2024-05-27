@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:collection/collection.dart';
-import 'package:dw_flutter_app/constants/strings.dart';
 import 'package:dw_flutter_app/model/gemini_chat.dart';
 import 'package:dw_flutter_app/network/gemini_client.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,10 +12,12 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
   final User user;
   final User assistant;
   final GeminiClient client;
+  final String assistantWelcomeMessage;
 
-  GeminiMessagesNotifier(this.uuid, this.user, this.assistant, this.client)
+  GeminiMessagesNotifier(this.uuid, this.user, this.assistant, this.client,
+      this.assistantWelcomeMessage)
       : super([]) {
-    _loadChatHistory();
+    _loadChatHistory(assistantWelcomeMessage);
   }
 
   void addMessage(Message message) {
@@ -24,7 +25,8 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
     _saveChatHistory();
   }
 
-  Future<void> handleSendPressed(PartialText message) async {
+  Future<void> handleSendPressed(
+      PartialText message, String assistantError) async {
     final wholeHistory = state;
 
     final userMessage = TextMessage(
@@ -89,7 +91,8 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
       ],
     );
 
-    String response = await client.generateAssistantResponse(historyToSend);
+    String response =
+        await client.generateAssistantResponse(historyToSend, assistantError);
 
     final assistantMessage = TextMessage(
       author: assistant,
@@ -106,7 +109,7 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
     super.dispose();
   }
 
-  Future<void> _loadChatHistory() async {
+  Future<void> _loadChatHistory(String assistantWelcomeMessage) async {
     final prefs = await SharedPreferences.getInstance();
     final encodedMessages = prefs.getString('chatHistory');
 
@@ -117,7 +120,7 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
 
       state = decodedMessages;
     } else {
-      state = [_getWelcomeMessage()];
+      state = [_getWelcomeMessage(assistantWelcomeMessage)];
     }
   }
 
@@ -127,19 +130,19 @@ class GeminiMessagesNotifier extends StateNotifier<List<Message>> {
     await prefs.setString('chatHistory', encodedMessages);
   }
 
-  Future<void> clearChatHistory() async {
+  Future<void> clearChatHistory(String assistantWelcomeMessage) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('chatHistory');
     state = [];
-    _loadChatHistory();
+    _loadChatHistory(assistantWelcomeMessage);
   }
 
-  Message _getWelcomeMessage() {
+  Message _getWelcomeMessage(String assistantWelcomeMessage) {
     return TextMessage(
       author: assistant,
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: uuid.v4(),
-      text: Strings.assistantWelcomeMessage,
+      text: assistantWelcomeMessage,
     );
   }
 }
