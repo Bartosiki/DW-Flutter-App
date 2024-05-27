@@ -1,39 +1,58 @@
 import 'package:flutter/material.dart';
 
 class EventConstants {
-  static List<String> getCategories() => [
-        'automation',
-        'ai',
-        'telecom',
-        'company',
-        'database',
-        'web',
-        'mobile',
-        'security',
-        'improvement',
-        'other',
-      ];
+  static List<String> getCategories(String languageCode) {
+    switch (languageCode) {
+      case 'pl':
+        return [
+          'automatyzacja',
+          'sztuczna inteligencja',
+          'telekomunikacja',
+          'biznes',
+          'baza danych',
+          'web',
+          'mobile',
+          'bezpieczeństwo',
+          'usprawnienia',
+          'inne',
+        ];
+      default:
+        return [
+          'automation',
+          'ai',
+          'telecom',
+          'business',
+          'database',
+          'web',
+          'mobile',
+          'security',
+          'improvement',
+          'other',
+        ];
+    }
+  }
+
   static IconData getIcon(String category) {
     switch (category) {
-      case 'automation':
+      case 'automation' || 'automatyzacja':
         return Icons.smart_toy;
-      case 'ai':
+      case 'ai' || 'sztuczna inteligencja':
         return Icons.psychology;
-      case 'telecom':
+      case 'telecom' || 'telekomunikacja':
         return Icons.cell_tower;
-      case 'company':
+      case 'business' || 'biznes':
         return Icons.business;
-      case 'database':
+      case 'database' || 'baza danych':
         return Icons.storage;
       case 'web':
         return Icons.web;
-      case 'mobile':
+      case 'mobile' || 'mobile':
         return Icons.smartphone;
-      case 'security':
+      case 'security' || 'bezpieczeństwo':
         return Icons.security;
-      case 'improvement':
+      case 'improvement' || 'usprawnienia':
         return Icons.lightbulb;
-      case 'other':
+      case 'other' || 'inne':
         return Icons.local_library;
       default:
         return Icons.local_library;

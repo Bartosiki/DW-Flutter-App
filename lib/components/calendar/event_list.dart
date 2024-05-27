@@ -1,10 +1,12 @@
 import 'package:dw_flutter_app/components/calendar/event_list_filter.dart';
 import 'package:dw_flutter_app/constants/event_constants.dart';
+import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../model/event.dart';
 import 'event_card.dart';
 
-class EventList extends StatefulWidget {
+class EventList extends ConsumerStatefulWidget {
   const EventList({
     super.key,
     required this.eventList,
@@ -13,14 +15,16 @@ class EventList extends StatefulWidget {
   final List<Event> eventList;
 
   @override
-  State<EventList> createState() => _EventListState();
+  ConsumerState<EventList> createState() => _EventListState();
 }
 
-class _EventListState extends State<EventList> {
+class _EventListState extends ConsumerState<EventList> {
   String? selectedCategory;
 
   @override
   Widget build(BuildContext context) {
+    final languageCode = ref.watch(languageProvider);
+
     List<Event> filteredEvents = widget.eventList
         .where((event) =>
             selectedCategory == null || event.category == selectedCategory)
@@ -29,7 +33,7 @@ class _EventListState extends State<EventList> {
     return Column(
       children: [
         EventListFilter(
-          categories: EventConstants.getCategories(),
+          categories: EventConstants.getCategories(languageCode),
           selectedCategory: selectedCategory,
           onSelected: (category) {
             setState(
