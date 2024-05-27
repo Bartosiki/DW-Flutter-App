@@ -29,7 +29,7 @@ class _SortToggleButtonState extends ConsumerState<SortToggleButton> {
     final strings = ref.watch(selectedStringsProvider);
 
     return ToggleButtons(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(15.0),
       isSelected: [
         widget.isPointsSortingSelected,
         !widget.isPointsSortingSelected

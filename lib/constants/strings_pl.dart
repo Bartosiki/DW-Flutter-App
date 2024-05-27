@@ -36,9 +36,9 @@ class StringsPl extends Strings {
           youHaveXPoints: 'Masz %d punktów',
           register: 'Rejestracja',
           eventScreenDescription:
-              'Opis ekranu zadania Opis ekranu zadania Opis ekranu zadania',
+              'Kalendarz przedstawia wszystkie wydarzenia, które odbędą się podczas Dnia Wydziału EEIA dnia %s.',
           taskScreenDescription:
-              'Opis ekranu zadania Opis ekranu zadania Opis ekranu zadania',
+              'Skanuj kody qr i wykonuj zadania! Czekają na Ciebie fantastyczne nagrody!',
           firstFloor: 'Pierwsze piętro',
           groundFloor: 'Parter',
           standingsScreenDescription:

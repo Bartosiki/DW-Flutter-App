@@ -34,9 +34,9 @@ class StringsEn extends Strings {
           youHaveXPoints: 'You have %d points',
           register: 'Register',
           eventScreenDescription:
-              'Task screen description Task screen description Task screen description',
+              'The calendar shows all events that will take place during EEIA Faculty Day on %s.',
           taskScreenDescription:
-              'Task screen description Task screen description Task screen description',
+              'Scan QR codes and complete tasks! Fantastic prizes are waiting for you!',
           firstFloor: 'First Floor',
           groundFloor: 'Ground Floor',
           standingsScreenDescription:
