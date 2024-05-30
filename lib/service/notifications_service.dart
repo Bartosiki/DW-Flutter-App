@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
+import '../constants/firestore_collections.dart';
+import '../constants/firestore_fields.dart';
 import '../constants/notifications.dart';
+import '../exceptions/user_not_found.dart';
+
 
 class PushNotificationService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
@@ -34,7 +39,7 @@ class PushNotificationService {
 
     FirebaseMessaging.onMessage.listen(_onMessageReceived);
 
-    String? token = await _firebaseMessaging.getToken();
+    saveDeviceToken();
   }
 
 
@@ -64,5 +69,31 @@ class PushNotificationService {
       message.notification?.body,
       platformChannelSpecifics,
     );
+  }
+
+
+  Future<void> saveDeviceToken() async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    final userSnapshot = await FirebaseFirestore.instance
+        .collection(FirestoreCollections.users)
+        .where(FirestoreUsersFields.userId, isEqualTo: userId)
+        .limit(1)
+        .get();
+
+    if (userSnapshot.docs.isEmpty) {
+      throw UserNotFound(userId!);
+    }
+
+    final userDoc = userSnapshot.docs.first;
+
+    String? token = await _firebaseMessaging.getToken();
+
+    if (FirestoreUsersFields.notificationToken.isNotEmpty && token != null) {
+      await userDoc.reference.update(
+        {
+          FirestoreUsersFields.notificationToken: token
+        },
+      );
+    }
   }
 }

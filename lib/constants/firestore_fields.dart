@@ -34,6 +34,7 @@ class FirestoreUsersFields {
   static const String isWinner = 'isWinner';
   static const String allowedNotifications = 'allowedNotifications';
   static const String lastScannedQrCodeTime = 'lastScannedQrCodeTime';
+  static const String notificationToken = '';
   FirestoreUsersFields._();
 }
 
