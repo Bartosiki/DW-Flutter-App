@@ -9,7 +9,9 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   AuthStateNotifier() : super(const AuthState.unknown()) {
     if (_authenticator.isAlreadySignedIn) {
       state = AuthState(
-        result: AuthResult.success,
+        result: _authenticator.isAnonymous
+            ? AuthResult.anonymous
+            : AuthResult.success,
         isLoading: false,
         userId: _authenticator.userId,
       );
@@ -35,6 +37,31 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
           userId: userId,
           displayName: _authenticator.displayName,
           email: _authenticator.email,
+        );
+        state = AuthState(
+          result: result,
+          isLoading: false,
+          userId: userId,
+        );
+      } catch (error) {
+        state = const AuthState.unknown();
+        return;
+      }
+    } else {
+      state = const AuthState.unknown();
+    }
+  }
+
+  Future<void> loginAnonymously() async {
+    state = state.copiedWithIsLoading(true);
+    final result = await _authenticator.signInAnonymously();
+    final userId = _authenticator.userId;
+    if (result == AuthResult.anonymous && userId != null) {
+      try {
+        await _userInfoStorage.saveOrUpdateUserInfoAfterSignIn(
+          userId: userId,
+          displayName: 'Guest',
+          email: '',
         );
         state = AuthState(
           result: result,

@@ -59,6 +59,10 @@ class Strings {
   final String points;
   final String name;
   final String assistantWelcomeMessage;
+  final String availableOnlyForLoggedUsers;
+  final String signInWithGoogleOrApple;
+  final String signIn;
+  final String orContinueAsGuest;
 
   const Strings({
     required this.appName,
@@ -118,5 +122,9 @@ class Strings {
     required this.points,
     required this.name,
     required this.assistantWelcomeMessage,
+    required this.availableOnlyForLoggedUsers,
+    required this.signInWithGoogleOrApple,
+    required this.signIn,
+    required this.orContinueAsGuest,
   });
 }

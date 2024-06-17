@@ -15,6 +15,7 @@ import '../../../exceptions/user_not_found.dart';
 import '../../../model/task.dart';
 import '../../../provider/tasks_provider.dart';
 import '../../../snackbar/snackbar_helper.dart';
+import '../../guest/only_for_logged_user.dart';
 
 class QrScannerScreen extends ConsumerStatefulWidget {
   const QrScannerScreen({super.key});
@@ -45,20 +46,22 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
       height: scanArea,
     );
 
-    return ScaffoldMessenger(
-      key: _scaffoldMessengerKey,
-      child: Scaffold(
-        body: Stack(
-          children: [
-            MobileScanner(
-              scanWindow: scanWindow,
-              controller: controller,
-              errorBuilder: (context, error, child) {
-                return _onError(context, error, child);
-              },
-            ),
-            _buildScanWindow(scanArea),
-          ],
+    return OnlyForLoggedUserScreen(
+      content: ScaffoldMessenger(
+        key: _scaffoldMessengerKey,
+        child: Scaffold(
+          body: Stack(
+            children: [
+              MobileScanner(
+                scanWindow: scanWindow,
+                controller: controller,
+                errorBuilder: (context, error, child) {
+                  return _onError(context, error, child);
+                },
+              ),
+              _buildScanWindow(scanArea),
+            ],
+          ),
         ),
       ),
     );

@@ -73,5 +73,10 @@ class StringsEn extends Strings {
           name: 'Name',
           assistantWelcomeMessage:
               'Hello! I am your EEIA Faculty Day assistant. How can I help you today? 🚀\nI can provide you with information about the event, help you with tasks, and answer your questions. Feel free to ask me anything!',
+          availableOnlyForLoggedUsers:
+              'This content is available only for logged users.',
+          signInWithGoogleOrApple: 'Sign in with Google or Apple',
+          signIn: 'Sign in',
+          orContinueAsGuest: 'or continue as a guest',
         );
 }

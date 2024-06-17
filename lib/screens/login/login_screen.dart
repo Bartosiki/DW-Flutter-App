@@ -52,6 +52,28 @@ class LoginScreen extends ConsumerWidget {
                       imagePath: "assets/images/apple_logo.png",
                       onPressed: () {},
                     ),
+                    const SizedBox(height: 6.0),
+                    TextButton(
+                      onPressed: () {
+                        ref.read(authStateProvider.notifier).loginAnonymously();
+                      },
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(
+                          const EdgeInsets.symmetric(
+                            horizontal: 28.0,
+                            vertical: 12.0,
+                          ),
+                        ),
+                        overlayColor: MaterialStateProperty.all(Colors.black),
+                      ),
+                      child: Text(
+                        strings.orContinueAsGuest,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 12.0),
                     const Padding(
                       padding:

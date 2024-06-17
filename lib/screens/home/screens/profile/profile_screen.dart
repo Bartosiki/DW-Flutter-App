@@ -6,12 +6,14 @@ import 'package:dw_flutter_app/screens/home/screens/profile/sections/partners.da
 import 'package:dw_flutter_app/screens/home/screens/profile/sections/patrons.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../provider/auth/is_user_anonymous_provider.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isUserAnonymous = ref.watch(isUserAnonymousProvider);
     final strings = ref.watch(selectedStringsProvider);
 
     return Scaffold(
@@ -36,10 +38,11 @@ class ProfileScreen extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                ProfileElement(
-                  title: strings.accountDetailsTitle,
-                  children: buildProfileAccountDetails(context, ref),
-                ),
+                if (!isUserAnonymous)
+                  ProfileElement(
+                    title: strings.accountDetailsTitle,
+                    children: buildProfileAccountDetails(context, ref),
+                  ),
                 ProfileElement(
                   title: strings.settingsTitle,
                   children: buildProfileSettings(context, ref),

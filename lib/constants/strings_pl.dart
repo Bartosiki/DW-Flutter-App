@@ -75,5 +75,10 @@ class StringsPl extends Strings {
           name: 'Nazwa',
           assistantWelcomeMessage:
               'Cześć! Jestem asystentem EEIA Faculty Day. Jak mogę Ci dzisiaj pomóc? 🚀\nMogę udzielić informacji na temat wydarzenia, pomóc w zadaniach i odpowiedzieć na pytania. Zapraszam do zadawania mi pytań!',
+          availableOnlyForLoggedUsers:
+              'Dostępne tylko dla zalogowanych użytkowników',
+          signInWithGoogleOrApple: 'Zaloguj się za pomocą Google lub Apple',
+          signIn: 'Zaloguj się',
+          orContinueAsGuest: 'lub kontynuuj jako gość',
         );
 }
