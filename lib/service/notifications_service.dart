@@ -7,7 +7,6 @@ import '../constants/firestore_fields.dart';
 import '../constants/notifications.dart';
 import '../exceptions/user_not_found.dart';
 
-
 class PushNotificationService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin flutterLocalNotifications =
@@ -18,7 +17,6 @@ class PushNotificationService {
   }
 
   Future<void> _initialize() async {
-
     await _firebaseMessaging.requestPermission(
       alert: true,
       announcement: false,
@@ -42,7 +40,6 @@ class PushNotificationService {
     saveDeviceToken();
   }
 
-
   Future<void> _onMessageReceived(RemoteMessage message) async {
     if (message.notification != null) {
       await _showNotification(message);
@@ -54,7 +51,7 @@ class PushNotificationService {
         AndroidNotificationDetails(
       Notifications.chanelId,
       Notifications.chanelName,
-      channelDescription:  Notifications.chanelDescription,
+      channelDescription: Notifications.chanelDescription,
       importance: Importance.max,
       priority: Priority.high,
       showWhen: false,
@@ -70,7 +67,6 @@ class PushNotificationService {
       platformChannelSpecifics,
     );
   }
-
 
   Future<void> saveDeviceToken() async {
     final userId = FirebaseAuth.instance.currentUser?.uid;
@@ -88,10 +84,12 @@ class PushNotificationService {
 
     String? token = await _firebaseMessaging.getToken();
 
-    if (FirestoreUsersFields.notificationToken.isNotEmpty && token != null) {
+    if (token != null) {
+      print(userSnapshot.docs);
+      print(token);
       await userDoc.reference.update(
         {
-          FirestoreUsersFields.notificationToken: token
+          FirestoreUsersFields.notificationToken: token,
         },
       );
     }
