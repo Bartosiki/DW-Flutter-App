@@ -38,7 +38,12 @@ class _EventListState extends ConsumerState<EventList> {
           onSelected: (category) {
             setState(
               () {
-                selectedCategory = category;
+                if (category == null) {
+                  selectedCategory = null;
+                  return;
+                }
+                selectedCategory =
+                    EventConstants.getUnifiedCategoryName(category);
               },
             );
           },
