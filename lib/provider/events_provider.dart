@@ -10,7 +10,7 @@ final eventsProvider = AutoDisposeStreamProvider<List<Event>>((ref) {
       .where(FirestoreEventsFields.timeEnd, isGreaterThan: DateTime.now())
       .orderBy(
         FirestoreEventsFields.timeStart,
-        descending: true,
+        descending: false,
       )
       .snapshots()
       .map(
