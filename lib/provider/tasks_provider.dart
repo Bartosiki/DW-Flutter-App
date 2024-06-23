@@ -8,10 +8,6 @@ import '../model/task.dart';
 final tasksProvider = AutoDisposeStreamProvider<List<Task>>((ref) {
   return FirebaseFirestore.instance
       .collection(FirestoreCollections.tasks)
-      .orderBy(
-        FirestoreTasksFields.taskId,
-        descending: true,
-      )
       .snapshots()
       .map(
         (snapshot) => snapshot.docs

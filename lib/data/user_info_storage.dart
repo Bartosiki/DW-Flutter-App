@@ -77,13 +77,12 @@ class UserInfoStorage {
     }
 
     if (user.finishedTasks.any((task) => task.qrCode == qrCode)) {
-      throw TaskAlreadyFinished(userId, task.taskId, qrCode);
+      throw TaskAlreadyFinished(userId, qrCode);
     }
 
     final newFinishedTasks = [
       ...user.finishedTasks,
       UserFinishedTask(
-        taskId: task.taskId,
         qrCode: qrCode,
         points: task.points,
         finishedAt: Timestamp.now(),

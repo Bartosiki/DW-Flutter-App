@@ -23,7 +23,7 @@ class TaskList extends ConsumerWidget {
     for (var element in tasks) {
       element.isDone = userInfo.maybeWhen(
         data: (userInfo) => userInfo.finishedTasks.any(
-          (finishedTask) => finishedTask.taskId == element.taskId,
+          (finishedTask) => finishedTask.qrCode == element.qrCode,
         ),
         orElse: () => false,
       );
@@ -48,19 +48,19 @@ class TaskList extends ConsumerWidget {
 
     final List<Widget> taskWidgets = [
       ...undoneTasks.map((task) => TaskCard(
-        title: task.title,
-        subtitle: task.description,
-        points: task.points,
-        isDone: task.isDone,
-      )),
+            title: task.title,
+            subtitle: task.description,
+            points: task.points,
+            isDone: task.isDone,
+          )),
       if (doneTasks.isNotEmpty && undoneTasks.isNotEmpty)
         const DividerWithMargins(),
       ...doneTasks.map((task) => TaskCard(
-        title: task.title,
-        subtitle: task.description,
-        points: task.points,
-        isDone: task.isDone,
-      )),
+            title: task.title,
+            subtitle: task.description,
+            points: task.points,
+            isDone: task.isDone,
+          )),
     ];
 
     return ListView.builder(
@@ -71,4 +71,3 @@ class TaskList extends ConsumerWidget {
     );
   }
 }
-
