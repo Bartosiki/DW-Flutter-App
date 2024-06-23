@@ -1,5 +1,6 @@
 class FirestoreConfigFields {
   static const String mainColor = 'mainColor';
+  static const String registrationLink = 'registerLink';
   FirestoreConfigFields._();
 }
 
