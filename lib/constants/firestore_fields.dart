@@ -16,7 +16,6 @@ class FirestoreEventsFields {
 }
 
 class FirestoreTasksFields {
-  static const String taskId = 'taskId';
   static const String title = 'title';
   static const String description = 'description';
   static const String points = 'points';
@@ -38,7 +37,6 @@ class FirestoreUsersFields {
 }
 
 class FirestoreUserFinishedTaskFields {
-  static const String taskId = 'taskId';
   static const String points = 'points';
   static const String qrCode = 'qrCode';
   static const String finishedAt = 'finishedAt';
