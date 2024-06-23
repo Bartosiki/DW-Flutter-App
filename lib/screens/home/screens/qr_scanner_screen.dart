@@ -34,6 +34,9 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
 
   @override
   Widget build(BuildContext context) {
+    // makes sure that the tasks are loaded and disposed when the screen is closed
+    final tasks = ref.watch(tasksProvider);
+
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
             MediaQuery.of(context).size.height < 400)
         ? 150.0
