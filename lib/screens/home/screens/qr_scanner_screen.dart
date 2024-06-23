@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:app_settings/app_settings.dart';
 import 'package:dw_flutter_app/extensions/log.dart';
+import 'package:dw_flutter_app/provider/auth/is_user_anonymous_provider.dart';
 import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,6 +16,7 @@ import '../../../exceptions/user_not_found.dart';
 import '../../../model/task.dart';
 import '../../../provider/tasks_provider.dart';
 import '../../../snackbar/snackbar_helper.dart';
+import '../../guest/only_for_logged_user.dart';
 
 class QrScannerScreen extends ConsumerStatefulWidget {
   const QrScannerScreen({super.key});
@@ -33,10 +35,23 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
 
   @override
   Widget build(BuildContext context) {
+    final isUserAnonymous = ref.watch(isUserAnonymousProvider);
+
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
             MediaQuery.of(context).size.height < 400)
         ? 150.0
         : 300.0;
+
+    return OnlyForLoggedUserScreen(
+      content: isUserAnonymous
+          ? _buildDisabledScannerWidget(scanArea)
+          : _buildScannerWidget(scanArea),
+    );
+  }
+
+  Widget _buildScannerWidget(double scanArea) {
+    // makes sure that the tasks are loaded and disposed when the screen is closed
+    final tasks = ref.watch(tasksProvider);
 
     final scanWindow = Rect.fromCenter(
       center: MediaQuery.of(context).size.center(Offset.zero) -
@@ -61,6 +76,12 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen>
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildDisabledScannerWidget(double scanArea) {
+    return Center(
+      child: _buildScanWindow(scanArea),
     );
   }
 

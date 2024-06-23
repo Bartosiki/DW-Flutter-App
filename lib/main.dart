@@ -20,14 +20,15 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   PushNotificationService();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(
-      const ProviderScope(
-        child: App(),
-      ),
-    );
-  });
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+    (_) {
+      runApp(
+        const ProviderScope(
+          child: App(),
+        ),
+      );
+    },
+  );
 }
 
 class App extends StatelessWidget {
@@ -60,15 +61,18 @@ class App extends StatelessWidget {
           theme: _buildTheme(mainColor, Brightness.light),
           darkTheme: _buildTheme(mainColor, Brightness.dark),
           themeMode: isDarkModeEnabled ? ThemeMode.dark : ThemeMode.light,
-          home: isLoggedIn
-              ? configValue.when(
-                  data: (config) => config != null
-                      ? const HomeScreen()
-                      : const CircularProgressIndicator(),
-                  loading: () => const CircularProgressIndicator(),
-                  error: (err, stack) => const LoginScreen(),
-                )
-              : const LoginScreen(),
+          home: Scaffold(
+            body: isLoggedIn
+                ? configValue.when(
+                    data: (config) => config != null
+                        ? const HomeScreen()
+                        : const Center(child: CircularProgressIndicator()),
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    error: (err, stack) => const LoginScreen(),
+                  )
+                : const LoginScreen(),
+          ),
         );
       },
     );

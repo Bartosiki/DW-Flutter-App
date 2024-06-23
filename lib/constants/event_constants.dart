@@ -32,6 +32,33 @@ class EventConstants {
     }
   }
 
+  static String getUnifiedCategoryName(String translatedCategory) {
+    switch (translatedCategory) {
+      case 'automatyzacja' || 'automation':
+        return 'automation';
+      case 'sztuczna inteligencja' || 'ai':
+        return 'ai';
+      case 'telekomunikacja' || 'telecom':
+        return 'telecom';
+      case 'biznes' || 'business':
+        return 'business';
+      case 'baza danych' || 'database':
+        return 'database';
+      case 'web':
+        return 'web';
+      case 'mobile':
+        return 'mobile';
+      case 'bezpieczeństwo' || 'security':
+        return 'security';
+      case 'usprawnienia' || 'improvement':
+        return 'improvement';
+      case 'inne' || 'other':
+        return 'other';
+      default:
+        return 'other';
+    }
+  }
+
   static IconData getIcon(String category) {
     switch (category) {
       case 'automation' || 'automatyzacja':

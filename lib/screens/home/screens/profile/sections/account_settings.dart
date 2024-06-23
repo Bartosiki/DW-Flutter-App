@@ -5,11 +5,13 @@ import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:dw_flutter_app/screens/home/screens/profile/language_select.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../../../provider/auth/is_user_anonymous_provider.dart';
 
 List<Widget> buildProfileSettings(BuildContext context, WidgetRef ref) {
   final userInfo = ref.watch(userInfoProvider);
   final darkModeState = ref.watch(darkModeProvider.notifier);
   final isDarkModeEnabled = ref.watch(darkModeProvider);
+  final isUserAnonymous = ref.watch(isUserAnonymousProvider);
   final strings = ref.watch(selectedStringsProvider);
 
   return [
@@ -31,26 +33,27 @@ List<Widget> buildProfileSettings(BuildContext context, WidgetRef ref) {
         ),
       ],
     ),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          strings.notifications,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
-              ),
-        ),
-        Switch.adaptive(
-          value: userInfo.value?.allowedNotifications ?? false,
-          onChanged: (value) {
-            ref
-                .read(authStateProvider.notifier)
-                .changeNotificationStatus(value);
-          },
-        ),
-      ],
-    ),
+    if (!isUserAnonymous)
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            strings.notifications,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
+          ),
+          Switch.adaptive(
+            value: userInfo.value?.allowedNotifications ?? false,
+            onChanged: (value) {
+              ref
+                  .read(authStateProvider.notifier)
+                  .changeNotificationStatus(value);
+            },
+          ),
+        ],
+      ),
     Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -68,14 +71,14 @@ List<Widget> buildProfileSettings(BuildContext context, WidgetRef ref) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          strings.logOut,
+          isUserAnonymous ? strings.signIn : strings.logOut,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.w400,
               ),
         ),
         IconButton(
-          icon: const Icon(Icons.logout),
+          icon: Icon(isUserAnonymous ? Icons.login : Icons.logout),
           onPressed: () async {
             await ref.read(authStateProvider.notifier).logOut();
             if (context.mounted) {

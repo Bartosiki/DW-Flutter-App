@@ -28,8 +28,8 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       userId: json[FirestoreUsersFields.userId],
-      displayName: json[FirestoreUsersFields.displayName],
-      email: json[FirestoreUsersFields.email],
+      displayName: json[FirestoreUsersFields.displayName] ?? 'Guest',
+      email: json[FirestoreUsersFields.email] ?? '',
       finishedTasks: (json[FirestoreUsersFields.finishedTasks] as List)
           .map(
             (task) => UserFinishedTask.fromJson(

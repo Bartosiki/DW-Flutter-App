@@ -33,7 +33,8 @@ class EventListFilter extends StatelessWidget {
                         ? Theme.of(context).colorScheme.onPrimary
                         : Theme.of(context).colorScheme.onSurface,
                   ),
-                  selected: selectedCategory == category,
+                  selected: selectedCategory ==
+                      EventConstants.getUnifiedCategoryName(category),
                   onSelected: (bool selected) {
                     onSelected(selected ? category : null);
                   },
