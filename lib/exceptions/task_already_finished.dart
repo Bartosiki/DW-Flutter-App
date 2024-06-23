@@ -9,5 +9,5 @@ class TaskAlreadyFinished implements ExceptionWithMessage {
 
   TaskAlreadyFinished(this.userId, this.qrCode)
       : message =
-            'User (id: $userId) has already finished task  with QR code ($qrCode).';
+            'User (id: $userId) has already finished task with QR code ($qrCode).';
 }
