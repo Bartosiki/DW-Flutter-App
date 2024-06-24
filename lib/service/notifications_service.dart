@@ -30,8 +30,18 @@ class PushNotificationService {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+
     const InitializationSettings initializationSettings =
-        InitializationSettings(android: initializationSettingsAndroid);
+        InitializationSettings(
+            android: initializationSettingsAndroid,
+            iOS: initializationSettingsIOS
+        );
 
     await flutterLocalNotifications.initialize(initializationSettings);
 
@@ -54,7 +64,9 @@ class PushNotificationService {
       channelDescription: Notifications.chanelDescription,
       importance: Importance.max,
       priority: Priority.high,
-      showWhen: false,
+      showWhen: true,
+      playSound: true,
+      enableVibration: true,
     );
 
     const NotificationDetails platformChannelSpecifics =

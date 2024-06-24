@@ -86,7 +86,7 @@ class App extends StatelessWidget {
 
     return basicTheme.copyWith(
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: colorScheme.background,
+      scaffoldBackgroundColor: colorScheme.surface,
     );
   }
 }
