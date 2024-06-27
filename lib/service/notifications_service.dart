@@ -97,8 +97,6 @@ class PushNotificationService {
     String? token = await _firebaseMessaging.getToken();
 
     if (token != null) {
-      print(userSnapshot.docs);
-      print(token);
       await userDoc.reference.update(
         {
           FirestoreUsersFields.notificationToken: token,

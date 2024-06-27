@@ -20,7 +20,7 @@ class CalendarScreen extends ConsumerWidget {
     final strings = ref.watch(selectedStringsProvider);
     final contestTime = ref.watch(contestTimeProvider);
     final languageCode = ref.watch(languageProvider);
-    final registrationLink = ref.watch(configProvider);
+    final config = ref.watch(configProvider);
 
     return events.when(
       data: (events) {
@@ -34,7 +34,7 @@ class CalendarScreen extends ConsumerWidget {
         return Scaffold(
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () async {
-              final String? url = registrationLink.value?.registrationLink;
+              final String? url = config.value?.registrationLink;
               if (url != null) {
                 if (await canLaunch(url)) {
                   await launch(url);
