@@ -52,6 +52,31 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     }
   }
 
+  Future<void> loginWithApple() async {
+    state = state.copiedWithIsLoading(true);
+    final result = await _authenticator.signInWithApple();
+    final userId = _authenticator.userId;
+    if (result == AuthResult.success && userId != null) {
+      try {
+        await _userInfoStorage.saveOrUpdateUserInfoAfterSignIn(
+          userId: userId,
+          displayName: _authenticator.displayName,
+          email: _authenticator.email,
+        );
+        state = AuthState(
+          result: result,
+          isLoading: false,
+          userId: userId,
+        );
+      } catch (error) {
+        state = const AuthState.unknown();
+        return;
+      }
+    } else {
+      state = const AuthState.unknown();
+    }
+  }
+
   Future<void> loginAnonymously() async {
     state = state.copiedWithIsLoading(true);
     final result = await _authenticator.signInAnonymously();

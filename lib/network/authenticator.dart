@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../model/auth_result.dart';
 
@@ -35,6 +36,25 @@ class Authenticator {
     );
     try {
       await FirebaseAuth.instance.signInWithCredential(oauthCredentials);
+      return AuthResult.success;
+    } catch (e) {
+      return AuthResult.failure;
+    }
+  }
+
+  Future<AuthResult> signInWithApple() async {
+    try {
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+      final oauthCredential = OAuthProvider("apple.com").credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+      await FirebaseAuth.instance.signInWithCredential(oauthCredential);
       return AuthResult.success;
     } catch (e) {
       return AuthResult.failure;
