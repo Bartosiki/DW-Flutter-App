@@ -45,9 +45,10 @@ class CalendarScreen extends ConsumerWidget {
               onPressed: () async {
                 final String? url = config.value?.registrationLink;
                 if (url != null) {
-                if (await canLaunchUrl(url as Uri)) {
-                  await launchUrl(url as Uri);
-                  } else {
+                  final Uri uri = Uri.parse(url);
+                  try {
+                    await launchUrl(uri);
+                  } catch (e) {
                     SnackbarHelper.showSimpleSnackbar(
                       _scaffoldMessengerKey,
                       strings.registrationLinkError,
