@@ -20,7 +20,7 @@ class TaskCard extends StatelessWidget {
       child: Center(
           child: Card(
             color: isDone
-                ? Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.1)
+                ? Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.1)
                 : null,
             child: ListTile(
               trailing: CircleAvatar(

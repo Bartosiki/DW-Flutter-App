@@ -36,7 +36,7 @@ class _DefaultBottomNavigationBarState
           Padding(
             padding: const EdgeInsets.only(top: 6.0),
             child: BottomNavigationBar(
-              backgroundColor: Theme.of(context).colorScheme.background,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               enableFeedback: true,
               showSelectedLabels: false,
               showUnselectedLabels: false,

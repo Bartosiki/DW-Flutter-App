@@ -45,7 +45,7 @@ class _ScreenSwitchState extends State<ScreenSwitch> {
                 child: SegmentedButton<Option>(
                   style: SegmentedButton.styleFrom(
                     backgroundColor:
-                        Theme.of(context).colorScheme.surfaceVariant,
+                        Theme.of(context).colorScheme.surfaceContainerHighest,
                     foregroundColor:
                         Theme.of(context).colorScheme.onSurfaceVariant,
                     selectedForegroundColor:

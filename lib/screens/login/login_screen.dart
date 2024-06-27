@@ -6,6 +6,7 @@ import 'package:dw_flutter_app/screens/login/login_screen_terms_agreement_widget
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import 'dart:io';
 
 import '../../provider/auth/auth_state_provider.dart';
 
@@ -46,25 +47,32 @@ class LoginScreen extends ConsumerWidget {
                         ref.read(authStateProvider.notifier).loginWithGoogle();
                       },
                     ),
-                    const SizedBox(height: 12.0),
-                    LoginButton(
-                      text: strings.continueWithApple,
-                      imagePath: "assets/images/apple_logo.png",
-                      onPressed: () {},
-                    ),
+                    if (Platform.isIOS)
+                      Column(
+                        children: [
+                          const SizedBox(height: 12.0),
+                          LoginButton(
+                            text: strings.continueWithApple,
+                            imagePath: "assets/images/apple_logo.png",
+                            onPressed: () {
+                              ref.read(authStateProvider.notifier).loginWithApple();
+                            },
+                          ),
+                        ],
+                      ),
                     const SizedBox(height: 6.0),
                     TextButton(
                       onPressed: () {
                         ref.read(authStateProvider.notifier).loginAnonymously();
                       },
                       style: ButtonStyle(
-                        padding: MaterialStateProperty.all(
+                        padding: WidgetStateProperty.all(
                           const EdgeInsets.symmetric(
                             horizontal: 28.0,
                             vertical: 12.0,
                           ),
                         ),
-                        overlayColor: MaterialStateProperty.all(Colors.black),
+                        overlayColor: WidgetStateProperty.all(Colors.black),
                       ),
                       child: Text(
                         strings.orContinueAsGuest,

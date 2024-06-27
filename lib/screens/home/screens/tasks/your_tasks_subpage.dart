@@ -73,7 +73,7 @@ class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
                     icon: SvgPicture.asset(
                       Paths.sortIcon,
                       colorFilter: ColorFilter.mode(
-                        Theme.of(context).colorScheme.onBackground,
+                        Theme.of(context).colorScheme.onSurface,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -102,7 +102,7 @@ class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
                         [user.gainedPoints],
                       ),
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.w700,
                         fontSize: 18,
                       ),
