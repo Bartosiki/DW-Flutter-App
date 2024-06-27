@@ -63,6 +63,7 @@ class Strings {
   final String signInWithGoogleOrApple;
   final String signIn;
   final String orContinueAsGuest;
+  final String registrationLinkError;
 
   const Strings({
     required this.appName,
@@ -126,5 +127,6 @@ class Strings {
     required this.signInWithGoogleOrApple,
     required this.signIn,
     required this.orContinueAsGuest,
+    required this.registrationLinkError,
   });
 }
