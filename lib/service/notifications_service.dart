@@ -17,15 +17,7 @@ class PushNotificationService {
   }
 
   Future<void> _initialize() async {
-    await _firebaseMessaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
+    enableNotification();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -40,8 +32,7 @@ class PushNotificationService {
     const InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
-            iOS: initializationSettingsIOS
-        );
+            iOS: initializationSettingsIOS);
 
     await flutterLocalNotifications.initialize(initializationSettings);
 
@@ -103,5 +94,17 @@ class PushNotificationService {
         },
       );
     }
+  }
+
+  Future<void> enableNotification() async {
+    await _firebaseMessaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
   }
 }

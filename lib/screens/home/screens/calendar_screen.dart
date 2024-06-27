@@ -1,4 +1,5 @@
 import 'package:dw_flutter_app/components/calendar/event_list.dart';
+import 'package:dw_flutter_app/snackbar/snackbar_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dw_flutter_app/provider/config_provider.dart';
 import 'package:dw_flutter_app/provider/contest_time_provider.dart';
@@ -12,7 +13,13 @@ import '../../../provider/events_provider.dart';
 import 'package:sprintf/sprintf.dart';
 
 class CalendarScreen extends ConsumerWidget {
-  const CalendarScreen({super.key});
+  CalendarScreen({super.key});
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
+  static const registrationErrorSnackbar = SnackBar(
+    content: Text('Yay! A SnackBar!'),
+  );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,43 +38,50 @@ class CalendarScreen extends ConsumerWidget {
             ),
           );
         }
-        return Scaffold(
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: () async {
-              final String? url = config.value?.registrationLink;
-              if (url != null) {
+        return ScaffoldMessenger(
+          key: _scaffoldMessengerKey,
+          child: Scaffold(
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: () async {
+                final String? url = config.value?.registrationLink;
+                if (url != null) {
                 if (await canLaunchUrl(url as Uri)) {
                   await launchUrl(url as Uri);
-                } else {
-                  print('Could not launch $url');
+                  } else {
+                    SnackbarHelper.showSimpleSnackbar(
+                      _scaffoldMessengerKey,
+                      strings.registrationLinkError,
+                      Colors.red,
+                    );
+                  }
                 }
-              }
-            },
-            label: Text(strings.register),
-            icon: const Icon(Icons.edit_outlined),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(height: 16),
-                ScreenDescription(
-                  description: sprintf(strings.eventScreenDescription, [
-                    formatDate(
-                        contestTime.value != null
-                            ? (contestTime.value as DateTime)
-                            : DateTime.now(),
-                        languageCode)
-                  ]),
-                ),
-                const SizedBox(height: 16),
-                Expanded(
-                  child: EventList(
-                    eventList: events,
+              },
+              label: Text(strings.register),
+              icon: const Icon(Icons.edit_outlined),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 16),
+                  ScreenDescription(
+                    description: sprintf(strings.eventScreenDescription, [
+                      formatDate(
+                          contestTime.value != null
+                              ? (contestTime.value as DateTime)
+                              : DateTime.now(),
+                          languageCode)
+                    ]),
                   ),
-                )
-              ],
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: EventList(
+                      eventList: events,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );
