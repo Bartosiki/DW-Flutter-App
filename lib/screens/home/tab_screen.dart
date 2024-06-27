@@ -81,7 +81,7 @@ List<BottomNavigationBarItem> getBottomNavigationItems(
           width: 24,
           height: 24,
           colorFilter: ColorFilter.mode(
-            Theme.of(context).colorScheme.onBackground,
+            Theme.of(context).colorScheme.onSurface,
             BlendMode.srcIn,
           ),
         ),

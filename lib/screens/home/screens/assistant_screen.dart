@@ -20,26 +20,26 @@ class AssistantScreen extends ConsumerWidget {
       content: Scaffold(
         body: Chat(
           theme: DefaultChatTheme(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             inputBackgroundColor: Theme.of(context).colorScheme.primary,
             inputTextColor: Theme.of(context).colorScheme.onPrimary,
             dateDividerTextStyle: TextStyle(
               color:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
+                  Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
               fontSize: 12,
               fontWeight: FontWeight.w800,
               height: 1.333,
             ),
             emptyChatPlaceholderTextStyle: TextStyle(
               color:
-                  Theme.of(context).colorScheme.onBackground.withOpacity(0.6),
+                  Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
               fontSize: 16,
               fontWeight: FontWeight.w500,
               height: 1.5,
             ),
             inputSurfaceTintColor: Theme.of(context).colorScheme.secondary,
             primaryColor: Theme.of(context).colorScheme.primary,
-            secondaryColor: Theme.of(context).colorScheme.surfaceVariant,
+            secondaryColor: Theme.of(context).colorScheme.surfaceContainerHighest,
             sentMessageBodyTextStyle: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary,
               fontSize: 16,

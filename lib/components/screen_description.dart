@@ -19,7 +19,7 @@ class ScreenDescription extends StatelessWidget {
           child: Text(
             description,
             style: TextStyle(
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
               fontWeight: FontWeight.w400,
               fontSize: 16,
             ),

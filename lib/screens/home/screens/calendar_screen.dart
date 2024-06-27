@@ -36,8 +36,8 @@ class CalendarScreen extends ConsumerWidget {
             onPressed: () async {
               final String? url = config.value?.registrationLink;
               if (url != null) {
-                if (await canLaunch(url)) {
-                  await launch(url);
+                if (await canLaunchUrl(url as Uri)) {
+                  await launchUrl(url as Uri);
                 } else {
                   print('Could not launch $url');
                 }
