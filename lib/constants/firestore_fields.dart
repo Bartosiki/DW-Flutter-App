@@ -1,5 +1,6 @@
 class FirestoreConfigFields {
   static const String mainColor = 'mainColor';
+  static const String registrationLink = 'registrationLink';
   FirestoreConfigFields._();
 }
 
@@ -33,6 +34,7 @@ class FirestoreUsersFields {
   static const String isWinner = 'isWinner';
   static const String allowedNotifications = 'allowedNotifications';
   static const String lastScannedQrCodeTime = 'lastScannedQrCodeTime';
+  static const String notificationToken = 'notificationToken';
   FirestoreUsersFields._();
 }
 

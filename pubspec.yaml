@@ -60,6 +60,8 @@ dependencies:
   flutter_dotenv: ^5.1.0
   flutter_chat_types: ^3.6.2
   flutter_riverpod: ^2.5.1
+  firebase_messaging: ^14.9.4
+  flutter_local_notifications: ^17.1.2
   blur: ^3.1.0
 
 dev_dependencies:

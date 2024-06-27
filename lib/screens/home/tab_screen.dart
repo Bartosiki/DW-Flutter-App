@@ -38,7 +38,7 @@ class TabScreen {
         TabScreenType.calendar,
         strings.calendar,
         Paths.calendarIcon,
-        const CalendarScreen(),
+        CalendarScreen(),
       ),
       TabScreen(
         TabScreenType.tasks,

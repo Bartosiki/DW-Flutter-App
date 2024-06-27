@@ -80,5 +80,7 @@ class StringsPl extends Strings {
           signInWithGoogleOrApple: 'Zaloguj się za pomocą Google lub Apple',
           signIn: 'Zaloguj się',
           orContinueAsGuest: 'lub kontynuuj jako gość',
+          registrationLinkError:
+              'Błąd linku rejestracyjnego, znajdż nas na facebooku!',
         );
 }

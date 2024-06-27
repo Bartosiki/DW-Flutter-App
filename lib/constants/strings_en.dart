@@ -78,5 +78,6 @@ class StringsEn extends Strings {
           signInWithGoogleOrApple: 'Sign in with Google or Apple',
           signIn: 'Sign in',
           orContinueAsGuest: 'or continue as a guest',
+          registrationLinkError: 'Registration link error, find us on Facebook',
         );
 }

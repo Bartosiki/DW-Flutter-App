@@ -4,6 +4,7 @@ import 'package:dw_flutter_app/provider/config_provider.dart';
 import 'package:dw_flutter_app/provider/dark_mode/dark_mode_notifier.dart';
 import 'package:dw_flutter_app/screens/home/home_screen.dart';
 import 'package:dw_flutter_app/screens/login/login_screen.dart';
+import 'package:dw_flutter_app/service/notifications_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +19,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  PushNotificationService();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) {
       runApp(
@@ -85,7 +86,7 @@ class App extends StatelessWidget {
 
     return basicTheme.copyWith(
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: colorScheme.background,
+      scaffoldBackgroundColor: colorScheme.surface,
     );
   }
 }
