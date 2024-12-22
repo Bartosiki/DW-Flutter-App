@@ -21,6 +21,8 @@ class StringsPl extends Strings {
               'aby dowiedzieć się więcej o tym, jak wykorzystujemy Twoje dane.',
           calendar: 'Kalendarz',
           tasks: 'Zadania',
+          events: 'Wydarzenia',
+          jobs: 'Oferty pracy',
           scanner: 'Skaner',
           map: 'Mapa',
           assistant: 'Asystent',

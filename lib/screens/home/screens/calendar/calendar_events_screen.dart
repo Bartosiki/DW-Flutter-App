@@ -8,12 +8,12 @@ import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/utility/string_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../components/screen_description.dart';
-import '../../../provider/events_provider.dart';
+import '../../../../components/screen_description.dart';
+import '../../../../provider/events_provider.dart';
 import 'package:sprintf/sprintf.dart';
 
-class CalendarScreen extends ConsumerWidget {
-  CalendarScreen({super.key});
+class CalendarEventsScreen extends ConsumerWidget {
+  CalendarEventsScreen({super.key});
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
 

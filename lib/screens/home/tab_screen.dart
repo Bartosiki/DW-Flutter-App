@@ -1,5 +1,5 @@
 import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
-import 'package:dw_flutter_app/screens/home/screens/calendar_screen.dart';
+import 'package:dw_flutter_app/screens/home/screens/calendar/calendar_screen.dart';
 import 'package:dw_flutter_app/screens/home/screens/map_screen.dart';
 import 'package:dw_flutter_app/screens/home/screens/qr_scanner_screen.dart';
 import 'package:dw_flutter_app/screens/home/screens/tasks/tasks_screen.dart';

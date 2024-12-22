@@ -13,6 +13,8 @@ class Strings {
   final String toLearnMoreAboutHowWeUseYourData;
   final String calendar;
   final String tasks;
+  final String events;
+  final String jobs;
   final String scanner;
   final String map;
   final String assistant;
@@ -77,6 +79,8 @@ class Strings {
     required this.toLearnMoreAboutHowWeUseYourData,
     required this.calendar,
     required this.tasks,
+    required this.events,
+    required this.jobs,
     required this.scanner,
     required this.map,
     required this.assistant,

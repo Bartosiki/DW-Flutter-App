@@ -4,6 +4,15 @@ class FirestoreConfigFields {
   FirestoreConfigFields._();
 }
 
+class FirestoreJobFields {
+  static const String title = 'title';
+  static const String description = 'description';
+  static const String companyName = 'companyName';
+  static const String companyLogo = 'companyLogo';
+  static const String salaryRange = 'salaryRange';
+  FirestoreJobFields._();
+}
+
 class FirestoreEventsFields {
   static const String title = 'title';
   static const String description = 'description';

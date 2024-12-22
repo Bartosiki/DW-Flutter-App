@@ -19,6 +19,8 @@ class StringsEn extends Strings {
               'to learn more about how we use your data.',
           calendar: 'Calendar',
           tasks: 'Tasks',
+          events: 'Events',
+          jobs: 'Job offers',
           scanner: 'Scanner',
           map: 'Map',
           assistant: 'Assistant',
