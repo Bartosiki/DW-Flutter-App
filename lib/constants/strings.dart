@@ -25,6 +25,9 @@ class Strings {
   final String empty;
   final String standingsCardPoints;
   final String darkMode;
+  final String salary;
+  final String jobDescription;
+  final String viewOffer;
   final String logOut;
   final String notifications;
   final String youHaveXPoints;
@@ -80,6 +83,7 @@ class Strings {
     required this.toLearnMoreAboutHowWeUseYourData,
     required this.home,
     required this.tasks,
+    required this.viewOffer,
     required this.events,
     required this.jobs,
     required this.scanner,
@@ -92,6 +96,8 @@ class Strings {
     required this.empty,
     required this.standingsCardPoints,
     required this.darkMode,
+    required this.salary,
+    required this.jobDescription,
     required this.logOut,
     required this.notifications,
     required this.youHaveXPoints,

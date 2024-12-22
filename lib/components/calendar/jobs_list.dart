@@ -40,6 +40,8 @@ class _EventListState extends ConsumerState<JobsList> {
                 companyName: widget.jobList[index].companyName,
                 companyLogo: widget.jobList[index].companyLogo!,
                 salaryRange: widget.jobList[index].salaryRange,
+                description: widget.jobList[index].description,
+                offerUrl: widget.jobList[index].offerUrl,
               );
             },
           ),

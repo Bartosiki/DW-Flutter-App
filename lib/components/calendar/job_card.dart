@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../provider/selected_strings_provider.dart';
 
 class JobCard extends ConsumerWidget {
   const JobCard({
@@ -8,15 +11,21 @@ class JobCard extends ConsumerWidget {
     required this.companyName,
     required this.companyLogo,
     required this.salaryRange,
+    required this.description,
+    required this.offerUrl,
   });
 
   final String title;
   final String companyName;
   final String companyLogo;
   final String salaryRange;
+  final String description;
+  final String offerUrl;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final strings = ref.watch(selectedStringsProvider);
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 3.0),
       child: Card(
@@ -91,45 +100,86 @@ class JobCard extends ConsumerWidget {
   }
 
   Widget _buildJobDetailsBottomSheet(BuildContext context) {
+    final strings = ProviderScope.containerOf(context).read(selectedStringsProvider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min, // Adjust size based on content
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min, // Adjust size based on content
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Job Title
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            companyName,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.grey,
+            const SizedBox(height: 10),
+
+            // Company Name
+            Text(
+              companyName,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
             ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            'Salary: $salaryRange',
-            style: TextStyle(
-              fontSize: 16,
-              color: Theme.of(context).colorScheme.primary,
+            const SizedBox(height: 10),
+
+            // Salary Range
+            Text(
+              '${strings.salary}: $salaryRange',
+              style: TextStyle(
+                fontSize: 16,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context); // Close the bottom sheet
-              },
-              child: const Text('Close'),
+            const SizedBox(height: 20),
+
+            // Job Description
+            Text(
+              strings.jobDescription,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              description,
+              style: const TextStyle(
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Offer URL
+            if (offerUrl.isNotEmpty) ...[
+              ElevatedButton.icon(
+                onPressed: () async {
+                  try {
+                    await launchUrl(Uri.parse(offerUrl));
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Could not open the URL'),
+                      ),
+                    );
+                  }
+                },
+                icon: const Icon(Icons.open_in_new),
+                label: Text(strings.viewOffer),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ],
+        ),
       ),
     );
   }

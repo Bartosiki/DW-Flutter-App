@@ -9,7 +9,8 @@ class Job {
   final String companyName;
   final String? companyLogo;
   final String salaryRange;
-  final String description; // New field for job descriptions
+  final String description;
+  final String offerUrl;
 
   const Job({
     required this.id,
@@ -18,6 +19,7 @@ class Job {
     this.companyLogo,
     required this.salaryRange,
     required this.description,
+    required this.offerUrl,
   });
 
   factory Job.fromJson(Map<String, dynamic> json) {
@@ -27,7 +29,8 @@ class Job {
       companyName: json['companyName'],
       companyLogo: json['companyLogo'],
       salaryRange: json['salaryRange'],
-      description: json['description'], // Parse description from JSON
+      description: json['description'],
+      offerUrl: json['offerUrl'],
     );
   }
 
@@ -41,6 +44,7 @@ class Job {
       companyLogo: companyLogo ?? this.companyLogo,
       salaryRange: salaryRange,
       description: description,
+      offerUrl: offerUrl,
     );
   }
 }
