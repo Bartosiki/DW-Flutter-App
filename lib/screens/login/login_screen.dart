@@ -66,13 +66,13 @@ class LoginScreen extends ConsumerWidget {
                         ref.read(authStateProvider.notifier).loginAnonymously();
                       },
                       style: ButtonStyle(
-                        padding: WidgetStateProperty.all(
+                        padding: MaterialStateProperty.all(
                           const EdgeInsets.symmetric(
                             horizontal: 28.0,
                             vertical: 12.0,
                           ),
                         ),
-                        overlayColor: WidgetStateProperty.all(Colors.black),
+                        overlayColor: MaterialStateProperty.all(Colors.black),
                       ),
                       child: Text(
                         strings.orContinueAsGuest,

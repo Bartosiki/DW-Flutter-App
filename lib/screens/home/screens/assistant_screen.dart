@@ -38,7 +38,7 @@ class AssistantScreen extends ConsumerWidget {
             inputSurfaceTintColor: Theme.of(context).colorScheme.secondary,
             primaryColor: Theme.of(context).colorScheme.primary,
             secondaryColor:
-                Theme.of(context).colorScheme.surfaceContainerHighest,
+                Theme.of(context).colorScheme.surfaceVariant,
             sentMessageBodyTextStyle: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary,
               fontSize: 16,
