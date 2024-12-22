@@ -16,8 +16,8 @@ class CalendarScreen extends ConsumerWidget {
     return ScreenSwitch(
         leftScreen: CalendarEventsScreen(),
         rightScreen: CalendarJobsScreen(),
-        leftIcon: const Icon(Icons.star),
-        rightIcon: const Icon(Icons.leaderboard),
+        leftIcon: const Icon(Icons.calendar_today),
+        rightIcon: const Icon(Icons.work),
         leftLabel: strings.events,
         rightLabel: strings.jobs,
         onSwitch: ref.read(calendarSubpageProvider.notifier).switchCalendarSubpage,
