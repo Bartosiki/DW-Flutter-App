@@ -19,7 +19,7 @@ class StringsPl extends Strings {
           privacyPolicy: 'Polityka prywatności ',
           toLearnMoreAboutHowWeUseYourData:
               'aby dowiedzieć się więcej o tym, jak wykorzystujemy Twoje dane.',
-          calendar: 'Kalendarz',
+          home: 'Strona główna',
           tasks: 'Zadania',
           events: 'Wydarzenia',
           jobs: 'Oferty pracy',
@@ -39,6 +39,8 @@ class StringsPl extends Strings {
           register: 'Rejestracja',
           eventScreenDescription:
               'Kalendarz przedstawia wszystkie wydarzenia, które odbędą się podczas Dnia Wydziału EEIA dnia %s.',
+          jobsScreenDescription:
+              'Oferty pracy od naszych partnerów czekają na Ciebie!',
           taskScreenDescription:
               'Skanuj kody qr i wykonuj zadania! Czekają na Ciebie fantastyczne nagrody!',
           firstFloor: 'Pierwsze piętro',

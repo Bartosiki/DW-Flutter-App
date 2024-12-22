@@ -1,6 +1,4 @@
-import 'package:dw_flutter_app/components/calendar/jobs_list.dart';
-import 'package:dw_flutter_app/model/job.dart';
-import 'package:dw_flutter_app/provider/combined_jobs_provider.dart';
+import 'package:dw_flutter_app/components/calendar/event_list.dart';
 import 'package:dw_flutter_app/snackbar/snackbar_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dw_flutter_app/provider/config_provider.dart';
@@ -11,10 +9,11 @@ import 'package:dw_flutter_app/utility/string_utility.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../components/screen_description.dart';
+import '../../../../provider/events_provider.dart';
 import 'package:sprintf/sprintf.dart';
 
-class CalendarJobsScreen extends ConsumerWidget {
-  CalendarJobsScreen({super.key});
+class EventsSubpage extends ConsumerWidget {
+  EventsSubpage({super.key});
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
 
@@ -24,16 +23,15 @@ class CalendarJobsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final combinedJobs = ref.watch(combinedJobsProvider);
+    final events = ref.watch(eventsProvider);
     final strings = ref.watch(selectedStringsProvider);
     final contestTime = ref.watch(contestTimeProvider);
     final languageCode = ref.watch(languageProvider);
     final config = ref.watch(configProvider);
 
-    return combinedJobs.when(
-      data: (data) {
-        final jobs = data['jobs'];
-        if (jobs == null || jobs.isEmpty) {
+    return events.when(
+      data: (events) {
+        if (events.isEmpty) {
           return Center(
             child: Text(
               strings.empty,
@@ -43,6 +41,25 @@ class CalendarJobsScreen extends ConsumerWidget {
         return ScaffoldMessenger(
           key: _scaffoldMessengerKey,
           child: Scaffold(
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: () async {
+                final String? url = config.value?.registrationLink;
+                if (url != null) {
+                  final Uri uri = Uri.parse(url);
+                  try {
+                    await launchUrl(uri);
+                  } catch (e) {
+                    SnackbarHelper.showSimpleSnackbar(
+                      _scaffoldMessengerKey,
+                      strings.registrationLinkError,
+                      Colors.red,
+                    );
+                  }
+                }
+              },
+              label: Text(strings.register),
+              icon: const Icon(Icons.edit_outlined),
+            ),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -60,8 +77,8 @@ class CalendarJobsScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16),
                   Expanded(
-                    child: JobsList(
-                      jobList: jobs,
+                    child: EventList(
+                      eventList: events,
                     ),
                   )
                 ],

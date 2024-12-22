@@ -8,14 +8,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../provider/auth/is_user_anonymous_provider.dart';
 import 'tab_screen.dart';
 
-class HomeScreen extends ConsumerStatefulWidget {
-  const HomeScreen({super.key});
+class MainScreen extends ConsumerStatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<MainScreen> createState() => _MainScreenState();
 }
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   int _selectedIndex = 0;
 
   @override

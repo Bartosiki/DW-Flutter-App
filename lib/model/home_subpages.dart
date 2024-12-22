@@ -1,0 +1,4 @@
+enum HomeSubpage {
+  homeEvents,
+  homeJobs,
+}

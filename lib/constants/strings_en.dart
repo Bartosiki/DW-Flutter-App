@@ -17,7 +17,7 @@ class StringsEn extends Strings {
           privacyPolicy: 'Privacy Policy ',
           toLearnMoreAboutHowWeUseYourData:
               'to learn more about how we use your data.',
-          calendar: 'Calendar',
+          home: 'Home',
           tasks: 'Tasks',
           events: 'Events',
           jobs: 'Job offers',
@@ -37,6 +37,8 @@ class StringsEn extends Strings {
           register: 'Register',
           eventScreenDescription:
               'The calendar shows all events that will take place during EEIA Faculty Day on %s.',
+          jobsScreenDescription:
+              'The job offers from our partners are waiting for you!',
           taskScreenDescription:
               'Scan QR codes and complete tasks! Fantastic prizes are waiting for you!',
           firstFloor: 'First Floor',

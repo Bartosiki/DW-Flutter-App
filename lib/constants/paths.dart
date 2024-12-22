@@ -1,5 +1,5 @@
 class Paths {
-  static const String calendarIcon = "assets/icons/calendar.svg";
+  static const String homeIcon = "assets/icons/home.svg";
   static const String trophyIcon = "assets/icons/trophy.svg";
   static const String qrCodeIcon = "assets/icons/qr_code.svg";
   static const String mapIcon = "assets/icons/map.svg";

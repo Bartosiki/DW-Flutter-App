@@ -1,5 +1,5 @@
 import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
-import 'package:dw_flutter_app/screens/home/screens/calendar/calendar_screen.dart';
+import 'package:dw_flutter_app/screens/home/screens/home/home_screen.dart';
 import 'package:dw_flutter_app/screens/home/screens/map_screen.dart';
 import 'package:dw_flutter_app/screens/home/screens/qr_scanner_screen.dart';
 import 'package:dw_flutter_app/screens/home/screens/tasks/tasks_screen.dart';
@@ -10,7 +10,7 @@ import '../../constants/paths.dart';
 import 'screens/assistant_screen.dart';
 
 enum TabScreenType {
-  calendar,
+  home,
   tasks,
   qrScanner,
   map,
@@ -35,10 +35,10 @@ class TabScreen {
 
     return [
       TabScreen(
-        TabScreenType.calendar,
-        strings.calendar,
-        Paths.calendarIcon,
-        CalendarScreen(),
+        TabScreenType.home,
+        strings.home,
+        Paths.homeIcon,
+        const HomeScreen(),
       ),
       TabScreen(
         TabScreenType.tasks,

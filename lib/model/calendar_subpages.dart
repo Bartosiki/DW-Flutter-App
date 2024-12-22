@@ -1,4 +1,0 @@
-enum CalendarSubpage {
-  calendarEvents,
-  calendarJobs,
-}

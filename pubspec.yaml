@@ -96,6 +96,7 @@ flutter:
     - assets/animations/kitty.json
     - assets/icons/ai_sparkles.svg
     - assets/icons/calendar.svg
+    - assets/icons/home.svg
     - assets/icons/map.svg
     - assets/icons/qr_code.svg
     - assets/icons/trophy.svg

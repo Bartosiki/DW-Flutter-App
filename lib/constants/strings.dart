@@ -11,7 +11,7 @@ class Strings {
   final String andConfirmThatYouHaveReadOur;
   final String privacyPolicy;
   final String toLearnMoreAboutHowWeUseYourData;
-  final String calendar;
+  final String home;
   final String tasks;
   final String events;
   final String jobs;
@@ -30,6 +30,7 @@ class Strings {
   final String youHaveXPoints;
   final String register;
   final String eventScreenDescription;
+  final String jobsScreenDescription;
   final String taskScreenDescription;
   final String firstFloor;
   final String groundFloor;
@@ -77,7 +78,7 @@ class Strings {
     required this.andConfirmThatYouHaveReadOur,
     required this.privacyPolicy,
     required this.toLearnMoreAboutHowWeUseYourData,
-    required this.calendar,
+    required this.home,
     required this.tasks,
     required this.events,
     required this.jobs,
@@ -96,6 +97,7 @@ class Strings {
     required this.youHaveXPoints,
     required this.register,
     required this.eventScreenDescription,
+    required this.jobsScreenDescription,
     required this.taskScreenDescription,
     required this.firstFloor,
     required this.groundFloor,
