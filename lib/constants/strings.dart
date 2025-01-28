@@ -14,6 +14,7 @@ class Strings {
   final String home;
   final String tasks;
   final String events;
+  final String salaryUndisclosed;
   final String jobs;
   final String scanner;
   final String map;
@@ -83,6 +84,7 @@ class Strings {
     required this.toLearnMoreAboutHowWeUseYourData,
     required this.home,
     required this.tasks,
+    required this.salaryUndisclosed,
     required this.viewOffer,
     required this.events,
     required this.jobs,

@@ -26,6 +26,7 @@ class StringsEn extends Strings {
           salary: 'Salary',
           jobDescription: 'Job description',
           viewOffer: 'View offer',
+          salaryUndisclosed: 'Salary undisclosed',
           assistant: 'Assistant',
           profile: 'Profile',
           yourTasks: 'Your tasks',

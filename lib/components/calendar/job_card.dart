@@ -10,16 +10,16 @@ class JobCard extends ConsumerWidget {
     required this.title,
     required this.companyName,
     required this.companyLogo,
-    required this.salaryRange,
-    required this.description,
+    this.salaryRange,
+    this.description,
     required this.offerUrl,
   });
 
   final String title;
   final String companyName;
   final String companyLogo;
-  final String salaryRange;
-  final String description;
+  final String? salaryRange; // Nullable
+  final String? description; // Nullable
   final String offerUrl;
 
   @override
@@ -74,7 +74,7 @@ class JobCard extends ConsumerWidget {
                         ),
                         const SizedBox(height: 5), // Add spacing between text
                         Text(
-                          salaryRange,
+                          salaryRange ?? strings.salaryUndisclosed, // Use default if null
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -102,7 +102,8 @@ class JobCard extends ConsumerWidget {
   Widget _buildJobDetailsBottomSheet(BuildContext context) {
     final strings = ProviderScope.containerOf(context).read(selectedStringsProvider);
 
-    return Padding(
+    return Container(
+      width: MediaQuery.of(context).size.width, // Set the width to full screen width
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       child: SingleChildScrollView(
         child: Column(
@@ -131,7 +132,7 @@ class JobCard extends ConsumerWidget {
 
             // Salary Range
             Text(
-              '${strings.salary}: $salaryRange',
+              salaryRange != null ? '${strings.salary}: ${salaryRange!}' : strings.salaryUndisclosed, // Use default if null
               style: TextStyle(
                 fontSize: 16,
                 color: Theme.of(context).colorScheme.primary,
@@ -140,21 +141,23 @@ class JobCard extends ConsumerWidget {
             const SizedBox(height: 20),
 
             // Job Description
-            Text(
-              strings.jobDescription,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            if (description != null) ...[
+              Text(
+                strings.jobDescription,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              description,
-              style: const TextStyle(
-                fontSize: 16,
+              const SizedBox(height: 8),
+              Text(
+                description!,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
+              const SizedBox(height: 20),
+            ],
 
             // Offer URL
             if (offerUrl.isNotEmpty) ...[

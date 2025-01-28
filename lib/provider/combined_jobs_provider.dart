@@ -7,11 +7,10 @@ final combinedJobsProvider = FutureProvider.autoDispose((ref) async {
   final jobsImages = await ref.watch(jobsImagesProvider.future);
 
   final jobsWithImages = jobs.asMap().entries.map((entry) {
-    final index = entry.key;
     final job = entry.value;
-    final companyLogo = (jobsImages != null && index < jobsImages.length)
-        ? jobsImages[index]
-        : null;
+    final companyLogo = jobsImages?.firstWhere(
+          (image) => image.contains(job.companyLogo!),
+    );
     return job.copyWith(companyLogo: companyLogo);
   }).toList();
 

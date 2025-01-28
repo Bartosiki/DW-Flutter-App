@@ -28,6 +28,7 @@ class StringsPl extends Strings {
           salary: 'Wynagrodzenie',
           jobDescription: 'Opis stanowiska',
           viewOffer: 'Zobacz ofertę',
+          salaryUndisclosed: 'Wynagrodzenie nieujawnione',
           assistant: 'Asystent',
           profile: 'Profil',
           yourTasks: 'Twoje zadania',

@@ -8,17 +8,17 @@ class Job {
   final String title;
   final String companyName;
   final String? companyLogo;
-  final String salaryRange;
-  final String description;
+  final String? salaryRange;
+  final String? description;
   final String offerUrl;
 
   const Job({
     required this.id,
     required this.title,
     required this.companyName,
-    this.companyLogo,
-    required this.salaryRange,
-    required this.description,
+    required this.companyLogo,
+    this.salaryRange,
+    this.description,
     required this.offerUrl,
   });
 
