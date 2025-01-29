@@ -38,7 +38,8 @@ class JobCard extends ConsumerWidget {
                   context: context,
                   isScrollControlled: true, // Enables full-screen bottom sheets
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20)),
                   ),
                   builder: (context) => _buildJobDetailsBottomSheet(context),
                 );
@@ -74,7 +75,8 @@ class JobCard extends ConsumerWidget {
                         ),
                         const SizedBox(height: 5), // Add spacing between text
                         Text(
-                          salaryRange ?? strings.salaryUndisclosed, // Use default if null
+                          salaryRange ?? strings.salaryUndisclosed,
+                          // Use default if null
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -100,10 +102,13 @@ class JobCard extends ConsumerWidget {
   }
 
   Widget _buildJobDetailsBottomSheet(BuildContext context) {
-    final strings = ProviderScope.containerOf(context).read(selectedStringsProvider);
+    final strings =
+        ProviderScope.containerOf(context).read(selectedStringsProvider);
 
     return Container(
-      width: MediaQuery.of(context).size.width, // Set the width to full screen width
+      width: MediaQuery.of(context)
+          .size
+          .width, // Set the width to full screen width
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       child: SingleChildScrollView(
         child: Column(
@@ -132,7 +137,9 @@ class JobCard extends ConsumerWidget {
 
             // Salary Range
             Text(
-              salaryRange != null ? '${strings.salary}: ${salaryRange!}' : strings.salaryUndisclosed, // Use default if null
+              salaryRange != null
+                  ? '${strings.salary}: ${salaryRange!}'
+                  : strings.salaryUndisclosed, // Use default if null
               style: TextStyle(
                 fontSize: 16,
                 color: Theme.of(context).colorScheme.primary,
@@ -176,7 +183,8 @@ class JobCard extends ConsumerWidget {
                 icon: const Icon(Icons.open_in_new),
                 label: Text(strings.viewOffer),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 ),
               ),
               const SizedBox(height: 20),

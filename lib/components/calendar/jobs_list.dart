@@ -25,7 +25,6 @@ class _EventListState extends ConsumerState<JobsList> {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         Expanded(
