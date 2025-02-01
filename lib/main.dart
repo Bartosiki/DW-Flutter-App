@@ -2,7 +2,7 @@ import 'package:dw_flutter_app/constants/app_colors.dart';
 import 'package:dw_flutter_app/extensions/hex_string_color_to_color.dart';
 import 'package:dw_flutter_app/provider/config_provider.dart';
 import 'package:dw_flutter_app/provider/dark_mode/dark_mode_notifier.dart';
-import 'package:dw_flutter_app/screens/home/home_screen.dart';
+import 'package:dw_flutter_app/screens/home/main_screen.dart';
 import 'package:dw_flutter_app/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -63,7 +63,7 @@ class App extends StatelessWidget {
             body: isLoggedIn
                 ? configValue.when(
                     data: (config) => config != null
-                        ? const HomeScreen()
+                        ? const MainScreen()
                         : const Center(child: CircularProgressIndicator()),
                     loading: () =>
                         const Center(child: CircularProgressIndicator()),

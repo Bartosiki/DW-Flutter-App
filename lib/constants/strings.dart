@@ -11,8 +11,11 @@ class Strings {
   final String andConfirmThatYouHaveReadOur;
   final String privacyPolicy;
   final String toLearnMoreAboutHowWeUseYourData;
-  final String calendar;
+  final String home;
   final String tasks;
+  final String events;
+  final String salaryUndisclosed;
+  final String jobs;
   final String scanner;
   final String map;
   final String assistant;
@@ -23,11 +26,15 @@ class Strings {
   final String empty;
   final String standingsCardPoints;
   final String darkMode;
+  final String salary;
+  final String jobDescription;
+  final String viewOffer;
   final String logOut;
   final String notifications;
   final String youHaveXPoints;
   final String register;
   final String eventScreenDescription;
+  final String jobsScreenDescription;
   final String taskScreenDescription;
   final String firstFloor;
   final String groundFloor;
@@ -75,8 +82,12 @@ class Strings {
     required this.andConfirmThatYouHaveReadOur,
     required this.privacyPolicy,
     required this.toLearnMoreAboutHowWeUseYourData,
-    required this.calendar,
+    required this.home,
     required this.tasks,
+    required this.salaryUndisclosed,
+    required this.viewOffer,
+    required this.events,
+    required this.jobs,
     required this.scanner,
     required this.map,
     required this.assistant,
@@ -87,11 +98,14 @@ class Strings {
     required this.empty,
     required this.standingsCardPoints,
     required this.darkMode,
+    required this.salary,
+    required this.jobDescription,
     required this.logOut,
     required this.notifications,
     required this.youHaveXPoints,
     required this.register,
     required this.eventScreenDescription,
+    required this.jobsScreenDescription,
     required this.taskScreenDescription,
     required this.firstFloor,
     required this.groundFloor,
