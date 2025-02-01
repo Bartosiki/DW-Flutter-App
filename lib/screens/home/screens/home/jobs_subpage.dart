@@ -1,6 +1,5 @@
 import 'package:dw_flutter_app/components/calendar/jobs_list.dart';
 import 'package:dw_flutter_app/provider/combined_jobs_provider.dart';
-import 'package:dw_flutter_app/provider/config_provider.dart';
 import 'package:dw_flutter_app/provider/contest_time_provider.dart';
 import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
@@ -25,7 +24,6 @@ class JobsSubpage extends ConsumerWidget {
     final strings = ref.watch(selectedStringsProvider);
     final contestTime = ref.watch(contestTimeProvider);
     final languageCode = ref.watch(languageProvider);
-    final config = ref.watch(configProvider);
 
     return combinedJobs.when(
       data: (data) {

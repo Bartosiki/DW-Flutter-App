@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../constants/paths.dart';
-import 'screens/assistant_screen.dart';
 
 enum TabScreenType {
   home,
@@ -57,12 +56,6 @@ class TabScreen {
         strings.map,
         Paths.mapIcon,
         const MapScreen(),
-      ),
-      TabScreen(
-        TabScreenType.assistant,
-        strings.assistant,
-        Paths.aiAssistantIcon,
-        const AssistantScreen(),
       ),
     ];
   }

@@ -1,12 +1,7 @@
-import 'package:dw_flutter_app/components/calendar/event_list_filter.dart';
 import 'package:dw_flutter_app/components/calendar/job_card.dart';
-import 'package:dw_flutter_app/constants/event_constants.dart';
 import 'package:dw_flutter_app/model/job.dart';
-import 'package:dw_flutter_app/provider/language/language_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../model/event.dart';
-import 'event_card.dart';
 
 class JobsList extends ConsumerStatefulWidget {
   const JobsList({
