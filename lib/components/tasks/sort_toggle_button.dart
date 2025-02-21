@@ -44,10 +44,11 @@ class _SortToggleButtonState extends ConsumerState<SortToggleButton> {
       },
       children: [
         SizedBox(
-          width: 100,
+          width: 110,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(
                   Icons.star,
@@ -60,7 +61,7 @@ class _SortToggleButtonState extends ConsumerState<SortToggleButton> {
           ),
         ),
         SizedBox(
-          width: 100,
+          width: 110,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
