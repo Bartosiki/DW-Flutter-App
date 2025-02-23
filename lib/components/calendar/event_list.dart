@@ -16,32 +16,24 @@ class EventList extends ConsumerStatefulWidget {
 }
 
 class _EventListState extends ConsumerState<EventList> {
-  String? selectedCategory;
-
   @override
   Widget build(BuildContext context) {
-
-    List<Event> filteredEvents = widget.eventList
-        .where((event) =>
-            selectedCategory == null || event.category == selectedCategory)
-        .toList();
-
     return Column(
       children: [
         Expanded(
           child: ListView.builder(
-            itemCount: filteredEvents.length + 1,
+            itemCount: widget.eventList.length + 1,
             itemBuilder: (context, index) {
-              if (index == filteredEvents.length) {
+              if (index == widget.eventList.length) {
                 return const SizedBox(height: 50);
               }
               return EventCard(
-                title: filteredEvents[index].title,
-                partner: filteredEvents[index].partner,
-                time: filteredEvents[index].timeStart,
-                room: filteredEvents[index].room,
-                category: filteredEvents[index].category,
-                type: filteredEvents[index].type,
+                title: widget.eventList[index].title,
+                partner: widget.eventList[index].partner,
+                time: widget.eventList[index].timeStart,
+                room: widget.eventList[index].room,
+                category: widget.eventList[index].category,
+                type: widget.eventList[index].type,
               );
             },
           ),

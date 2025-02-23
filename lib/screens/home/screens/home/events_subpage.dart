@@ -17,10 +17,6 @@ class EventsSubpage extends ConsumerWidget {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
 
-  static const registrationErrorSnackbar = SnackBar(
-    content: Text('Yay! A SnackBar!'),
-  );
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final events = ref.watch(eventsProvider);
