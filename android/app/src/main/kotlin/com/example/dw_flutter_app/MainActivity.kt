@@ -1,4 +1,4 @@
-package com.example.dw_flutter_app
+package com.eeia.dw
 
 import io.flutter.embedding.android.FlutterActivity
 
