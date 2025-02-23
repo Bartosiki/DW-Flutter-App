@@ -51,3 +51,4 @@ firebase.json
 /ios/Runner/GoogleService-Info.plist
 .vscode/settings.json
 .fvm/
+upload-keystore.jks

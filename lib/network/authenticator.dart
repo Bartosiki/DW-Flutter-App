@@ -44,17 +44,11 @@ class Authenticator {
 
   Future<AuthResult> signInWithApple() async {
     try {
-      final appleCredential = await SignInWithApple.getAppleIDCredential(
-        scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
-        ],
-      );
-      final oauthCredential = OAuthProvider("apple.com").credential(
-        idToken: appleCredential.identityToken,
-        accessToken: appleCredential.authorizationCode,
-      );
-      await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      final provider = AppleAuthProvider();
+      provider.addScope('email');
+      provider.addScope('name');
+
+      await FirebaseAuth.instance.signInWithProvider(provider);
       return AuthResult.success;
     } catch (e) {
       return AuthResult.failure;
