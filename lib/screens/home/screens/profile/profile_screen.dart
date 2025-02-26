@@ -4,6 +4,7 @@ import 'package:dw_flutter_app/screens/home/screens/profile/sections/account_det
 import 'package:dw_flutter_app/screens/home/screens/profile/sections/account_settings.dart';
 import 'package:dw_flutter_app/screens/home/screens/profile/sections/partners.dart';
 import 'package:dw_flutter_app/screens/home/screens/profile/sections/patrons.dart';
+import 'package:dw_flutter_app/screens/home/screens/profile/sections/profile_management.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../provider/auth/is_user_anonymous_provider.dart';
@@ -54,6 +55,10 @@ class ProfileScreen extends ConsumerWidget {
                 ProfileElement(
                   title: strings.partnersTitle,
                   children: buildProfilePartners(context, ref),
+                ),
+                ProfileElement(
+                  title: "Manage your profile",
+                  children: buildProfileManagement(context, ref),
                 ),
               ],
             ),

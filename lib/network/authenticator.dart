@@ -43,60 +43,65 @@ class Authenticator {
   }
 
   Future<AuthResult> signInWithApple() async {
-  try {
-    final isAvailable = await SignInWithApple.isAvailable();
-    if (!isAvailable) {
+    try {
+      final isAvailable = await SignInWithApple.isAvailable();
+      if (!isAvailable) {
+        return AuthResult.failure;
+      }
+
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      if (appleCredential.identityToken == null) {
+        return AuthResult.aborted;
+      }
+
+      final oauthCredential = OAuthProvider('apple.com').credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      final firebaseUser = userCredential.user;
+
+      if (firebaseUser != null) {
+        if (appleCredential.givenName != null &&
+            appleCredential.familyName != null) {
+          final displayName =
+              '${appleCredential.givenName} ${appleCredential.familyName}'
+                  .trim();
+
+          if (firebaseUser.displayName == null ||
+              firebaseUser.displayName!.isEmpty) {
+            await firebaseUser.updateDisplayName(displayName);
+          }
+        }
+
+        return AuthResult.success;
+      }
+
+      return AuthResult.failure;
+    } on SignInWithAppleAuthorizationException catch (e) {
+      switch (e.code) {
+        case AuthorizationErrorCode.canceled:
+          return AuthResult.aborted;
+        case AuthorizationErrorCode.failed:
+        case AuthorizationErrorCode.invalidResponse:
+        case AuthorizationErrorCode.notHandled:
+        case AuthorizationErrorCode.unknown:
+          return AuthResult.failure;
+        case AuthorizationErrorCode.notInteractive:
+          return AuthResult.failure;
+      }
+    } catch (e) {
       return AuthResult.failure;
     }
-
-    final appleCredential = await SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-    );
-
-    if (appleCredential.identityToken == null) {
-      return AuthResult.aborted;
-    }
-
-    final oauthCredential = OAuthProvider('apple.com').credential(
-      idToken: appleCredential.identityToken,
-      accessToken: appleCredential.authorizationCode,
-    );
-
-    final userCredential = await FirebaseAuth.instance.signInWithCredential(oauthCredential);
-    final firebaseUser = userCredential.user;
-
-    if (firebaseUser != null) {
-      if (appleCredential.givenName != null && appleCredential.familyName != null) {
-        final displayName = '${appleCredential.givenName} ${appleCredential.familyName}'.trim();
-        
-        if (firebaseUser.displayName == null || firebaseUser.displayName!.isEmpty) {
-          await firebaseUser.updateDisplayName(displayName);
-        }
-      }
-      
-      return AuthResult.success;
-    }
-
-    return AuthResult.failure;
-  } on SignInWithAppleAuthorizationException catch (e) {
-    switch (e.code) {
-      case AuthorizationErrorCode.canceled:
-        return AuthResult.aborted;
-      case AuthorizationErrorCode.failed:
-      case AuthorizationErrorCode.invalidResponse:
-      case AuthorizationErrorCode.notHandled:
-      case AuthorizationErrorCode.unknown:
-        return AuthResult.failure;
-      case AuthorizationErrorCode.notInteractive:
-        return AuthResult.failure;
-    }
-  } catch (e) {
-    return AuthResult.failure;
   }
-}
 
   Future<AuthResult> signInAnonymously() async {
     try {
@@ -104,6 +109,20 @@ class Authenticator {
       return AuthResult.anonymous;
     } catch (e) {
       return AuthResult.failure;
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      print(user);
+      if (user != null) {
+        print("deleting user");
+        await user.delete();
+        print("user deleted");
+      }
+    } catch (e) {
+      throw Exception('Failed to delete account');
     }
   }
 }

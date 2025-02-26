@@ -7,6 +7,14 @@ class Strings {
   final String continueWithGoogle;
   final String continueWithApple;
   final String bySigningUpYouAgreeToOur;
+  final String deleteProfile1;
+  final String deleteProfile2;
+  final String profileCancelDelete;
+  final String profileDelete;
+  final String profileDeleteButton;
+  final String profileDeleteConfirmation;
+  final String profileDeleteFailed;
+  final String profileDeleteSuccess;
   final String termsOfService;
   final String andConfirmThatYouHaveReadOur;
   final String privacyPolicy;
@@ -83,6 +91,14 @@ class Strings {
     required this.privacyPolicy,
     required this.toLearnMoreAboutHowWeUseYourData,
     required this.home,
+    required this.deleteProfile1,
+    required this.deleteProfile2,
+    required this.profileCancelDelete,
+    required this.profileDelete,
+    required this.profileDeleteButton,
+    required this.profileDeleteConfirmation,
+    required this.profileDeleteFailed,
+    required this.profileDeleteSuccess,
     required this.tasks,
     required this.salaryUndisclosed,
     required this.viewOffer,

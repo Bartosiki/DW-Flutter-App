@@ -117,4 +117,22 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
       state = const AuthState.unknown();
     }
   }
+
+  Future<void> deleteProfile({Function? onDeleted}) async {
+    state = state.copiedWithIsLoading(true);
+    final userId = _authenticator.userId;
+    if (userId != null) {
+      try {
+        await _userInfoStorage.deleteUserInfo(userId);
+        await _authenticator.deleteAccount();
+        state = const AuthState.unknown();
+        if (onDeleted != null) {
+          onDeleted();
+        }
+      } catch (error) {
+        state = state.copiedWithIsLoading(false);
+        throw error;
+      }
+    }
+  }
 }

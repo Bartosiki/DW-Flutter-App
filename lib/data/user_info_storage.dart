@@ -129,4 +129,19 @@ class UserInfoStorage {
       },
     );
   }
+
+  Future<void> deleteUserInfo(String userId) async {
+    final userSnapshot = await FirebaseFirestore.instance
+        .collection(FirestoreCollections.users)
+        .where(FirestoreUsersFields.userId, isEqualTo: userId)
+        .limit(1)
+        .get();
+
+    if (userSnapshot.docs.isEmpty) {
+      throw UserNotFound(userId);
+    }
+
+    final userDoc = userSnapshot.docs.first;
+    await userDoc.reference.delete();
+  }
 }
