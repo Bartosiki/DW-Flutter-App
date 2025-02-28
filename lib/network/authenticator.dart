@@ -1,3 +1,4 @@
+import 'package:dw_flutter_app/exceptions/reauth_required_exception.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -115,14 +116,61 @@ class Authenticator {
   Future<void> deleteAccount() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
-      print(user);
       if (user != null) {
-        print("deleting user");
         await user.delete();
-        print("user deleted");
       }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        // We'll handle this in the AuthStateNotifier
+        throw ReauthRequiredException();
+      }
+      throw Exception('Failed to delete account: ${e.message}');
     } catch (e) {
-      throw Exception('Failed to delete account');
+      throw Exception('Failed to delete account: $e');
+    }
+  }
+
+  Future<bool> reauthenticateWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final signInAccount = await googleSignIn.signIn();
+      if (signInAccount == null) {
+        return false;
+      }
+
+      final googleAuth = await signInAccount.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await FirebaseAuth.instance.currentUser
+          ?.reauthenticateWithCredential(credential);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> reauthenticateWithApple() async {
+    try {
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      final oauthCredential = OAuthProvider('apple.com').credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      await FirebaseAuth.instance.currentUser
+          ?.reauthenticateWithCredential(oauthCredential);
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 }

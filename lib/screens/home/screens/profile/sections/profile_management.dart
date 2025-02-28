@@ -1,3 +1,4 @@
+import 'package:dw_flutter_app/exceptions/reauth_required_exception.dart';
 import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/provider/auth/auth_state_provider.dart';
 import 'package:flutter/material.dart';
@@ -39,14 +40,69 @@ List<Widget> buildProfileManagement(BuildContext context, WidgetRef ref) {
                   // Close the confirmation dialog first
                   Navigator.of(dialogContext).pop();
 
+                  // Show loading dialog
+                  showDialog(
+                    context: profileContext,
+                    barrierDismissible: false,
+                    builder: (context) => const AlertDialog(
+                      content: Row(
+                        children: [
+                          CircularProgressIndicator(),
+                          SizedBox(width: 20),
+                          Text("Deleting profile...")
+                        ],
+                      ),
+                    ),
+                  );
+
                   // Delete the profile
                   await ref.read(authStateProvider.notifier).deleteProfile();
+
+                  // Close loading dialog
+                  if (profileContext.mounted) {
+                    Navigator.of(profileContext).pop();
+                  }
 
                   // Close the profile modal using the original context
                   if (profileContext.mounted) {
                     Navigator.of(profileContext).pop();
                   }
+                } on ReauthRequiredException {
+                  // Close loading dialog if open
+                  if (profileContext.mounted) {
+                    Navigator.of(profileContext).pop();
+                  }
+
+                  // Show re-auth required dialog
+                  if (profileContext.mounted) {
+                    showDialog(
+                      context: profileContext,
+                      builder: (context) => AlertDialog(
+                        // title: Text(strings.recentAuthNeeded),
+                        // content: Text(strings.deleteProfileReauthMessage),
+                        title: Text("Reauth needed"),
+                        content: Text("Reauth message needed"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              // Logout user
+                              ref.read(authStateProvider.notifier).logOut();
+                              // Close profile screen
+                              Navigator.of(profileContext).pop();
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
                 } catch (e) {
+                  // Close loading dialog if open
+                  if (profileContext.mounted) {
+                    Navigator.of(profileContext).pop();
+                  }
+
                   if (profileContext.mounted) {
                     showDialog(
                       context: profileContext,

@@ -16,117 +16,141 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final strings = ref.watch(selectedStringsProvider);
+    final authState = ref.watch(authStateProvider);
 
-    return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24.0,
-            vertical: 16,
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 600.0,
-                      child: Lottie.asset(
-                        "assets/animations/kitty.json",
-                        reverse: true,
-                      ),
-                    ),
-                    LoginButton(
-                      text: strings.continueWithGoogle,
-                      imagePath: "assets/images/google_logo.png",
-                      onPressed: () {
-                        ref.read(authStateProvider.notifier).loginWithGoogle();
-                      },
-                    ),
-                    if (Platform.isIOS)
-                      Column(
-                        children: [
-                          const SizedBox(height: 12.0),
-                          LoginButton(
-                            text: strings.continueWithApple,
-                            imagePath: "assets/images/apple_logo.png",
-                            onPressed: () {
-                              ref.read(authStateProvider.notifier).loginWithApple();
-                            },
-                          ),
-                        ],
-                      ),
-                    const SizedBox(height: 6.0),
-                    TextButton(
-                      onPressed: () {
-                        ref.read(authStateProvider.notifier).loginAnonymously();
-                      },
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all(
-                          const EdgeInsets.symmetric(
-                            horizontal: 28.0,
-                            vertical: 12.0,
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: AppColors.backgroundColor,
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 16,
+              ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 600.0,
+                          child: Lottie.asset(
+                            "assets/animations/kitty.json",
+                            reverse: true,
                           ),
                         ),
-                        overlayColor: MaterialStateProperty.all(Colors.black),
-                      ),
-                      child: Text(
-                        strings.orContinueAsGuest,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.0,
+                        LoginButton(
+                          text: strings.continueWithGoogle,
+                          imagePath: "assets/images/google_logo.png",
+                          onPressed: () {
+                            ref
+                                .read(authStateProvider.notifier)
+                                .loginWithGoogle();
+                          },
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 12.0),
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
-                      child: DividerWithMargins(),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: LoginScreenTermsAgreementWidget(),
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const Image(
-                      image: AssetImage("assets/images/dw_logo_white.png"),
-                      height: 100.0,
-                    ),
-                    const SizedBox(height: 26.0),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 64.0),
-                      child: Text(
-                        strings.signUpToTakePartInOurEvent,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 36.0,
-                          fontWeight: FontWeight.w500,
+                        if (Platform.isIOS)
+                          Column(
+                            children: [
+                              const SizedBox(height: 12.0),
+                              LoginButton(
+                                text: strings.continueWithApple,
+                                imagePath: "assets/images/apple_logo.png",
+                                onPressed: () {
+                                  ref
+                                      .read(authStateProvider.notifier)
+                                      .loginWithApple();
+                                },
+                              ),
+                            ],
+                          ),
+                        const SizedBox(height: 6.0),
+                        TextButton(
+                          onPressed: () {
+                            ref
+                                .read(authStateProvider.notifier)
+                                .loginAnonymously();
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(
+                                horizontal: 28.0,
+                                vertical: 12.0,
+                              ),
+                            ),
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.black),
+                          ),
+                          child: Text(
+                            strings.orContinueAsGuest,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                            ),
+                          ),
                         ),
-                      ),
+                        const SizedBox(height: 12.0),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 10.0),
+                          child: DividerWithMargins(),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: LoginScreenTermsAgreementWidget(),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Image(
+                          image: AssetImage("assets/images/dw_logo_white.png"),
+                          height: 100.0,
+                        ),
+                        const SizedBox(height: 26.0),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 64.0),
+                          child: Text(
+                            strings.signUpToTakePartInOurEvent,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 36.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
-      ),
+        // Loading overlay
+        if (authState.isLoading)
+          Container(
+            color: Colors.black54,
+            width: double.infinity,
+            height: double.infinity,
+            child: const Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

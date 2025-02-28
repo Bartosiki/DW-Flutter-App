@@ -1,3 +1,4 @@
+import 'package:dw_flutter_app/exceptions/reauth_required_exception.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../network/authenticator.dart';
@@ -122,8 +123,38 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     final userId = _authenticator.userId;
     if (userId != null) {
       try {
-        await _userInfoStorage.deleteUserInfo(userId);
-        await _authenticator.deleteAccount();
+        // First delete the user info from Firestore
+
+        // Then try to delete the Firebase account
+        try {
+          await logOut();
+          await _authenticator.deleteAccount();
+          await _userInfoStorage.deleteUserInfo(userId);
+        } on ReauthRequiredException {
+          // Need to re-authenticate first
+          bool reauthSuccess = false;
+
+          // Try re-authentication based on current auth method
+          if (!_authenticator.isAnonymous) {
+            // Try to determine if user signed in with Google or Apple
+            // You might want to store this info when they sign in
+            reauthSuccess = await _authenticator.reauthenticateWithGoogle();
+
+            if (!reauthSuccess) {
+              reauthSuccess = await _authenticator.reauthenticateWithApple();
+            }
+          }
+
+          if (reauthSuccess) {
+            // Try deleting again after re-authentication
+            await logOut();
+            await _authenticator.deleteAccount();
+            await _userInfoStorage.deleteUserInfo(userId);
+          } else {
+            throw const ReauthRequiredException();
+          }
+        }
+
         state = const AuthState.unknown();
         if (onDeleted != null) {
           onDeleted();
