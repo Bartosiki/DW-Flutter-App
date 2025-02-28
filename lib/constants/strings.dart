@@ -79,6 +79,10 @@ class Strings {
   final String signIn;
   final String orContinueAsGuest;
   final String registrationLinkError;
+  final String deletingProfile;
+  final String reauthNeeded;
+  final String reauthNeededDescription;
+  final String managementTitle;
 
   const Strings({
     required this.appName,
@@ -158,5 +162,9 @@ class Strings {
     required this.signIn,
     required this.orContinueAsGuest,
     required this.registrationLinkError,
+    required this.deletingProfile,
+    required this.reauthNeeded,
+    required this.reauthNeededDescription,
+    required this.managementTitle,
   });
 }

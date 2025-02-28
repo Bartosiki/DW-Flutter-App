@@ -57,7 +57,7 @@ class ProfileScreen extends ConsumerWidget {
                   children: buildProfilePartners(context, ref),
                 ),
                 ProfileElement(
-                  title: "Manage your profile",
+                  title: strings.managementTitle,
                   children: buildProfileManagement(context, ref),
                 ),
               ],

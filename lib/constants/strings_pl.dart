@@ -98,5 +98,10 @@ class StringsPl extends Strings {
           orContinueAsGuest: 'lub kontynuuj jako gość',
           registrationLinkError:
               'Błąd linku rejestracyjnego, znajdż nas na facebooku!',
+          deletingProfile: 'Usuwanie profilu...',
+          reauthNeeded: 'Wymagana reautoryzacja',
+          reauthNeededDescription:
+              'Aby wykonać tę akcję, musisz się ponownie zautoryzować.',
+          managementTitle: 'Zarządzanie profilem',
         );
 }

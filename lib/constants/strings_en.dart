@@ -95,5 +95,10 @@ class StringsEn extends Strings {
           signIn: 'Sign in',
           orContinueAsGuest: 'or continue as a guest',
           registrationLinkError: 'Registration link error, find us on Facebook',
+          deletingProfile: 'Deleting profile...',
+          reauthNeeded: 'Reauthentication needed',
+          reauthNeededDescription:
+              'To perform this action, you need to reauthenticate.',
+          managementTitle: 'Manage your profile',
         );
 }

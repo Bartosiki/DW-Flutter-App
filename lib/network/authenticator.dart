@@ -119,14 +119,10 @@ class Authenticator {
       if (user != null) {
         await user.delete();
       }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'requires-recent-login') {
-        // We'll handle this in the AuthStateNotifier
-        throw ReauthRequiredException();
-      }
-      throw Exception('Failed to delete account: ${e.message}');
+    } on FirebaseAuthException {
+      throw const ReauthRequiredException();
     } catch (e) {
-      throw Exception('Failed to delete account: $e');
+      throw const ReauthRequiredException();
     }
   }
 
