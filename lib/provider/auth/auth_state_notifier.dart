@@ -123,15 +123,10 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     final userId = _authenticator.userId;
     if (userId != null) {
       try {
-        // First delete the user info from Firestore
-
-        // Then try to delete the Firebase account
+        await _userInfoStorage.deleteUserInfo(userId);
         try {
-          await logOut();
           await _authenticator.deleteAccount();
-          await _userInfoStorage.deleteUserInfo(userId);
         } on ReauthRequiredException {
-          // Need to re-authenticate first
           bool reauthSuccess = false;
 
           // Try re-authentication based on current auth method
@@ -147,9 +142,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 
           if (reauthSuccess) {
             // Try deleting again after re-authentication
-            await logOut();
             await _authenticator.deleteAccount();
-            await _userInfoStorage.deleteUserInfo(userId);
           } else {
             throw const ReauthRequiredException();
           }

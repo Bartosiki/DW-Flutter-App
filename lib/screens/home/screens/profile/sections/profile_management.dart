@@ -1,3 +1,4 @@
+import 'package:dw_flutter_app/constants/app_colors.dart';
 import 'package:dw_flutter_app/exceptions/reauth_required_exception.dart';
 import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/provider/auth/auth_state_provider.dart';
@@ -14,18 +15,32 @@ List<Widget> buildProfileManagement(BuildContext context, WidgetRef ref) {
       barrierDismissible: false,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: Text(strings.profileDeleteConfirmation),
+          backgroundColor: AppColors.backgroundColor,
+          title: Text(
+            strings.profileDeleteConfirmation,
+            style: TextStyle(color: AppColors.loginAgreementTextColor),
+          ),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(strings.deleteProfile1),
-                Text(strings.deleteProfile2),
+                Text(
+                  strings.deleteProfile1,
+                  style: TextStyle(color: AppColors.loginAgreementTextColor),
+                ),
+                Text(
+                  strings.deleteProfile2,
+                  style: TextStyle(color: AppColors.loginAgreementTextColor),
+                ),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text(strings.profileCancelDelete),
+              child: Text(
+                strings.profileCancelDelete,
+                style: TextStyle(
+                    color: AppColors.loginAgreementHighlightTextColor),
+              ),
               onPressed: () {
                 Navigator.of(dialogContext).pop();
               },
@@ -44,12 +59,19 @@ List<Widget> buildProfileManagement(BuildContext context, WidgetRef ref) {
                   showDialog(
                     context: profileContext,
                     barrierDismissible: false,
-                    builder: (context) => const AlertDialog(
+                    builder: (context) => AlertDialog(
+                      backgroundColor: AppColors.backgroundColor,
                       content: Row(
                         children: [
-                          CircularProgressIndicator(),
+                          CircularProgressIndicator(
+                            color: AppColors.defaultMainColor,
+                          ),
                           SizedBox(width: 20),
-                          Text("Deleting profile...")
+                          Text(
+                            "Deleting profile...",
+                            style: TextStyle(
+                                color: AppColors.loginAgreementTextColor),
+                          )
                         ],
                       ),
                     ),
@@ -69,6 +91,7 @@ List<Widget> buildProfileManagement(BuildContext context, WidgetRef ref) {
                   }
                 } on ReauthRequiredException {
                   // Close loading dialog if open
+                  print('ReauthRequiredException');
                   if (profileContext.mounted) {
                     Navigator.of(profileContext).pop();
                   }
@@ -78,10 +101,17 @@ List<Widget> buildProfileManagement(BuildContext context, WidgetRef ref) {
                     showDialog(
                       context: profileContext,
                       builder: (context) => AlertDialog(
-                        // title: Text(strings.recentAuthNeeded),
-                        // content: Text(strings.deleteProfileReauthMessage),
-                        title: Text("Reauth needed"),
-                        content: Text("Reauth message needed"),
+                        backgroundColor: AppColors.backgroundColor,
+                        title: Text(
+                          "Reauth needed",
+                          style: TextStyle(
+                              color: AppColors.loginAgreementTextColor),
+                        ),
+                        content: Text(
+                          "Reauth message needed",
+                          style: TextStyle(
+                              color: AppColors.loginAgreementTextColor),
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () {
@@ -91,7 +121,11 @@ List<Widget> buildProfileManagement(BuildContext context, WidgetRef ref) {
                               // Close profile screen
                               Navigator.of(profileContext).pop();
                             },
-                            child: const Text('OK'),
+                            child: Text(
+                              'OK',
+                              style:
+                                  TextStyle(color: AppColors.defaultMainColor),
+                            ),
                           ),
                         ],
                       ),
@@ -99,7 +133,9 @@ List<Widget> buildProfileManagement(BuildContext context, WidgetRef ref) {
                   }
                 } catch (e) {
                   // Close loading dialog if open
+                  print('Error deleting profile: $e');
                   if (profileContext.mounted) {
+                    Navigator.of(profileContext).pop();
                     Navigator.of(profileContext).pop();
                   }
 
@@ -107,12 +143,29 @@ List<Widget> buildProfileManagement(BuildContext context, WidgetRef ref) {
                     showDialog(
                       context: profileContext,
                       builder: (context) => AlertDialog(
-                        title: const Text('Error'),
-                        content: Text(strings.profileDeleteFailed),
+                        backgroundColor: AppColors.backgroundColor,
+                        title: Text(
+                          'Error',
+                          style: TextStyle(
+                              color: AppColors.loginAgreementTextColor),
+                        ),
+                        content: Text(
+                          strings.profileDeleteFailed,
+                          style: TextStyle(
+                              color: AppColors.loginAgreementTextColor),
+                        ),
                         actions: [
                           TextButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: const Text('OK'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              ref.read(authStateProvider.notifier).logOut();
+                              Navigator.of(profileContext).pop();
+                            },
+                            child: Text(
+                              'OK',
+                              style:
+                                  TextStyle(color: AppColors.defaultMainColor),
+                            ),
                           ),
                         ],
                       ),
