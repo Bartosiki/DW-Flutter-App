@@ -12,7 +12,7 @@ List<Widget> buildProfileAccountDetails(BuildContext context, WidgetRef ref) {
     Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Text(
-        '${strings.welcome} ${userInfo.value?.displayName ?? ''}',
+        '${strings.welcome} ${userInfo?.value?.displayName ?? ''}',
         style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.w600,

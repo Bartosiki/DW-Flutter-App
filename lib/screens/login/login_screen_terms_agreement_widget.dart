@@ -26,7 +26,7 @@ class LoginScreenTermsAgreementWidget extends ConsumerWidget {
           onTapped: () {
             launchUrl(
               Uri.parse(
-                "https://www.google.pl/",
+                "https://www.termsfeed.com/live/6d1a6e95-0273-4420-a182-a49a4ddaab27",
               ),
             );
           },
@@ -37,7 +37,7 @@ class LoginScreenTermsAgreementWidget extends ConsumerWidget {
           onTapped: () {
             launchUrl(
               Uri.parse(
-                "https://www.google.pl/",
+                "https://www.termsfeed.com/live/67eaed96-67a4-4a87-8864-fd45719dcf24",
               ),
             );
           },
