@@ -113,6 +113,23 @@ class Authenticator {
     }
   }
 
+  bool isReauthenticationNeeded() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return false;
+    }
+
+    final lastSignInTime = user.metadata.lastSignInTime;
+    if (lastSignInTime == null) {
+      return true;
+    }
+
+    final now = DateTime.now();
+    final difference = now.difference(lastSignInTime);
+
+    return difference.inMinutes > 4;
+  }
+
   Future<void> deleteAccount() async {
     try {
       final user = FirebaseAuth.instance.currentUser;
@@ -142,6 +159,7 @@ class Authenticator {
 
       await FirebaseAuth.instance.currentUser
           ?.reauthenticateWithCredential(credential);
+      print('Reauthenticated with Google');
       return true;
     } catch (e) {
       return false;

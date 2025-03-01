@@ -121,18 +121,14 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   Future<void> deleteProfile({Function? onDeleted}) async {
     state = state.copiedWithIsLoading(true);
     final userId = _authenticator.userId;
+
     if (userId != null) {
       try {
-        await _userInfoStorage.deleteUserInfo(userId);
-        try {
-          await _authenticator.deleteAccount();
-        } on ReauthRequiredException {
+        if (_authenticator.isReauthenticationNeeded()) {
           bool reauthSuccess = false;
 
-          // Try re-authentication based on current auth method
           if (!_authenticator.isAnonymous) {
-            // Try to determine if user signed in with Google or Apple
-            // You might want to store this info when they sign in
+            print('Reauthenticating...');
             reauthSuccess = await _authenticator.reauthenticateWithGoogle();
 
             if (!reauthSuccess) {
@@ -140,13 +136,14 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
             }
           }
 
-          if (reauthSuccess) {
-            // Try deleting again after re-authentication
-            await _authenticator.deleteAccount();
-          } else {
+          if (!reauthSuccess) {
+            state = state.copiedWithIsLoading(false);
             throw const ReauthRequiredException();
           }
         }
+
+        await _userInfoStorage.deleteUserInfo(userId);
+        await _authenticator.deleteAccount();
 
         state = const AuthState.unknown();
         if (onDeleted != null) {
