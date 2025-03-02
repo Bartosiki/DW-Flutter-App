@@ -6,7 +6,8 @@ import 'package:dw_flutter_app/screens/login/login_screen_terms_agreement_widget
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'dart:io';
+import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb;
+import 'dart:io' if (dart.library.html) 'dart:ui' as ui;
 
 import '../../provider/auth/auth_state_provider.dart';
 
@@ -17,6 +18,11 @@ class LoginScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final strings = ref.watch(selectedStringsProvider);
     final authState = ref.watch(authStateProvider);
+
+    // Safe platform check that works on mobile and web
+    final bool showAppleSignIn = !kIsWeb &&
+        (defaultTargetPlatform == TargetPlatform.iOS ||
+            defaultTargetPlatform == TargetPlatform.macOS);
 
     return Stack(
       children: [
@@ -52,7 +58,7 @@ class LoginScreen extends ConsumerWidget {
                                 .loginWithGoogle();
                           },
                         ),
-                        if (Platform.isIOS)
+                        if (showAppleSignIn)
                           Column(
                             children: [
                               const SizedBox(height: 12.0),
