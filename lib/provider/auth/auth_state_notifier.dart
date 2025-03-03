@@ -129,9 +129,9 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 
           if (!_authenticator.isAnonymous) {
             print('Reauthenticating...');
-            reauthSuccess = await _authenticator.reauthenticateWithGoogle();
-
-            if (!reauthSuccess) {
+            if (_authenticator.userProvider == 'google.com') {
+              reauthSuccess = await _authenticator.reauthenticateWithGoogle();
+            } else if (_authenticator.userProvider == 'apple.com') {
               reauthSuccess = await _authenticator.reauthenticateWithApple();
             }
           }

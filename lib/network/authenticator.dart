@@ -11,6 +11,7 @@ class Authenticator {
   String? get userId => FirebaseAuth.instance.currentUser?.uid;
   String? get displayName => FirebaseAuth.instance.currentUser?.displayName;
   String? get email => FirebaseAuth.instance.currentUser?.email;
+  String? get userProvider => FirebaseAuth.instance.currentUser?.providerData.first.providerId;
   Future<String?> get userIdToken async =>
       await FirebaseAuth.instance.currentUser?.getIdToken();
 
