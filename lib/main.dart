@@ -4,6 +4,7 @@ import 'package:dw_flutter_app/provider/config_provider.dart';
 import 'package:dw_flutter_app/provider/dark_mode/dark_mode_notifier.dart';
 import 'package:dw_flutter_app/screens/home/main_screen.dart';
 import 'package:dw_flutter_app/screens/login/login_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -82,9 +83,23 @@ class App extends StatelessWidget {
     var basicTheme =
         brightness == Brightness.dark ? ThemeData.dark() : ThemeData.light();
 
-    return basicTheme.copyWith(
+    var theme = basicTheme.copyWith(
       colorScheme: colorScheme,
       scaffoldBackgroundColor: colorScheme.surface,
     );
+
+    // Web-specific theme adjustments
+    if (kIsWeb) {
+      theme = theme.copyWith(
+        textTheme: theme.textTheme.apply(
+          fontFamily: 'Roboto', // Ensure a web-safe font
+        ),
+        iconTheme: theme.iconTheme.copyWith(
+          size: 24.0, // Consistent icon sizing for web
+        ),
+      );
+    }
+
+    return theme;
   }
 }
