@@ -1,3 +1,4 @@
+import 'package:dw_flutter_app/components/platform_aware_icon.dart';
 import 'package:dw_flutter_app/components/screen_description.dart';
 import 'package:dw_flutter_app/components/tasks/sort_modal_content.dart';
 import 'package:dw_flutter_app/components/tasks/task_list.dart';
@@ -7,7 +8,6 @@ import 'package:dw_flutter_app/provider/tasks_provider.dart';
 import 'package:dw_flutter_app/provider/user_info_provider.dart';
 import 'package:dw_flutter_app/screens/home/screens/tasks/sorting_enums.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sprintf/sprintf.dart';
 
@@ -70,12 +70,9 @@ class _YourTasksSubpageState extends ConsumerState<YourTasksSubpage> {
                 ScreenDescription(
                   description: strings.taskScreenDescription,
                   trailingIcon: IconButton(
-                    icon: SvgPicture.asset(
-                      Paths.sortIcon,
-                      colorFilter: ColorFilter.mode(
-                        Theme.of(context).colorScheme.onSurface,
-                        BlendMode.srcIn,
-                      ),
+                    icon: PlatformAwareIcon(
+                      iconPath: Paths.sortIcon,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     onPressed: () {
                       showModalBottomSheet(

@@ -39,7 +39,6 @@ class PlatformAwareIcon extends StatelessWidget {
     );
   }
 
-  // Map your SVG paths to Material icons
   IconData _getIconDataForPath(String path) {
     switch (path) {
       case 'assets/icons/home.svg':
@@ -50,8 +49,10 @@ class PlatformAwareIcon extends StatelessWidget {
         return Icons.qr_code_scanner_rounded;
       case 'assets/icons/map.svg':
         return Icons.map_rounded;
+      case 'assets/icons/sort_icon.svg':
+        return Icons.sort_rounded;
       default:
-        return Icons.circle;
+        return Icons.circle_rounded;
     }
   }
 }
