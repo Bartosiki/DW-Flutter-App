@@ -3,6 +3,7 @@ import 'package:dw_flutter_app/extensions/hex_string_color_to_color.dart';
 import 'package:dw_flutter_app/provider/config_provider.dart';
 import 'package:dw_flutter_app/provider/dark_mode/dark_mode_notifier.dart';
 import 'package:dw_flutter_app/screens/home/main_screen.dart';
+import 'package:dw_flutter_app/screens/home/screens/mobile_only_screen.dart';
 import 'package:dw_flutter_app/screens/login/login_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'provider/auth/is_logged_in_provider.dart';
 import 'firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:html' as html;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +45,13 @@ class App extends StatelessWidget {
     );
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
+    // Check if device is desktop
+    final bool isDesktop = kIsWeb &&
+        (defaultTargetPlatform == TargetPlatform.windows ||
+            defaultTargetPlatform == TargetPlatform.macOS ||
+            defaultTargetPlatform == TargetPlatform.linux ||
+            _isDesktopBrowser());
+
     return Consumer(
       builder: (context, ref, child) {
         final configValue = ref.watch(configProvider);
@@ -60,21 +70,33 @@ class App extends StatelessWidget {
           theme: _buildTheme(mainColor, Brightness.light),
           darkTheme: _buildTheme(mainColor, Brightness.dark),
           themeMode: isDarkModeEnabled ? ThemeMode.dark : ThemeMode.light,
-          home: Scaffold(
-            body: isLoggedIn
-                ? configValue.when(
-                    data: (config) => config != null
-                        ? const MainScreen()
-                        : const Center(child: CircularProgressIndicator()),
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    error: (err, stack) => const LoginScreen(),
-                  )
-                : const LoginScreen(),
-          ),
+          home: isDesktop
+              ? const MobileOnlyScreen()
+              : Scaffold(
+                  body: isLoggedIn
+                      ? configValue.when(
+                          data: (config) => config != null
+                              ? const MainScreen()
+                              : const Center(
+                                  child: CircularProgressIndicator()),
+                          loading: () =>
+                              const Center(child: CircularProgressIndicator()),
+                          error: (err, stack) => const LoginScreen(),
+                        )
+                      : const LoginScreen(),
+                ),
         );
       },
     );
+  }
+
+  bool _isDesktopBrowser() {
+    if (kIsWeb) {
+      // A simple heuristic: if width > 1000px, consider it a desktop
+      final window = html.window;
+      return window.innerWidth != null && window.innerWidth! > 1000;
+    }
+    return false;
   }
 
   ThemeData _buildTheme(Color primaryColor, Brightness brightness) {
