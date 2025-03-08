@@ -80,8 +80,9 @@ class App extends StatelessWidget {
   ThemeData _buildTheme(Color primaryColor, Brightness brightness) {
     var colorScheme =
         ColorScheme.fromSeed(seedColor: primaryColor, brightness: brightness);
-    var basicTheme =
-        brightness == Brightness.dark ? ThemeData.dark() : ThemeData.light();
+    var basicTheme = brightness == Brightness.dark
+        ? ThemeData.dark(useMaterial3: true)
+        : ThemeData.light(useMaterial3: true);
 
     var theme = basicTheme.copyWith(
       colorScheme: colorScheme,

@@ -1,3 +1,4 @@
+import 'package:dw_flutter_app/components/platform_aware_icon.dart';
 import 'package:dw_flutter_app/provider/selected_strings_provider.dart';
 import 'package:dw_flutter_app/screens/home/screens/home/home_screen.dart';
 import 'package:dw_flutter_app/screens/home/screens/map_screen.dart';
@@ -69,23 +70,13 @@ List<BottomNavigationBarItem> getBottomNavigationItems(
     (screen) {
       return BottomNavigationBarItem(
         label: screen.label,
-        icon: SvgPicture.asset(
-          screen.iconPath,
-          width: 24,
-          height: 24,
-          colorFilter: ColorFilter.mode(
-            Theme.of(context).colorScheme.onSurface,
-            BlendMode.srcIn,
-          ),
+        icon: PlatformAwareIcon(
+          iconPath: screen.iconPath,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
-        activeIcon: SvgPicture.asset(
-          screen.iconPath,
-          width: 24,
-          height: 24,
-          colorFilter: ColorFilter.mode(
-            Theme.of(context).colorScheme.primary,
-            BlendMode.srcIn,
-          ),
+        activeIcon: PlatformAwareIcon(
+          iconPath: screen.iconPath,
+          color: Theme.of(context).colorScheme.primary,
         ),
       );
     },
